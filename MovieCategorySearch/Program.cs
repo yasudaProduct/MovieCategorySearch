@@ -1,27 +1,33 @@
-var builder = WebApplication.CreateBuilder(args);
+using Merino;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+//アプリケーション初期化
+WebApplicationBuilder builder = BootStrap.BuildWebApplication(args);
 
-var app = builder.Build();
+//認証
+// builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//     .AddCookie(options =>
+//     {
+//         options.LoginPath = "/Authentication/Login";
+//         options.AccessDeniedPath = "/Authentication/AccessDenied";
+//     });
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+// builder.Services.AddAuthorization(options =>
+// {
+//     options.FallbackPolicy = new AuthorizationPolicyBuilder()
+//     .RequireAuthenticatedUser()
+//     .Build();
+// });
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+WebApplication app = BootStrap.CreateWebApplication(builder);
 
-app.UseRouting();
+//テストデータ
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
 
-app.UseAuthorization();
+//    SeedData.Initialize(services);
+//}
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.Run();
+BootStrap.RunWebApplication(app);
