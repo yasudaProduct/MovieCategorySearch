@@ -1,0 +1,12 @@
+﻿services:
+  postgres-dev:
+    image: postgres:latest
+    container_name: MCS-Postgres-Dev
+
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mcs-dev
+
+    ports:
+      - 5432:5432
