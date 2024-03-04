@@ -1,0 +1,31 @@
+﻿@using MovieCategorySearch.ViewModels
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+
+}
+<h2>ログイン</h2>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-controller="Authentication" asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LoginId" class="control-label">ログインID</label>
+                <input asp-for="LoginId" type="text" name="loginId" placeholder="ログインID" id="loginId" class="form-control" />
+            <span asp-validation-for="LoginId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ログイン" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

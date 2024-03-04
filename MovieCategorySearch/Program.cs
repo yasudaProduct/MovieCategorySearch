@@ -6,19 +6,19 @@ using Microsoft.AspNetCore.Authorization;
 WebApplicationBuilder builder = BootStrap.BuildWebApplication(args);
 
 //認証
-// builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//     .AddCookie(options =>
-//     {
-//         options.LoginPath = "/Authentication/Login";
-//         options.AccessDeniedPath = "/Authentication/AccessDenied";
-//     });
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Authentication/Login";
+        options.AccessDeniedPath = "/Authentication/AccessDenied";
+    });
 
-// builder.Services.AddAuthorization(options =>
-// {
-//     options.FallbackPolicy = new AuthorizationPolicyBuilder()
-//     .RequireAuthenticatedUser()
-//     .Build();
-// });
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+});
 
 WebApplication app = BootStrap.CreateWebApplication(builder);
 
