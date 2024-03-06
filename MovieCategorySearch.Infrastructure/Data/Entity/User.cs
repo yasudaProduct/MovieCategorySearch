@@ -42,5 +42,7 @@ namespace MovieCategorySearch.Infrastructure.Data.Entity
         [MaxLength(1)]
         public string? DeletedFlg { get; set; }
 
+        public ICollection<Category> Categorys { get; set; }
+
     }
 }
