@@ -5,9 +5,9 @@ namespace MovieCategorySearch.ViewModels
 {
     public class LoginViewModel
     {
-        [DisplayName("ユーザーID")]
+        [DisplayName("メールアドレス")]
         [Required]
-        [RegularExpression("[0-9a-zA-Z]*", ErrorMessage = "{0}は半角英数字で入力してください。")]
+        [EmailAddress]
         public string LoginId { get; set; }
 
         [DisplayName("パスワード")]
