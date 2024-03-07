@@ -1,6 +1,7 @@
 using Merino;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using MovieCategorySearch.Infrastructure.Data;
 
 //アプリケーション初期化
 WebApplicationBuilder builder = BootStrap.BuildWebApplication(args);
@@ -23,11 +24,11 @@ builder.Services.AddAuthorization(options =>
 WebApplication app = BootStrap.CreateWebApplication(builder);
 
 //テストデータ
-//using (var scope = app.Services.CreateScope())
-//{
-//    var services = scope.ServiceProvider;
+using (var scope = app.Services.CreateScope())
+{
+   var services = scope.ServiceProvider;
 
-//    SeedData.Initialize(services);
-//}
+   SeedData.Initialize(services);
+}
 
 BootStrap.RunWebApplication(app);
