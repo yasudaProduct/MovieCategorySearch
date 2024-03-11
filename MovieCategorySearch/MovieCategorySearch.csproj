@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Merino\Merino.csproj" />
     <ProjectReference Include="..\MovieCategorySearch.Infrastructure\MovieCategorySearch.Infrastructure.csproj" />
+    <ProjectReference Include="..\MovieCategorySearch.UseCase\MovieCategorySearch.UseCase.csproj" />
   </ItemGroup>
 
   <ItemGroup>

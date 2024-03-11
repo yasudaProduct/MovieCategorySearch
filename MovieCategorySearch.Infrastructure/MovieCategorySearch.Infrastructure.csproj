@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Merino\Merino.csproj" />
+    <ProjectReference Include="..\MovieCategorySearch.UseCase\MovieCategorySearch.UseCase.csproj" />
   </ItemGroup>
 
   <ItemGroup>

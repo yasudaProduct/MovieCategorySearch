@@ -3,16 +3,16 @@
     "SettingFile": {
       "Database": "database.json"
     },
-    // "InjectionAssembly": [
-    //   {
-    //     "AssemblyName": "SampleWeb01",
-    //     "EndMatchNames": [
-    //       {
-    //         "EndMatchName": "Service"
-    //       }
-    //     ]
-    //   }
-    // ],
+    "InjectionAssembly": [
+      {
+        "AssemblyName": "MovieCategorySearch.UseCase",
+        "EndMatchNames": [
+          {
+            "EndMatchName": "Service"
+          }
+        ]
+      }
+    ],
     // "CustomSettingFile": [
     //   {
     //     "AssemblyName": "SampleWeb01",
