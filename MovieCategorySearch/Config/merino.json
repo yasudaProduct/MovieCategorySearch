@@ -5,11 +5,18 @@
     },
     "InjectionAssembly": [
       {
-        "AssemblyName": "MovieCategorySearch.UseCase",
+        "AssemblyName": "MovieCategorySearch.Application",
         "EndMatchNames": [
-          {
-            "EndMatchName": "Service"
-          }
+          "Service"
+        ]
+      },
+      {
+        "AssemblyName": "MovieCategorySearch.Infrastructure",
+        "EndMatchNames": [
+          "Repository"
+        ],
+        "ExactMatchNames": [
+          "InMemoryUserRepository"
         ]
       }
     ],

@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <ProjectReference Include="..\Merino\Merino.csproj" />
+    <ProjectReference Include="..\..\yuta_SampleWeb01\Merino\Merino.csproj" />
+    <ProjectReference Include="..\MovieCategorySearch.Domain\MovieCategorySearch.Application.csproj" />
     <ProjectReference Include="..\MovieCategorySearch.Infrastructure\MovieCategorySearch.Infrastructure.csproj" />
-    <ProjectReference Include="..\MovieCategorySearch.UseCase\MovieCategorySearch.UseCase.csproj" />
   </ItemGroup>
 
   <ItemGroup>

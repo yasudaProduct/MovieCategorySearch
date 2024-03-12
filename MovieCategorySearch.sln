@@ -5,6 +5,12 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCategorySearch", "MovieCategorySearch\MovieCategorySearch.csproj", "{57DCEB34-845A-4CFE-8651-3E2F5D62E2F5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCategorySearch.Application", "MovieCategorySearch.Domain\MovieCategorySearch.Application.csproj", "{243F81F1-85E9-43BD-B06B-BABCFDEAD0CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCategorySearch.Infrastructure", "MovieCategorySearch.Infrastructure\MovieCategorySearch.Infrastructure.csproj", "{6087A2F6-3D62-4870-AD49-404FF20BAB64}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Merino", "..\yuta_SampleWeb01\Merino\Merino.csproj", "{CC6D6912-1A50-448A-B968-8E32878D50FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{57DCEB34-845A-4CFE-8651-3E2F5D62E2F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57DCEB34-845A-4CFE-8651-3E2F5D62E2F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57DCEB34-845A-4CFE-8651-3E2F5D62E2F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{243F81F1-85E9-43BD-B06B-BABCFDEAD0CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{243F81F1-85E9-43BD-B06B-BABCFDEAD0CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{243F81F1-85E9-43BD-B06B-BABCFDEAD0CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{243F81F1-85E9-43BD-B06B-BABCFDEAD0CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6087A2F6-3D62-4870-AD49-404FF20BAB64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6087A2F6-3D62-4870-AD49-404FF20BAB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6087A2F6-3D62-4870-AD49-404FF20BAB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6087A2F6-3D62-4870-AD49-404FF20BAB64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC6D6912-1A50-448A-B968-8E32878D50FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC6D6912-1A50-448A-B968-8E32878D50FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC6D6912-1A50-448A-B968-8E32878D50FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC6D6912-1A50-448A-B968-8E32878D50FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,8 +3,8 @@ using Merino.Controller;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.ViewModels;
-using MovieCategorySearch.UseCase.Auth.Dto;
-using MovieCategorySearch.UseCase.Auth;
+using MovieCategorySearch.Application.UseCase.Auth;
+using MovieCategorySearch.Application.UseCase.Auth.Dto;
 
 namespace MovieCategorySearch.Controllers
 {
@@ -15,6 +15,7 @@ namespace MovieCategorySearch.Controllers
         private readonly ILogger _logger;
 
         private readonly IAuthService _authService;
+
         public AuthenticationController(
             ILogger<AuthenticationController> logger,
             IAuthService authService
@@ -39,7 +40,7 @@ namespace MovieCategorySearch.Controllers
 
             //認証
             AuthRequest req = new AuthRequest(model.LoginId, model.Password);
-            if (_authService.Auth(req))
+            if (!_authService.Auth(req))
             {
                 ModelState.AddModelError(string.Empty, "ログイン情報に誤りがあります。");
                 return View();
