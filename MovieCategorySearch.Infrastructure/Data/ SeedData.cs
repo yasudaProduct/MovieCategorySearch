@@ -21,6 +21,7 @@ public static class SeedData
                     {
                         TmdbMovieId = 1,
                         Title = "When Harry Met Sally",
+                        DeletedFlg = "0",
                         CreatePgmId = "Seed",
                         CreateUserId = "Seed",
                         CreateDate = DateTime.Now,
@@ -32,6 +33,7 @@ public static class SeedData
                     {
                         TmdbMovieId = 2,
                         Title = "Ghostbusters ",
+                        DeletedFlg = "0",
                         CreatePgmId = "Seed",
                         CreateUserId = "Seed",
                         CreateDate = DateTime.Now,
@@ -43,6 +45,7 @@ public static class SeedData
                     {
                         TmdbMovieId = 3,
                         Title = "Ghostbusters 2",
+                        DeletedFlg = "0",
                         CreatePgmId = "Seed",
                         CreateUserId = "Seed",
                         CreateDate = DateTime.Now,
@@ -54,6 +57,7 @@ public static class SeedData
                     {
                         TmdbMovieId = 4,
                         Title = "Rio Bravo",
+                        DeletedFlg = "0",
                         CreatePgmId = "Seed",
                         CreateUserId = "Seed",
                         CreateDate = DateTime.Now,
@@ -73,6 +77,7 @@ public static class SeedData
                         UserId = 1,
                         MailAdress = "seed01@example.com",
                         UserCls = "1",
+                        DeletedFlg = "0",
                         CreatePgmId = "Seed",
                         CreateUserId = "Seed",
                         CreateDate = DateTime.Now,
@@ -85,6 +90,7 @@ public static class SeedData
                         UserId = 2,
                         MailAdress = "seed02@example.com",
                         UserCls = "1",
+                        DeletedFlg = "0",
                         CreatePgmId = "Seed",
                         CreateUserId = "Seed",
                         CreateDate = DateTime.Now,

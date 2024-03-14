@@ -2,11 +2,19 @@
   "DatabaseSetting": {
     "DataSources": {
       "DataSource": [
+        //{
+        //  "ConnectionString": "Host=localhost;Database=mcs-dev;Username=postgres;Password=postgres",
+        //  "EntityFramework": {
+        //    "Valid": true,
+        //    "UseDbProvider": 2,
+        //    "ContextAssemblyName": "MovieCategorySearch.Infrastructure",
+        //    "ContextClassName": "MovieCategorySearch.Infrastructure.Data.PostgresDbContext"
+        //  }
+        //},
         {
-          "ConnectionString": "Host=localhost;Database=mcs-dev;Username=postgres;Password=postgres",
           "EntityFramework": {
             "Valid": true,
-            "UseDbProvider": 2,
+            "UseDbProvider": 3,
             "ContextAssemblyName": "MovieCategorySearch.Infrastructure",
             "ContextClassName": "MovieCategorySearch.Infrastructure.Data.PostgresDbContext"
           }

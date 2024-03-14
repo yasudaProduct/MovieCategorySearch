@@ -24,11 +24,11 @@ builder.Services.AddAuthorization(options =>
 WebApplication app = BootStrap.CreateWebApplication(builder);
 
 //テストデータ
-//using (var scope = app.Services.CreateScope())
-//{
-//   var services = scope.ServiceProvider;
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
 
-//   SeedData.Initialize(services);
-//}
+    SeedData.Initialize(services);
+}
 
 BootStrap.RunWebApplication(app);

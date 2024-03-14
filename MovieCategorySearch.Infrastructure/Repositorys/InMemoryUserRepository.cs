@@ -17,6 +17,8 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
         {
             var user = _dbContext.User.FirstOrDefault(x => x.MailAdress == mailAddress);
 
+            if (user == null) return null;
+
             return new User(user.UserId, user.MailAdress, user.UserCls);
         }
     }
