@@ -53,7 +53,7 @@ namespace MovieCategorySearch.Controllers
                     Name = "めりの",
                 });
 
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(MovieController.Index), "Movie");
         }
     }
 }
