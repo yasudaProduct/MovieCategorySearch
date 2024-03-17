@@ -7,7 +7,7 @@
 @* <p>
     <a asp-action="Create">Create New</a>
 </p> *@
-<form asp-controller="Movie" asp-action="Index" method="post">
+<form asp-controller="Movie" asp-action="Search" method="post">
     <p>
 
         @* <select asp-for="MovieGenre" asp-items="Model.Genres">
@@ -17,7 +17,7 @@
     </p>
     <div class="cont">
         <div class="cont-search pt-2 pb-2">
-            <input type="text" name="SearchString" placeholder="タイトル" class="form-control" />
+            <input type="text" name="title" placeholder="タイトル" class="form-control" />
             <input type="submit" value="検索" class="btn btn-outline-dark" />
         </div>
     </div>

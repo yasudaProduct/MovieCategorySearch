@@ -13,7 +13,8 @@
       {
         "AssemblyName": "MovieCategorySearch.Infrastructure",
         "EndMatchNames": [
-          "Repository"
+          "Repository",
+          "QueryService"
         ],
         "ExactMatchNames": [
           "InMemoryUserRepository"

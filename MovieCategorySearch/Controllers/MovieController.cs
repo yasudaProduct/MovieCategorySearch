@@ -12,13 +12,17 @@ namespace MovieCategorySearch.Controllers
 
         private readonly IMovieService _movieService;
 
+        private readonly IMovieQueryService _movieQueryService;
+
         public MovieController(
             ILogger<MovieController> logger,
-            IMovieService movieService
+            IMovieService movieService,
+            IMovieQueryService movieQueryService
             )
         {
             _logger = logger;
             _movieService = movieService;
+            _movieQueryService = movieQueryService;
         }
 
         // GET: MoviesController
@@ -42,20 +46,20 @@ namespace MovieCategorySearch.Controllers
 
         public async Task<IActionResult> Search(string title)
         {
-            //var movieList = _movieService.SearchMovie(title);
+            var movieList = _movieQueryService.SearchMovieList(title);
 
-            //MovieListViewModel model = new MovieListViewModel();
+            MovieListViewModel model = new MovieListViewModel();
 
-            //movieList.ForEach(movie =>
-            //{
-            //    model.MovieList.Add(new MovieViewModel()
-            //    {
-            //        Id = movie.Id,
-            //        Title = movie.Title
-            //    });
-            //});
+            movieList.ForEach(movie =>
+            {
+                model.MovieList.Add(new MovieViewModel()
+                {
+                    Id = movie.Id,
+                    Title = movie.Title
+                });
+            });
 
-            //return View("Index", model);
+            return View("Index", model);
         }   
 
         // GET: MoviesController/Details/5
