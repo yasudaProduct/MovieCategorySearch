@@ -4,7 +4,7 @@ using MovieCategorySearch.Application.UseCase.Auth.Dto;
 namespace MovieCategorySearch.Application.UseCase.Auth
 {
 
-    public class AuthService : IAuthService
+    public class AuthService : IMovieService
     {
         //private readonly ILogger _logger;
 

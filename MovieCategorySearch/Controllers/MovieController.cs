@@ -1,16 +1,62 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MovieCategorySearch.Application.UseCase.Movie;
+using MovieCategorySearch.ViewModels;
 
 namespace MovieCategorySearch.Controllers
 {
     [Authorize]
     public class MovieController : Controller
     {
+        private readonly ILogger _logger;
+
+        private readonly IMovieService _movieService;
+
+        public MovieController(
+            ILogger<MovieController> logger,
+            IMovieService movieService
+            )
+        {
+            _logger = logger;
+            _movieService = movieService;
+        }
+
         // GET: MoviesController
         public ActionResult Index()
         {
-            return View();
+            var movieList = _movieService.GetMovieList();
+
+            MovieListViewModel model = new MovieListViewModel();
+
+            movieList.ForEach(movie =>
+            {
+                model.MovieList.Add(new MovieViewModel()
+                {
+                    Id = movie.Id,
+                    Title = movie.Title
+                });
+            });
+
+            return View(model);
         }
+
+        public async Task<IActionResult> Search(string title)
+        {
+            //var movieList = _movieService.SearchMovie(title);
+
+            //MovieListViewModel model = new MovieListViewModel();
+
+            //movieList.ForEach(movie =>
+            //{
+            //    model.MovieList.Add(new MovieViewModel()
+            //    {
+            //        Id = movie.Id,
+            //        Title = movie.Title
+            //    });
+            //});
+
+            //return View("Index", model);
+        }   
 
         // GET: MoviesController/Details/5
         public ActionResult Details(int id)

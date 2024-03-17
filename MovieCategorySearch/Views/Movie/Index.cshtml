@@ -1,25 +1,29 @@
 ﻿@model MovieCategorySearch.ViewModels.MovieListViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "映画一覧";
 }
 
-<h1>Index</h1>
-
-<p>
+@* <p>
     <a asp-action="Create">Create New</a>
-</p>
-<form asp-controller="Movie" asp-action="Index" method="get">
+</p> *@
+<form asp-controller="Movie" asp-action="Index" method="post">
     <p>
 
         @* <select asp-for="MovieGenre" asp-items="Model.Genres">
-            <option value="">All</option>
+        <option value="">All</option>
         </select> *@
 
-        Title: <input type="text" name="SearchString" />
-        <input type="submit" value="Filter" />
     </p>
+    <div class="cont">
+        <div class="cont-search pt-2 pb-2">
+            <input type="text" name="SearchString" placeholder="タイトル" class="form-control" />
+            <input type="submit" value="検索" class="btn btn-outline-dark" />
+        </div>
+    </div>
+
 </form>
+
 <table class="table">
     <thead>
         <tr>
@@ -33,7 +37,7 @@
         </tr>
     </thead>
     <tbody>
-        @* @foreach (var item in Model.MovieList!)
+        @foreach (var item in Model.MovieList!)
         {
             <tr>
                 <td>
@@ -48,6 +52,6 @@
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
-        } *@
+        }
     </tbody>
 </table>

@@ -8,12 +8,10 @@ namespace MovieCategorySearch.Application.Domain.Auth
         bool Login(string mailAddress, string password);
     }
 
-    public class AuthDomainService :IAuthDomainService
+    internal class AuthDomainService :IAuthDomainService
     {
         public bool Login(string mailAddress, string password)
         {
-            
-            
             return true;
         }
     }
