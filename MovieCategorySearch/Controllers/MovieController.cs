@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MovieCategorySearch.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class MovieController : Controller
     {
         // GET: MoviesController
