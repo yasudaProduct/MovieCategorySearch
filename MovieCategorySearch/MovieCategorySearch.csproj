@@ -27,6 +27,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>23dd705a-b160-4bc1-9a66-f3ce42f41d5a</UserSecretsId>
+    <SignAssembly>False</SignAssembly>
   </PropertyGroup>
 
 </Project>

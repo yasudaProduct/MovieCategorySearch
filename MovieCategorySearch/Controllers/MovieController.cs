@@ -26,9 +26,9 @@ namespace MovieCategorySearch.Controllers
         }
 
         // GET: MoviesController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var movieList = _movieService.GetMovieList();
+            var movieList = await _movieService.GetMovieList();
 
             MovieListViewModel model = new MovieListViewModel();
 

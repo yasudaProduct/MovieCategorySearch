@@ -4,6 +4,6 @@ namespace MovieCategorySearch.Application.UseCase.Movie
 {
     public interface IMovieService
     {
-        public List<MovieResult> GetMovieList();
+        public Task<List<MovieResult>> GetMovieList();
     }
 }
