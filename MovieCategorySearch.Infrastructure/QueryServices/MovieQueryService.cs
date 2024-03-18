@@ -3,9 +3,6 @@ using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Infrastructure.Data;
 using MovieCategorySearch.Infrastructure.Data.Entity;
 using System.Linq.Expressions;
-using Merino.Utils;
-using Microsoft.EntityFrameworkCore;
-using System.Xml;
 
 namespace MovieCategorySearch.Infrastructure.QueryServices
 {
@@ -13,28 +10,31 @@ namespace MovieCategorySearch.Infrastructure.QueryServices
     {
         private readonly PostgresDbContext _dbContext;
 
-        public MovieQueryService(PostgresDbContext dbContext) 
+        public MovieQueryService(PostgresDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         public List<MovieResult> SearchMovieList(string title)
         {
-            //条件作成
-            Expression<Func<Movie, bool>> condition1 = x => x.Title == "When Harry Met Sally";
-            Expression<Func<Movie, bool>> condition2 = x => x.TmdbMovieId == 1;           
+          
+            Queue<Expression<Func<Movie, bool>>> condList = new Queue<Expression<Func<Movie, bool>>>();
 
-            // 条件を組み合わせて動的に構築します。
-            var parameter = Expression.Parameter(typeof(Movie), "e");
-            var combinedCondition = Expression.Lambda<Func<Movie, bool>>(
-                Expression.AndAlso(
-                    Expression.Invoke(condition1, parameter),
-                    Expression.Invoke(condition2, parameter)
-                ),
-                parameter
-            );
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                condList.Enqueue(x => x.Title.Contains(title));
+            }
 
-            var movieList = _dbContext.Movie.Where(combinedCondition);
+            var query = _dbContext.Movie.AsQueryable();
+
+            while (condList.Count != 0)
+            {
+                //Queryを追加しているだけ
+                query = query.Where(condList.Dequeue());
+            }
+
+            //Query実行
+            var movieList = query.ToList();
 
             List<MovieResult> result = new List<MovieResult>();
             foreach (var movie in movieList)
@@ -49,10 +49,7 @@ namespace MovieCategorySearch.Infrastructure.QueryServices
 
             return result;
         }
-
-
     }
-
 }
 class ParameterReplacer<T> : ExpressionVisitor
 {
