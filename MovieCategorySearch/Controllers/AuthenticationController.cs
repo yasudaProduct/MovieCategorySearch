@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.ViewModels;
 using MovieCategorySearch.Application.UseCase.Auth;
 using MovieCategorySearch.Application.UseCase.Auth.Dto;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace MovieCategorySearch.Controllers
 {
@@ -14,11 +17,11 @@ namespace MovieCategorySearch.Controllers
     {
         private readonly ILogger _logger;
 
-        private readonly IAuthService _authService;
+        private readonly IMovieService _authService;
 
         public AuthenticationController(
             ILogger<AuthenticationController> logger,
-            IAuthService authService
+            IMovieService authService
             )
         {
             _logger = logger;
@@ -47,11 +50,42 @@ namespace MovieCategorySearch.Controllers
             }
 
             //認証Cookie作成
-            base.AddCookie<AppCookieDto>(new AppCookieDto() 
-                { 
-                    Id = 1,
-                    Name = "めりの",
+            //base.AddCookie<AppCookieDto>(new AppCookieDto() 
+            //    { 
+            //        Id = 1,
+            //        Name = "めりの",
+            //    });
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, model.LoginId),
+                //new Claim("FullName", "yasuda yuta"),
+                //new Claim(ClaimTypes.Role, "Administrator"),
+            };
+
+            var claimsIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+            claimsIdentity.AddClaims(claims);
+
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                new AuthenticationProperties
+                {
+                    // Cookie をブラウザー セッション間で永続化するか？（ブラウザを閉じてもログアウトしないかどうか）
+                    IsPersistent = false,
+                    //ExpiresUtc = DateTime.UtcNow.AddMinutes(20)
                 });
+
+            return RedirectToAction(nameof(MovieController.Index),"Movie");
+        }
+
+        //[HttpGet]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }

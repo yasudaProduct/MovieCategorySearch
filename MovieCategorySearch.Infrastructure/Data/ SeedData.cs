@@ -12,7 +12,7 @@ public static class SeedData
             serviceProvider.GetRequiredService<
                 DbContextOptions<PostgresDbContext>>()))
         {
-
+            #region Movie
             if (!context.Movie.Any())
             {
 
@@ -67,7 +67,9 @@ public static class SeedData
                     }
                 );
             }
+            #endregion
 
+            #region User
             if (!context.User.Any())
             {
 
@@ -100,6 +102,7 @@ public static class SeedData
                     }
                     );
             }
+            #endregion
 
             context.SaveChanges();
         }

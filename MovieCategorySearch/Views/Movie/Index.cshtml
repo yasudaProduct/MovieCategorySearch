@@ -1,0 +1,57 @@
+﻿@model MovieCategorySearch.ViewModels.MovieListViewModel
+
+@{
+    ViewData["Title"] = "映画一覧";
+}
+
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p> *@
+<form asp-controller="Movie" asp-action="Search" method="post">
+    <p>
+
+        @* <select asp-for="MovieGenre" asp-items="Model.Genres">
+        <option value="">All</option>
+        </select> *@
+
+    </p>
+    <div class="cont">
+        <div class="cont-search pt-2 pb-2">
+            <input type="text" name="title" placeholder="タイトル" class="form-control" />
+            <input type="submit" value="検索" class="btn btn-outline-dark" />
+        </div>
+    </div>
+
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MovieList![0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MovieList![0].Content)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MovieList!)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
