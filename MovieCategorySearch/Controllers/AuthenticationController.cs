@@ -17,11 +17,11 @@ namespace MovieCategorySearch.Controllers
     {
         private readonly ILogger _logger;
 
-        private readonly IMovieService _authService;
+        private readonly IAuthService _authService;
 
         public AuthenticationController(
             ILogger<AuthenticationController> logger,
-            IMovieService authService
+            IAuthService authService
             )
         {
             _logger = logger;

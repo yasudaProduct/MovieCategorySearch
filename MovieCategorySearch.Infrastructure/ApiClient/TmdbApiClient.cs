@@ -11,7 +11,7 @@ namespace MovieCategorySearch.Infrastructure.ApiClient
     public class TmdbApiClient : MerinoApiClient, ITmdbApiClient
     {
 
-        const string BASE_URL = "https://api.themoviedb.org/3/movie/";
+        const string BASE_URL = "https://api.themoviedb.org/3/";
 
         private string _accessToken;
 
@@ -20,8 +20,9 @@ namespace MovieCategorySearch.Infrastructure.ApiClient
         private Dictionary<string, string> commonHeaders 
             = new Dictionary<string, string>()
             {
+                { "include_adult", "false"},
                 { "language", "ja" },
-                { "page", "1" }
+                { "page", "1" },
             };
 
         public TmdbApiClient(IConfiguration config)
@@ -39,7 +40,7 @@ namespace MovieCategorySearch.Infrastructure.ApiClient
                 { "page", "1" }
             };
 
-            var request = new HttpRequestMessage(HttpMethod.Get, BASE_URL+ "top_rated" + $"?{await new FormUrlEncodedContent(parameters).ReadAsStringAsync()}");
+            var request = new HttpRequestMessage(HttpMethod.Get, BASE_URL+ "movie/top_rated" + $"?{await new FormUrlEncodedContent(parameters).ReadAsStringAsync()}");
             request.Headers.Add("accept", "application/json");
             request.Headers.Add("Authorization", $"Bearer {_accessToken}");
 
@@ -61,7 +62,28 @@ namespace MovieCategorySearch.Infrastructure.ApiClient
         public async Task<TmdbApiResponce> GetPopular()
         {
 
-            var request  = await this.CreateRequestMessage("popular");
+            var request  = await this.CreateRequestMessage("movie/popular");
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                TmdbApiResponce responseString = await response.Content.ReadFromJsonAsync<TmdbApiResponce>();
+                Console.WriteLine(responseString);
+                return responseString;
+            }
+            else
+            {
+                Console.WriteLine("Error");
+                throw new Exception("Error");
+            }
+        }
+
+        public async Task<TmdbApiResponce> SearchCollection(string title)
+        {
+            Dictionary<string, string> urlParam = commonHeaders;
+            urlParam.Add("query", title);
+
+            var request = await this.CreateRequestMessage("search/movie", urlParam);
             var response = await client.SendAsync(request);
 
             if (response.IsSuccessStatusCode)
@@ -79,9 +101,12 @@ namespace MovieCategorySearch.Infrastructure.ApiClient
 
         #region private methods
 
-        private async Task<HttpRequestMessage> CreateRequestMessage(string method)
+        private async Task<HttpRequestMessage> CreateRequestMessage(string urlMethod,Dictionary<string,string>? urlParam = null)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, BASE_URL+ method + $"?{await new FormUrlEncodedContent(commonHeaders).ReadAsStringAsync()}");
+
+            if (urlParam == null) urlParam = commonHeaders;
+
+            var request = new HttpRequestMessage(HttpMethod.Get, BASE_URL+ urlMethod + $"?{await new FormUrlEncodedContent(urlParam).ReadAsStringAsync()}");
             request.Headers.Add("accept", "application/json");
             request.Headers.Add("Authorization", $"Bearer {_accessToken}");
 

@@ -1,8 +1,6 @@
 ﻿using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Infrastructure.Data;
-using MovieCategorySearch.Infrastructure.Data.Entity;
-using System.Linq.Expressions;
 
 namespace MovieCategorySearch.Infrastructure.QueryServices
 {
@@ -37,9 +35,7 @@ namespace MovieCategorySearch.Infrastructure.QueryServices
 
             return new MovieQueryResult()
             {
-                Id = movie.Id,
                 TmdbMovieId = movie.TmdbMovieId,
-                Title = movie.Title
             };
         }
 
@@ -48,41 +44,39 @@ namespace MovieCategorySearch.Infrastructure.QueryServices
         /// </summary>
         /// <param name="title">検索するタイトル。</param>
         /// <returns>映画の結果のリスト。</returns>
-        public List<MovieQueryResult> SearchMovieList(string title)
-        {
-            //TODO TmdbApiから取得した映画情報を取得
+        //public List<MovieQueryResult> SearchMovieList(string title)
+        //{
+        //    //TODO TmdbApiから取得した映画情報を取得
 
-            Queue<Expression<Func<Movie, bool>>> condList = new Queue<Expression<Func<Movie, bool>>>();
+        //    Queue<Expression<Func<Movie, bool>>> condList = new Queue<Expression<Func<Movie, bool>>>();
 
-            //検索条件を追加
-            if (!string.IsNullOrWhiteSpace(title))
-            {
-                condList.Enqueue(x => x.Title.Contains(title));
-            }
+        //    //検索条件を追加
+        //    if (!string.IsNullOrWhiteSpace(title))
+        //    {
+        //        condList.Enqueue(x => x.Title.Contains(title));
+        //    }
 
-            //検索条件を追加
-            var query = _dbContext.Movie.AsQueryable();
-            while (condList.Count != 0)
-            {
-                query = query.Where(condList.Dequeue());
-            }
+        //    //検索条件を追加
+        //    var query = _dbContext.Movie.AsQueryable();
+        //    while (condList.Count != 0)
+        //    {
+        //        query = query.Where(condList.Dequeue());
+        //    }
 
-            //クエリ実行
-            var movieList = query.ToList();
+        //    //クエリ実行
+        //    var movieList = query.ToList();
 
-            List<MovieQueryResult> result = new List<MovieQueryResult>();
-            foreach (var movie in movieList)
-            {
-                result.Add(new MovieQueryResult()
-                {
-                    Id = movie.Id,
-                    TmdbMovieId = movie.TmdbMovieId,
-                    Title = movie.Title
-                });
-            }
+        //    List<MovieQueryResult> result = new List<MovieQueryResult>();
+        //    foreach (var movie in movieList)
+        //    {
+        //        result.Add(new MovieQueryResult()
+        //        {
+        //            TmdbMovieId = movie.TmdbMovieId,
+        //        });
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
     }
 }

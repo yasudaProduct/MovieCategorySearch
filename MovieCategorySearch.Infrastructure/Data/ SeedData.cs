@@ -20,7 +20,6 @@ public static class SeedData
                     new Movie
                     {
                         TmdbMovieId = 1,
-                        Title = "When Harry Met Sally",
                         DeletedFlg = "0",
                         CreatePgmId = "Seed",
                         CreateUserId = "Seed",
@@ -32,7 +31,6 @@ public static class SeedData
                     new Movie
                     {
                         TmdbMovieId = 2,
-                        Title = "Ghostbusters ",
                         DeletedFlg = "0",
                         CreatePgmId = "Seed",
                         CreateUserId = "Seed",
@@ -44,7 +42,6 @@ public static class SeedData
                     new Movie
                     {
                         TmdbMovieId = 3,
-                        Title = "Ghostbusters 2",
                         DeletedFlg = "0",
                         CreatePgmId = "Seed",
                         CreateUserId = "Seed",
@@ -56,7 +53,6 @@ public static class SeedData
                     new Movie
                     {
                         TmdbMovieId = 4,
-                        Title = "Rio Bravo",
                         DeletedFlg = "0",
                         CreatePgmId = "Seed",
                         CreateUserId = "Seed",

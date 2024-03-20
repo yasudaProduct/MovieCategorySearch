@@ -8,5 +8,7 @@ namespace MovieCategorySearch.Application.Usecase.Movie
         public Task<TmdbApiResponce> RunAsync();
 
         public Task<TmdbApiResponce> GetPopular();
+
+        public Task<TmdbApiResponce> SearchCollection(string title);
     }
 }

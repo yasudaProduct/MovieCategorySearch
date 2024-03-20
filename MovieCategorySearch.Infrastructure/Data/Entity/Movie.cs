@@ -9,21 +9,11 @@ namespace MovieCategorySearch.Infrastructure.Data.Entity
     [Table("movie")]
     public class Movie : BaseEntity
     {
-        [Description("映画ID")]
-        [Key]
-        [Column("id")]
-        [Required]
-        public int Id { get; set; }
-
         [Description("TMDb映画ID")]
+        [Key]
         [Column("tmdb_movie_id")]
         [Required]
         public int TmdbMovieId { get; set; }
-
-        [Description("タイトル")]
-        [Column("title")]
-        [Required]
-        public string Title { get; set; }
 
         [Description("削除フラグ")]
         [Column("deleted_flg")]

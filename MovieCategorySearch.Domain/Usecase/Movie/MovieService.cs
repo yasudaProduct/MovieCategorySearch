@@ -40,21 +40,35 @@ namespace MovieCategorySearch.Application.UseCase.Movie
             foreach(var movie in reqest.results)
             {
 
-                MovieResult mr = new MovieResult
+                movieResultList.Add(new MovieResult
                 {
                     TmdbMovieId = movie.id,
                     Title = movie.title,
                     Overview = movie.overview,
-                };
+                });
 
-                MovieQueryResult res = _movieQueryService.GetbyTmdbId(movie.id);
-                if(res != null)
+            }
+
+            return movieResultList;
+        }
+
+        public async Task<List<MovieResult>> Search(string title)
+        {
+            //TmdbApiからデータを取得
+            TmdbApiResponce reqest = await _tmdbApiClient.SearchCollection(title);
+
+            List<MovieResult> movieResultList = new List<MovieResult>();
+
+            foreach (var movie in reqest.results)
+            {
+
+                movieResultList.Add(new MovieResult
                 {
-                    mr.Id = res.Id;
-                }
+                    TmdbMovieId = movie.id,
+                    Title = movie.title,
+                    Overview = movie.overview,
+                });
 
-                //TmdbIdを元にDBからデータを取得
-                movieResultList.Add(mr);
             }
 
             return movieResultList;

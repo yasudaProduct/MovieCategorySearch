@@ -4,8 +4,6 @@ namespace MovieCategorySearch.ViewModels
 {
     public class MovieViewModel
     {
-        public int? Id { get; set; }
-
         public int TmdbMovieId { get; set; }
         
         [DisplayName("タイトル")]

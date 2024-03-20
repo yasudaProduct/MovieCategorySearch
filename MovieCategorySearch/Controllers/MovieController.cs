@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MovieCategorySearch.Application.UseCase.Auth;
 using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.ViewModels;
 
@@ -48,7 +49,6 @@ namespace MovieCategorySearch.Controllers
             {
                 model.MovieList.Add(new MovieViewModel()
                 {
-                    Id = movie.Id,
                     TmdbMovieId = movie.TmdbMovieId,
                     Title = movie.Title,
                     Overview = movie.Overview
@@ -65,7 +65,7 @@ namespace MovieCategorySearch.Controllers
         /// <returns>検索結果を含むビュー。</returns>
         public async Task<IActionResult> Search(string title)
         {
-            var movieList = _movieQueryService.SearchMovieList(title);
+            var movieList = await _movieService.Search(title);
 
             MovieListViewModel model = new MovieListViewModel();
 
@@ -73,9 +73,9 @@ namespace MovieCategorySearch.Controllers
             {
                 model.MovieList.Add(new MovieViewModel()
                 {
-                    Id = movie.Id,
                     TmdbMovieId = movie.TmdbMovieId,
                     Title = movie.Title,
+                    Overview = movie.Overview
                 });
             });
 
