@@ -73,5 +73,21 @@ namespace MovieCategorySearch.Application.UseCase.Movie
 
             return movieResultList;
         }
+
+        public async Task<MovieResult> GetDetails(int tmdbId)
+        {
+            TmdbMovieDetailsResponce reqest = await _tmdbApiClient.GetDetails(tmdbId);
+
+            MovieResult result = new MovieResult()
+            {
+                TmdbMovieId = reqest.id,
+                Title = reqest.title,
+                Overview = reqest.overview,
+                ReleaseDate = reqest.release_date,
+            };
+
+            return result;
+        }
+
     }
 }

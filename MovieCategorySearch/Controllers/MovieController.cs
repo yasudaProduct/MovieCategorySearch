@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.Application.UseCase.Auth;
 using MovieCategorySearch.Application.UseCase.Movie;
+using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.ViewModels;
 
 namespace MovieCategorySearch.Controllers
@@ -87,9 +88,25 @@ namespace MovieCategorySearch.Controllers
         /// </summary>
         /// <param name="id">映画のID。</param>
         /// <returns>映画の詳細を含むビュー。</returns>
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            MovieResult result =  await _movieService.GetDetails(id);
+
+            MovieViewModel movie = new MovieViewModel()
+            {
+                TmdbMovieId = result.TmdbMovieId,
+                Title = result.Title,
+                Overview = result.Overview
+            };
+
+            MovieDetailsViewModel model = new MovieDetailsViewModel()
+            {
+                Movie = movie,
+                Genres = result.Genres,
+                ReleaseDate = result.ReleaseDate
+            };
+
+            return View(model);
         }
 
         /// <summary>

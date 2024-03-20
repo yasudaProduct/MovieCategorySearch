@@ -14,8 +14,5 @@ namespace MovieCategorySearch.ViewModels
         [DataType(DataType.Password)]
         [Required]
         public string Password { get; set; }
-
-        [DisplayName("テスト")]
-        public int TestInt { get; set; }
     }
 }

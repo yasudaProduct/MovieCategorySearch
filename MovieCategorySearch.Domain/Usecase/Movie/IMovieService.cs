@@ -7,5 +7,7 @@ namespace MovieCategorySearch.Application.UseCase.Movie
         public Task<List<MovieResult>> GetMovieList();
 
         public Task<List<MovieResult>> Search(string title);
+
+        public Task<MovieResult> GetDetails(int tmdbId);
     }
 }

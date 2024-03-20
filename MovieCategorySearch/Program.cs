@@ -1,7 +1,5 @@
 using Merino;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.DependencyInjection;
 using MovieCategorySearch.Infrastructure.Data;
 
 //アプリケーション初期化

@@ -99,6 +99,25 @@ namespace MovieCategorySearch.Infrastructure.ApiClient
             }
         }
 
+        public async Task<TmdbMovieDetailsResponce> GetDetails(int tmdbId)
+        {
+            Dictionary<string, string> urlParam = commonHeaders;
+
+            var request = await this.CreateRequestMessage("movie/" + tmdbId.ToString(), urlParam);
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                TmdbMovieDetailsResponce responseString = await response.Content.ReadFromJsonAsync<TmdbMovieDetailsResponce>();
+                Console.WriteLine(responseString);
+                return responseString;
+            }
+            else
+            {
+                Console.WriteLine("Error");
+                throw new Exception("Error");
+            }
+        }
         #region private methods
 
         private async Task<HttpRequestMessage> CreateRequestMessage(string urlMethod,Dictionary<string,string>? urlParam = null)
