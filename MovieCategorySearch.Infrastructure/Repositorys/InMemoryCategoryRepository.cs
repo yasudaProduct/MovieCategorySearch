@@ -1,4 +1,5 @@
-using MovieCategorySearch.Application.Domain.Categorys;
+using MovieCategorySearch.Application.Domain.Categories;
+using MovieCategorySearch.Application.Domain.Categories.ValueObject;
 using MovieCategorySearch.Infrastructure.Data;
 
 namespace MovieCategorySearch.Infrastructure.Repositorys
@@ -13,7 +14,7 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
             _dbContext = dbContext;
         }
 
-        public void Save(Category category)
+        public int Save(Category category)
         {
             var entity = new Data.Entity.Category()
             {
@@ -25,6 +26,20 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
 
             _dbContext.Category.Add(entity);
             _dbContext.SaveChanges();
+
+            return entity.Id;
         }
+
+        public Category Find(int id)
+        {
+            var entity = _dbContext.Category.Find(id);
+
+            return new Category(
+                entity.Id,
+                new CategoryName(entity.Name),
+                entity.Description != null ? new Description(entity.Description): null
+                );
+        }
+
     }
 }

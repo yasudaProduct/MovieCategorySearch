@@ -24,7 +24,7 @@ namespace MovieCategorySearch.Infrastructure.Data.Entity
         [Description("説明")]
         [Column("description")]
         [MaxLength(100)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Description("作成者ID")]
         [Column("create_user_id")]

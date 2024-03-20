@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MovieCategorySearch.Application.Usecase.Category.Dto;
-using MovieCategorySearch.Application.UseCase.Category;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MovieCategorySearch.Application.Usecase.Categories.Dto;
+using MovieCategorySearch.Application.UseCase.Categories;
 using MovieCategorySearch.ViewModels;
 
 namespace MovieCategorySearch.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ILogger _logger;
@@ -26,7 +28,18 @@ namespace MovieCategorySearch.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            if (id == null) return RedirectToAction(nameof(HomeController.Index));
+
+            CategoryDetailsDto dto =  _categoryService.Find(id);
+
+            CategoryViewModel viewModel = new CategoryViewModel()
+            {
+                Id = dto.Id,
+                CategoryName = dto.CategoryName,
+                Description = dto.Description
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult Create()
@@ -44,12 +57,12 @@ namespace MovieCategorySearch.Controllers
             }
 
             //category serviceを呼び出す
-            _categoryService.Create(new CreateCategoryCommand(
+            int id = _categoryService.Create(new CreateCategoryCommand(
                 viewModel.CategoryName,
                 viewModel.Description)
                 );
 
-            return View();
+            return RedirectToAction(nameof(Details), new { id = id });
         }
 
         public ActionResult Edit(int id)

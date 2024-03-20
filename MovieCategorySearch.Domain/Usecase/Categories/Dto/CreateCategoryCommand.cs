@@ -1,4 +1,4 @@
-﻿namespace MovieCategorySearch.Application.Usecase.Category.Dto
+﻿namespace MovieCategorySearch.Application.Usecase.Categories.Dto
 {
     public class CreateCategoryCommand
     {

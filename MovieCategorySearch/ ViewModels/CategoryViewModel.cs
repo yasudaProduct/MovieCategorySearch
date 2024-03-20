@@ -6,6 +6,9 @@ namespace MovieCategorySearch.ViewModels
     public class CategoryViewModel
     {
 
+        [DisplayName("ID")]
+        public int Id { get; set; }
+
         [DisplayName("カテゴリ名")]
         [Required]
         [StringLength(30)]
@@ -13,6 +16,6 @@ namespace MovieCategorySearch.ViewModels
 
         [DisplayName("説明")]
         [StringLength(100)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }

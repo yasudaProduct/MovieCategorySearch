@@ -1,4 +1,4 @@
-﻿namespace MovieCategorySearch.Application.Domain.Categorys.ValueObject
+﻿namespace MovieCategorySearch.Application.Domain.Categories.ValueObject
 {
     public sealed class CategoryName
     {
@@ -10,7 +10,7 @@
             {
                 throw new ArgumentException("カテゴリ名が未入力です");
             }
-            if (value.Length > 30)
+            if (value.Length > 50)
             {
                 throw new ArgumentException("カテゴリ名は50文字以内で入力してください");
             }

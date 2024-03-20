@@ -1,6 +1,6 @@
-using MovieCategorySearch.Application.Domain.Categorys.ValueObject;
+using MovieCategorySearch.Application.Domain.Categories.ValueObject;
 
-namespace MovieCategorySearch.Application.Domain.Categorys
+namespace MovieCategorySearch.Application.Domain.Categories
 {
     public class Category
     {

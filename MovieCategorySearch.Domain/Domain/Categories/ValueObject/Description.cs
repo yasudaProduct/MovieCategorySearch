@@ -1,4 +1,4 @@
-﻿namespace MovieCategorySearch.Application.Domain.Categorys.ValueObject
+﻿namespace MovieCategorySearch.Application.Domain.Categories.ValueObject
 {
     public sealed class Description
     {
