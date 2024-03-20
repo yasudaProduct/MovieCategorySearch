@@ -6,5 +6,7 @@ namespace MovieCategorySearch.Application.Usecase.Movie
     {
 
         public Task<TmdbApiResponce> RunAsync();
+
+        public Task<TmdbApiResponce> GetPopular();
     }
 }

@@ -12,15 +12,19 @@ namespace MovieCategorySearch.Application.UseCase.Movie
 
         private readonly IMovieRepository _movieRpository;
 
+        private readonly IMovieQueryService _movieQueryService;
+
         private readonly ITmdbApiClient _tmdbApiClient;
         public MovieService(
             ILogger<MovieService> logger,
             IMovieRepository movieRpository,
+            IMovieQueryService movieQueryService,
             ITmdbApiClient tmdbApiClient
         )
         {
             _logger = logger;
             _movieRpository = movieRpository;
+            _movieQueryService = movieQueryService;
             _tmdbApiClient = tmdbApiClient;
         }
 
@@ -28,25 +32,32 @@ namespace MovieCategorySearch.Application.UseCase.Movie
         {
 
             //TmdbApiからデータを取得
-            TmdbApiResponce reqest = await _tmdbApiClient.RunAsync();
+            TmdbApiResponce reqest = await _tmdbApiClient.GetPopular();
 
-            //TODO TmdbIdを元にDBからデータを取得
-            //Factoryを使ってデータを作成？
-            List<Domain.Movie.Movie> movieList = _movieRpository.FindAll();           
+            List<MovieResult> movieResultList = new List<MovieResult>();
 
-            List<MovieResult> result = new List<MovieResult>();
-
-            foreach (var movie in movieList)
+            //MovieResultを作成 TODO Factoryにする？
+            foreach(var movie in reqest.results)
             {
-                result.Add(new MovieResult()
+
+                MovieResult mr = new MovieResult
                 {
-                    Id = movie.Id,
-                    TmdbMovieId = movie.TmdbMovieId,
-                    Title = movie.Title
-                });
+                    TmdbMovieId = movie.id,
+                    Title = movie.title,
+                    Overview = movie.overview,
+                };
+
+                MovieQueryResult res = _movieQueryService.GetbyTmdbId(movie.id);
+                if(res != null)
+                {
+                    mr.Id = res.Id;
+                }
+
+                //TmdbIdを元にDBからデータを取得
+                movieResultList.Add(mr);
             }
 
-            return result;
+            return movieResultList;
         }
     }
 }

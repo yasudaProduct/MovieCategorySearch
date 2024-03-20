@@ -1,16 +1,14 @@
 ﻿namespace MovieCategorySearch.Application.UseCase.Movie.Dto
 {
 
-    public class MovieResult
+    public class MovieQueryResult
     {
 
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public int TmdbMovieId { get; set; }
 
         public string Title { get; set; }
-
-        public string Overview { get; set; }
        
     }
 

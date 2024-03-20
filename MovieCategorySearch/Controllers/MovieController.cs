@@ -5,6 +5,9 @@ using MovieCategorySearch.ViewModels;
 
 namespace MovieCategorySearch.Controllers
 {
+    /// <summary>
+    /// 映画を管理するためのコントローラーです。
+    /// </summary>
     [Authorize]
     public class MovieController : Controller
     {
@@ -14,6 +17,12 @@ namespace MovieCategorySearch.Controllers
 
         private readonly IMovieQueryService _movieQueryService;
 
+        /// <summary>
+        /// <see cref="MovieController"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="logger">ロガー。</param>
+        /// <param name="movieService">映画サービス。</param>
+        /// <param name="movieQueryService">映画クエリサービス。</param>
         public MovieController(
             ILogger<MovieController> logger,
             IMovieService movieService,
@@ -25,7 +34,10 @@ namespace MovieCategorySearch.Controllers
             _movieQueryService = movieQueryService;
         }
 
-        // GET: MoviesController
+        /// <summary>
+        /// 映画の一覧を表示します。
+        /// </summary>
+        /// <returns>映画の一覧を含むビュー。</returns>
         public async Task<ActionResult> Index()
         {
             var movieList = await _movieService.GetMovieList();
@@ -37,13 +49,20 @@ namespace MovieCategorySearch.Controllers
                 model.MovieList.Add(new MovieViewModel()
                 {
                     Id = movie.Id,
-                    Title = movie.Title
+                    TmdbMovieId = movie.TmdbMovieId,
+                    Title = movie.Title,
+                    Overview = movie.Overview
                 });
             });
 
             return View(model);
         }
 
+        /// <summary>
+        /// 指定されたタイトルで映画を検索します。
+        /// </summary>
+        /// <param name="title">検索するタイトル。</param>
+        /// <returns>検索結果を含むビュー。</returns>
         public async Task<IActionResult> Search(string title)
         {
             var movieList = _movieQueryService.SearchMovieList(title);
@@ -55,26 +74,38 @@ namespace MovieCategorySearch.Controllers
                 model.MovieList.Add(new MovieViewModel()
                 {
                     Id = movie.Id,
-                    Title = movie.Title
+                    TmdbMovieId = movie.TmdbMovieId,
+                    Title = movie.Title,
                 });
             });
 
             return View("Index", model);
-        }   
+        }
 
-        // GET: MoviesController/Details/5
+        /// <summary>
+        /// 映画の詳細を表示します。
+        /// </summary>
+        /// <param name="id">映画のID。</param>
+        /// <returns>映画の詳細を含むビュー。</returns>
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: MoviesController/Create
+        /// <summary>
+        /// 映画の作成フォームを表示します。
+        /// </summary>
+        /// <returns>映画の作成フォームを含むビュー。</returns>
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: MoviesController/Create
+        /// <summary>
+        /// 新しい映画を作成します。
+        /// </summary>
+        /// <param name="collection">映画データを含むフォームコレクション。</param>
+        /// <returns>アクションの結果。</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -89,13 +120,22 @@ namespace MovieCategorySearch.Controllers
             }
         }
 
-        // GET: MoviesController/Edit/5
+        /// <summary>
+        /// 映画の編集フォームを表示します。
+        /// </summary>
+        /// <param name="id">映画のID。</param>
+        /// <returns>映画の編集フォームを含むビュー。</returns>
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: MoviesController/Edit/5
+        /// <summary>
+        /// 映画を更新します。
+        /// </summary>
+        /// <param name="id">映画のID。</param>
+        /// <param name="collection">更新された映画データを含むフォームコレクション。</param>
+        /// <returns>アクションの結果。</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -110,13 +150,22 @@ namespace MovieCategorySearch.Controllers
             }
         }
 
-        // GET: MoviesController/Delete/5
+        /// <summary>
+        /// 削除確認ページを表示します。
+        /// </summary>
+        /// <param name="id">映画のID。</param>
+        /// <returns>削除確認ページを含むビュー。</returns>
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: MoviesController/Delete/5
+        /// <summary>
+        /// 映画を削除します。
+        /// </summary>
+        /// <param name="id">映画のID。</param>
+        /// <param name="collection">フォームコレクション。</param>
+        /// <returns>アクションの結果。</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
