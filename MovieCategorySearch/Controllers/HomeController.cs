@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
 using MovieCategorySearch.Application.UseCase.Categories;
 using MovieCategorySearch.Application.UseCase.Movie;
+using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Models;
 using MovieCategorySearch.ViewModels;
 
@@ -35,22 +36,39 @@ public class HomeController : MerinoController
     #endregion  
 
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
 
         List<CategoryDetailsDto> list = _categoryService.FindAll().ToList();
 
-        List<CategoryModel> CategoryModelList = new List<CategoryModel>();
+        List<CategoryModel> categoryModelList = new List<CategoryModel>();
         foreach (var item in list)
         {
-            CategoryModelList.Add(new CategoryModel()
+            categoryModelList.Add(new CategoryModel()
             {
                 Id= item.Id,
                 CategoryName = item.CategoryName,
             });
-        }      
+        }
 
-        return View(new HomeViewModel() { CategoryModelList = CategoryModelList });
+        List<MovieResult> movieResultList = await _movieService.GetMovieList();
+
+        List<MovieViewModel> movieViewModelList = new List<MovieViewModel>();
+        foreach (var item in movieResultList)
+        {
+            movieViewModelList.Add(new MovieViewModel()
+            {
+                TmdbMovieId = item.TmdbMovieId,
+                Title = item.Title,
+                Overview = item.Overview
+            });
+        }
+
+        return View(
+            new HomeViewModel() {
+                CategoryModelList = categoryModelList,
+                MovieList = movieViewModelList 
+            });
     }
 
     public IActionResult Privacy()
