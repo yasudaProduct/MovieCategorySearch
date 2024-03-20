@@ -14,21 +14,6 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
             _dbContext = dbContext;
         }
 
-        public int Save(Category category)
-        {
-            var entity = new Data.Entity.Category()
-            {
-                Name = category.CategoryName.Value,
-                Description = category.Description?.Value,
-                CreateUserId = 1,
-                DeletedFlg = "0",
-            };
-
-            _dbContext.Category.Add(entity);
-            _dbContext.SaveChanges();
-
-            return entity.Id;
-        }
 
         public Category Find(int id)
         {
@@ -37,8 +22,36 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
             return new Category(
                 entity.Id,
                 new CategoryName(entity.Name),
+                1,
                 entity.Description != null ? new Description(entity.Description): null
                 );
+        }
+
+        public List<Category> FindAll()
+        {
+            return _dbContext.Category.ToList().Select(x => new Category(
+                               x.Id,
+                               new CategoryName(x.Name),
+                               x.CreateUserId,
+                               x.Description != null ? new Description(x.Description) : null
+                               )).ToList();
+        }
+
+        public int Save(Category category)
+        {
+            var entity = new Data.Entity.Category()
+            {
+                Name = category.CategoryName.Value,
+                Description = category.Description?.Value,
+                CreateUserId = category.CreateUserId,
+                UpdateUserId = category.CreateUserId,
+                DeletedFlg = "0",
+            };
+
+            _dbContext.Category.Add(entity);
+            _dbContext.SaveChanges();
+
+            return entity.Id;
         }
 
     }

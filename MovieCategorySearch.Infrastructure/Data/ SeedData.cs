@@ -22,10 +22,10 @@ public static class SeedData
                         TmdbMovieId = 1,
                         DeletedFlg = "0",
                         CreatePgmId = "Seed",
-                        CreateUserId = "Seed",
+                        CreateUserId = 1,
                         CreateDate = DateTime.Now,
                         UpdatePgmId = "Seed",
-                        UpdateUserId = "Seed",
+                        UpdateUserId = 1,
                         UpdateDate = DateTime.Now,
                     },
                     new Movie
@@ -33,10 +33,10 @@ public static class SeedData
                         TmdbMovieId = 2,
                         DeletedFlg = "0",
                         CreatePgmId = "Seed",
-                        CreateUserId = "Seed",
+                        CreateUserId = 1,
                         CreateDate = DateTime.Now,
                         UpdatePgmId = "Seed",
-                        UpdateUserId = "Seed",
+                        UpdateUserId = 1,
                         UpdateDate = DateTime.Now,
                     },
                     new Movie
@@ -44,10 +44,10 @@ public static class SeedData
                         TmdbMovieId = 3,
                         DeletedFlg = "0",
                         CreatePgmId = "Seed",
-                        CreateUserId = "Seed",
+                        CreateUserId = 1,
                         CreateDate = DateTime.Now,
                         UpdatePgmId = "Seed",
-                        UpdateUserId = "Seed",
+                        UpdateUserId = 1,
                         UpdateDate = DateTime.Now,
                     },
                     new Movie
@@ -55,10 +55,10 @@ public static class SeedData
                         TmdbMovieId = 4,
                         DeletedFlg = "0",
                         CreatePgmId = "Seed",
-                        CreateUserId = "Seed",
+                        CreateUserId = 1,
                         CreateDate = DateTime.Now,
                         UpdatePgmId = "Seed",
-                        UpdateUserId = "Seed",
+                        UpdateUserId = 1,
                         UpdateDate = DateTime.Now,
                     }
                 );
@@ -77,10 +77,10 @@ public static class SeedData
                         UserCls = "1",
                         DeletedFlg = "0",
                         CreatePgmId = "Seed",
-                        CreateUserId = "Seed",
+                        CreateUserId = 1,
                         CreateDate = DateTime.Now,
                         UpdatePgmId = "Seed",
-                        UpdateUserId = "Seed",
+                        UpdateUserId = 1,
                         UpdateDate = DateTime.Now,
                     },
                     new User
@@ -90,10 +90,55 @@ public static class SeedData
                         UserCls = "1",
                         DeletedFlg = "0",
                         CreatePgmId = "Seed",
-                        CreateUserId = "Seed",
+                        CreateUserId = 1,
                         CreateDate = DateTime.Now,
                         UpdatePgmId = "Seed",
-                        UpdateUserId = "Seed",
+                        UpdateUserId = 1,
+                        UpdateDate = DateTime.Now,
+                    }
+                    );
+            }
+            #endregion
+
+            #region Category
+            if (!context.Category.Any())
+            {
+
+                context.Category.AddRange(
+                    new Category
+                    {
+                        Name = "ãLâØÇè¡ÇµÇƒÇ›ÇΩÇ¢âfâÊ",
+                        Description = "Seed Date",
+                        CreateUserId = 1,
+                        DeletedFlg = "0",
+                        CreatePgmId = "Seed",
+                        CreateDate = DateTime.Now,
+                        UpdatePgmId = "Seed",
+                        UpdateUserId = 1,
+                        UpdateDate = DateTime.Now,
+                    },
+                    new Category
+                    {
+                        Name = "âJÇÃì˙Ç…äœÇΩÇ¢âfâÊ",
+                        Description = "Seed Date",
+                        CreateUserId = 2,
+                        DeletedFlg = "0",
+                        CreatePgmId = "Seed",
+                        CreateDate = DateTime.Now,
+                        UpdatePgmId = "Seed",
+                        UpdateUserId = 1,
+                        UpdateDate = DateTime.Now,
+                    },
+                    new Category
+                    {
+                        Name = "óFÇæÇøÇ∆äœÇΩÇ¢âfâÊ",
+                        Description = "Seed Date",
+                        CreateUserId = 1,
+                        DeletedFlg = "0",
+                        CreatePgmId = "Seed",
+                        CreateDate = DateTime.Now,
+                        UpdatePgmId = "Seed",
+                        UpdateUserId = 1,
                         UpdateDate = DateTime.Now,
                     }
                     );

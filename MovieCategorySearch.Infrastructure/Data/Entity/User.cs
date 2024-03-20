@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Merino.Entity;
+using Merino.Infrastructure.Entity;
 
 namespace MovieCategorySearch.Infrastructure.Data.Entity
 {

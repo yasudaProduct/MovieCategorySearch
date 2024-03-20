@@ -8,6 +8,9 @@ namespace MovieCategorySearch.Application.UseCase.Categories
     public interface ICategoryService
     {
         public CategoryDetailsDto Find(int id);
+
+        public IEnumerable<CategoryDetailsDto> FindAll();
+
         public int Create(CreateCategoryCommand commnad);
     }
 
@@ -28,18 +31,6 @@ namespace MovieCategorySearch.Application.UseCase.Categories
         }
         #endregion
 
-        public int Create(CreateCategoryCommand command)
-        {
-            //ドメインモデル作成
-            var category = new Domain.Categories.Category(
-                null,
-                new CategoryName(command.CategoryName),
-                command.Description != null ? new Description(command.Description): null
-                );
-
-            //リポジトリに保存
-            return _categoryRepository.Save(category);
-        }
 
         public CategoryDetailsDto Find(int id)
         {
@@ -50,6 +41,34 @@ namespace MovieCategorySearch.Application.UseCase.Categories
                 category.CategoryName.Value,
                 category.Description?.Value
                 );
+        }
+
+        public IEnumerable<CategoryDetailsDto> FindAll()
+        {
+            var categoryList = _categoryRepository.FindAll();
+
+            foreach (var category in categoryList)
+            {
+                yield return new CategoryDetailsDto(
+                    category.Id.Value,
+                    category.CategoryName.Value,
+                    category.Description?.Value
+                    );
+            }
+        }
+
+        public int Create(CreateCategoryCommand command)
+        {
+            //ドメインモデル作成
+            var category = new Category(
+                null,
+                new CategoryName(command.CategoryName),
+                command.CreateUserId,
+                command.Description != null ? new Description(command.Description) : null
+                );
+
+            //リポジトリに保存
+            return _categoryRepository.Save(category);
         }
 
     }

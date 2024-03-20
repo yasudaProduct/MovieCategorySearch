@@ -49,6 +49,8 @@ namespace MovieCategorySearch.Controllers
                 return View();
             }
 
+            //ユーザー取得
+
             //認証Cookie作成
             //base.AddCookie<AppCookieDto>(new AppCookieDto() 
             //    { 
@@ -59,8 +61,8 @@ namespace MovieCategorySearch.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, model.LoginId),
-                //new Claim("FullName", "yasuda yuta"),
-                //new Claim(ClaimTypes.Role, "Administrator"),
+                new Claim("UserId", "1"),
+                new Claim(ClaimTypes.Role, "Administrator"),
             };
 
             var claimsIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -80,8 +82,6 @@ namespace MovieCategorySearch.Controllers
             return RedirectToAction(nameof(MovieController.Index),"Movie");
         }
 
-        //[HttpGet]
-        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
 

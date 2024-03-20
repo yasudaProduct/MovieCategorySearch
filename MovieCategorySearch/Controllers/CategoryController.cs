@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Merino.Controller;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
 using MovieCategorySearch.Application.UseCase.Categories;
@@ -7,7 +8,7 @@ using MovieCategorySearch.ViewModels;
 namespace MovieCategorySearch.Controllers
 {
     [Authorize]
-    public class CategoryController : Controller
+    public class CategoryController : MerinoController
     {
         private readonly ILogger _logger;
 
@@ -59,7 +60,8 @@ namespace MovieCategorySearch.Controllers
             //category serviceを呼び出す
             int id = _categoryService.Create(new CreateCategoryCommand(
                 viewModel.CategoryName,
-                viewModel.Description)
+                viewModel.Description,
+                int.Parse(UserId))
                 );
 
             return RedirectToAction(nameof(Details), new { id = id });
