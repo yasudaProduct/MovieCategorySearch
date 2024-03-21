@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCategorySearch.Infrast
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Merino", "..\dotnetMVCLib\Merino\Merino.csproj", "{20FD5BB5-4EEC-4DEB-9FA9-CB321FBE120E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCategorySeach.UnitTest", "MovieCategorySeach.UnitTest\MovieCategorySeach.UnitTest.csproj", "{9E31D5A3-E957-48CA-889D-627823579183}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{20FD5BB5-4EEC-4DEB-9FA9-CB321FBE120E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20FD5BB5-4EEC-4DEB-9FA9-CB321FBE120E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20FD5BB5-4EEC-4DEB-9FA9-CB321FBE120E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E31D5A3-E957-48CA-889D-627823579183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E31D5A3-E957-48CA-889D-627823579183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E31D5A3-E957-48CA-889D-627823579183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E31D5A3-E957-48CA-889D-627823579183}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
