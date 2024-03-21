@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
 using MovieCategorySearch.Application.UseCase.Categories;
 using MovieCategorySearch.Controllers;
+using MovieCategorySearch.ViewModels;
+using System.Security.Claims;
 
 namespace MovieCategorySeach.UnitTest.Controllers
 {
@@ -11,30 +14,35 @@ namespace MovieCategorySeach.UnitTest.Controllers
     {
         private CategoryController _controller;
 
+        private Mock<ILogger<CategoryController>> _mockILogger;
+
+        private Mock<ICategoryService> _mockICategoryService;
+
         public CategoryControllerTest()
         {
             //Arrange
-            Mock<ILogger<CategoryController>> mockILogger = new Mock<ILogger<CategoryController>>();
+            _mockILogger = new Mock<ILogger<CategoryController>>();
 
-            Mock<ICategoryService> mockICategoryService = new Mock<ICategoryService>();
-            mockICategoryService.Setup(mock => mock.Find(1))
-                .Returns(new CategoryDetailsDto(1, "", ""));
+            _mockICategoryService = new Mock<ICategoryService>();
+            _mockICategoryService.Setup(mock => mock.Find(1))
+                .Returns(new CategoryDetailsDto(1, "カテゴリ１", "説明１"));
 
-            mockICategoryService.Setup(mock => mock.FindAll())
+            _mockICategoryService.Setup(mock => mock.FindAll())
                 .Returns(new List<CategoryDetailsDto>()
                 {
-                    new CategoryDetailsDto(1, "テスト1", "テスト1"),
-                    new CategoryDetailsDto(2, "テスト2", "テスト2")
+                    new CategoryDetailsDto(1, "カテゴリ１", "説明１"),
+                    new CategoryDetailsDto(2, "カテゴリ２", "説明２")
                 });
 
-            mockICategoryService.Setup(mock => mock.Create(new CreateCategoryCommand(
-                "CategoryName",
-                "Description",
+            _mockICategoryService.Setup(mock => mock.Create(new CreateCategoryCommand(
+                "カテゴリ３",
+                "説明３",
                 1
                 )))
-                .Returns(1);
+                .Returns(1)
+                .Verifiable();
 
-            _controller = new CategoryController(mockILogger.Object, mockICategoryService.Object);
+            _controller = new CategoryController(_mockILogger.Object, _mockICategoryService.Object);
         }
 
         public void Dispose()
@@ -55,18 +63,24 @@ namespace MovieCategorySeach.UnitTest.Controllers
         }
 
         [Fact]
-        public async void Details_Open()
+        public async void Details_ReturnsViewWithCategoryViewModel()
         {
             //Act
             var result = _controller.Details(1);
 
             //Assert
             var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsType<CategoryViewModel>(viewResult.Model);
+
+            Assert.Equal(1, model.Id);
+            Assert.Equal("カテゴリ１", model.CategoryName);
+            Assert.Equal("説明１", model.Description);
         }
 
         [Fact]
         public async void Create_Open()
         {
+
             //Act
             var result = _controller.Create();
 
@@ -74,5 +88,69 @@ namespace MovieCategorySeach.UnitTest.Controllers
             var viewResult = Assert.IsType<ViewResult>(result);
         }
 
+        [Fact]
+        public async void CreatePost_ReturnsViewWithCategoryViewModel_WhenModelStateIsInvalid()
+        {
+            //Arrange
+            var viewModel = new CategoryViewModel
+            {
+                CategoryName = "テスト１",
+                Description = "テスト２"
+            };
+            _controller.ModelState.AddModelError("CategoryName", "カテゴリ名は必須です。"); //ModelStateを無効にする
+
+            //Act
+            var result = _controller.Create(viewModel);
+
+            //Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsType<CategoryViewModel>(viewResult.Model);
+            Assert.Equal("テスト１", model.CategoryName);
+            Assert.Equal("テスト２", model.Description);
+        }
+
+        [Fact]
+        public async void CreatePost_ReturnsARedirect_WhenModelStateIsValid()
+        {
+
+            var mockICategoryService = new Mock<ICategoryService>();
+            mockICategoryService.Setup(mock => mock.Create(new CreateCategoryCommand(
+                "カテゴリ３",
+                "説明３",
+                1
+                )))
+                .Returns(1)
+                .Verifiable();
+
+            var controller = new CategoryController(new Mock<ILogger<CategoryController>>().Object, mockICategoryService.Object);
+
+            //Arrange
+            var viewModel = new CategoryViewModel
+            {
+                CategoryName = "テスト１",
+                Description = "テスト２"
+            };
+
+            //Cookie認証を設定
+            controller.ControllerContext.HttpContext = new DefaultHttpContext();
+            controller.ControllerContext.HttpContext.User = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.Name, "UnitTest@example.com"),
+                new Claim("UserId", "1"),
+                new Claim(ClaimTypes.Role, "Administrator"),
+            }));
+
+            //Act
+            var result = controller.Create(viewModel);
+
+            //Assert
+            
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("Details", redirectToActionResult.ActionName);
+            Assert.Equal("id", redirectToActionResult.RouteValues.Keys.First());
+            Assert.Equal(1, redirectToActionResult.RouteValues["id"]);
+
+        }
     }
 }
