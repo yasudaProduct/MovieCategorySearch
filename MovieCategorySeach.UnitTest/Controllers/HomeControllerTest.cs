@@ -1,5 +1,4 @@
-﻿using MessagePack;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
@@ -7,9 +6,8 @@ using MovieCategorySearch.Application.UseCase.Categories;
 using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Controllers;
+using MovieCategorySearch.Models;
 using MovieCategorySearch.ViewModels;
-using NuGet.Packaging;
-using System.Data;
 
 namespace MovieCategorySeach.UnitTest.Controllers
 {
@@ -70,5 +68,28 @@ namespace MovieCategorySeach.UnitTest.Controllers
             Assert.Equal(viewModel.MovieList.ToList()[0].Title, "テスト1");
             Assert.Equal(viewModel.MovieList.ToList()[0].Overview, "テスト");
         }
+
+        [Fact]
+        public async void Privacy_Open()
+        {
+            //Act
+            var result = _controller.Privacy();
+
+            //Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public async void Error_Open()
+        {
+            //Act
+            var result = _controller.Error();
+
+            //Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsType<ErrorViewModel>(viewResult.Model);
+        }
+
+        
     }
 }
