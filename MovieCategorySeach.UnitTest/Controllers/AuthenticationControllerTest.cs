@@ -38,6 +38,24 @@ namespace MovieCategorySeach.UnitTest.Controllers
         }
 
         [Fact]
+        public void Login_ReturnUrlViewResult()
+        {
+            // Arrange
+            string ReturnUrl = "/Category/Create";
+
+            // Act
+            var result = _controller.Login(ReturnUrl);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsType<LoginViewModel>(viewResult.Model);
+
+            Assert.Null(model.LoginId);
+            Assert.Null(model.Password);
+            Assert.NotNull(model.ReturnUrl);
+        }
+
+        [Fact]
         public async Task Login_WithInvalidModel_ReturnsViewResult()
         {
             // Arrange

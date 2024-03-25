@@ -112,7 +112,7 @@ namespace MovieCategorySeach.UnitTest.Controllers
         [Fact]
         public async void CreatePost_ReturnsARedirect_WhenModelStateIsValid()
         {
-
+            //Arrange
             var mockICategoryService = new Mock<ICategoryService>();
             mockICategoryService.Setup(mock => mock.Create(new CreateCategoryCommand(
                 "カテゴリ３",
@@ -122,9 +122,11 @@ namespace MovieCategorySeach.UnitTest.Controllers
                 .Returns(1)
                 .Verifiable();
 
-            var controller = new CategoryController(new Mock<ILogger<CategoryController>>().Object, mockICategoryService.Object);
-
-            //Arrange
+            var controller = new CategoryController(
+                new Mock<ILogger<CategoryController>>().Object,
+                mockICategoryService.Object
+                );
+            
             var viewModel = new CategoryViewModel
             {
                 CategoryName = "テスト１",

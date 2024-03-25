@@ -29,7 +29,7 @@ namespace MovieCategorySearch.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login(string ReturnUrl)
+        public IActionResult Login(string? ReturnUrl = null)
         {
             return View(new LoginViewModel { ReturnUrl = ReturnUrl});
         }

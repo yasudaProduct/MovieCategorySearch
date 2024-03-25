@@ -11,11 +11,11 @@ using MovieCategorySearch.ViewModels;
 
 namespace MovieCategorySeach.UnitTest.Controllers
 {
-    public class HomeControllerTest : IDisposable
+    public class CategoryServiceTest : IDisposable
     {
         private HomeController _controller;
 
-        public HomeControllerTest()
+        public CategoryServiceTest()
         {
             //Arrange
             Mock<ILogger<HomeController>> mockILogger = new Mock<ILogger<HomeController>>();

@@ -34,7 +34,10 @@ namespace MovieCategorySearch.Application.UseCase.Categories
 
         public CategoryDetailsDto Find(int id)
         {
-            Category category = _categoryRepository.Find(id);
+
+            Category category = _categoryRepository.Find(id) ?? null;
+
+            if (category == null) return null;
 
             return new CategoryDetailsDto(
                 category.Id.Value,
