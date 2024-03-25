@@ -47,3 +47,9 @@ header {
     .cont-search > input[type="text"] {
         height: 100%;
     }
+
+.btn-cate {
+    border-color: lightgray;
+    border-radius: 30px;
+    background-color: #FFF7F1;
+}
