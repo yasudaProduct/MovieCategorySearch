@@ -8,6 +8,7 @@
 <div class="row">
     <div class="col-md-6">
         <form asp-controller="Authentication" asp-action="Login" method="post">
+            @Html.HiddenFor(model => model.ReturnUrl)
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="LoginId" class="control-label">メールアドレス</label>

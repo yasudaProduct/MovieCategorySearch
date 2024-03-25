@@ -17,5 +17,7 @@ namespace MovieCategorySearch.ViewModels
         [DataType(DataType.Password)]
         [MerinoRequired(nameof(ValidateMessageResource.MS0001))]
         public string Password { get; set; }
+
+        public string? ReturnUrl { get; set; }
     }
 }

@@ -29,9 +29,9 @@ namespace MovieCategorySearch.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl)
         {
-            return View();
+            return View(new LoginViewModel { ReturnUrl = ReturnUrl});
         }
 
         [HttpPost]
@@ -79,7 +79,8 @@ namespace MovieCategorySearch.Controllers
                     //ExpiresUtc = DateTime.UtcNow.AddMinutes(20)
                 });
 
-            return RedirectToAction(nameof(MovieController.Index),"Movie");
+            
+            return String.IsNullOrEmpty(model.ReturnUrl) ? RedirectToAction(nameof(MovieController.Index),"Movie") : Redirect(model.ReturnUrl);
         }
 
         public async Task<IActionResult> Logout()
