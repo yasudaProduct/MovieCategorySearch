@@ -45,6 +45,7 @@ namespace MovieCategorySearch.Application.UseCase.Movie
                     TmdbMovieId = movie.id,
                     Title = movie.title,
                     Overview = movie.overview,
+                    PosterPath = movie.poster_path
                 });
 
             }

@@ -14,6 +14,8 @@
 
         public DateTime ReleaseDate { get; set; }
 
+        public string PosterPath { get; set; }
+
     }
 
 }

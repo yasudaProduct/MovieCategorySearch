@@ -60,7 +60,8 @@ public class HomeController : MerinoController
             {
                 TmdbMovieId = item.TmdbMovieId,
                 Title = item.Title,
-                Overview = item.Overview
+                Overview = item.Overview,
+                PosterPath = item.PosterPath
             });
         }
 

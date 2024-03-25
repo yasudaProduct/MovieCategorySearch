@@ -12,5 +12,7 @@ namespace MovieCategorySearch.ViewModels
         [DisplayName("内容")]
         public string Overview { get; set; }
 
+        public string PosterPath { get; set; }
+
     }
 }
