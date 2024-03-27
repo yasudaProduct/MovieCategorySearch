@@ -1,12 +1,12 @@
 namespace MovieCategorySearch.Domain.Auth
 {
 
-    internal interface IAuthDomainService
+    public interface IAuthDomainService
     {
         bool Login(string mailAddress, string password);
     }
 
-    internal class AuthDomainService :IAuthDomainService
+    public class AuthDomainService :IAuthDomainService
     {
         public bool Login(string mailAddress, string password)
         {
