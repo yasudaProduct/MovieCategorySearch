@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using MovieCategorySearch.Application.Usecase.Movie;
 using MovieCategorySearch.Application.Usecase.Movie.Dto;
 using System.Net.Http.Json;
-using System.Runtime.InteropServices;
 
 namespace MovieCategorySearch.Infrastructure.ApiClient
 {

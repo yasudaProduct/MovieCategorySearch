@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\dotnetMVCLib\Merino\Merino.csproj" />
-    <ProjectReference Include="..\MovieCategorySearch.Domain\MovieCategorySearch.Application.csproj" />
+    <ProjectReference Include="..\MovieCategorySearch.Application\MovieCategorySearch.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
