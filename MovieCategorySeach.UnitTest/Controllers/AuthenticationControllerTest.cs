@@ -12,12 +12,18 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace MovieCategorySeach.UnitTest.Controllers
 {
+    /// <summary>
+    /// ユニットテスト用のAuthenticationControllerクラスです。
+    /// </summary>
     public class AuthenticationControllerTest
     {
         private AuthenticationController _controller;
         private Mock<ILogger<AuthenticationController>> _loggerMock;
         private Mock<IAuthService> _authServiceMock;
 
+        /// <summary>
+        /// AuthenticationControllerTestクラスの新しいインスタンスを初期化します。
+        /// </summary>
         public AuthenticationControllerTest()
         {
             _loggerMock = new Mock<ILogger<AuthenticationController>>();
@@ -25,6 +31,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             _controller = new AuthenticationController(_loggerMock.Object, _authServiceMock.Object);
         }
 
+        /// <summary>
+        /// LoginメソッドがViewResultを返すことをテストします。
+        /// </summary>
         [Fact]
         public void Login_ReturnsViewResult()
         {
@@ -37,6 +46,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             Assert.IsType<ViewResult>(result);
         }
 
+        /// <summary>
+        /// LoginメソッドがReturnUrlを含むViewResultを返すことをテストします。
+        /// </summary>
         [Fact]
         public void Login_ReturnUrlViewResult()
         {
@@ -55,6 +67,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             Assert.NotNull(model.ReturnUrl);
         }
 
+        /// <summary>
+        /// 無効なモデルを使用してLoginメソッドがViewResultを返すことをテストします。
+        /// </summary>
         [Fact]
         public async Task Login_WithInvalidModel_ReturnsViewResult()
         {
@@ -69,6 +84,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             Assert.IsType<ViewResult>(result);
         }
 
+        /// <summary>
+        /// 無効な認証情報を使用してLoginメソッドがViewResultを返すことをテストします。
+        /// </summary>
         [Fact]
         public async Task Login_WithInvalidCredentials_ReturnsViewResult()
         {
@@ -85,6 +103,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             Assert.True(_controller.ModelState.ContainsKey(string.Empty));
         }
 
+        /// <summary>
+        /// 有効な認証情報を使用してLoginメソッドがMovieIndexにリダイレクトすることをテストします。
+        /// </summary>
         [Fact]
         public async Task Login_WithValidCredentials_RedirectsToMovieIndex()
         {
@@ -102,6 +123,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             Assert.Equal("Movie", redirectResult.ControllerName);
         }
 
+        /// <summary>
+        /// LogoutメソッドがHomeIndexにリダイレクトすることをテストします。
+        /// </summary>
         [Fact]
         public async Task Logout_RedirectsToHomeIndex()
         {
@@ -110,9 +134,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             _controller.ControllerContext.HttpContext = new DefaultHttpContext();
             var claimsIdentity = new ClaimsIdentity(new Claim[]
             {
-                new Claim(ClaimTypes.Name, "UnitTest@example.com"),
-                new Claim("UserId", "1"),
-                new Claim(ClaimTypes.Role, "Administrator"),
+                    new Claim(ClaimTypes.Name, "UnitTest@example.com"),
+                    new Claim("UserId", "1"),
+                    new Claim(ClaimTypes.Role, "Administrator"),
             });
             //_controller.ControllerContext.HttpContext.User = new ClaimsPrincipal(claimsIdentity);
 
