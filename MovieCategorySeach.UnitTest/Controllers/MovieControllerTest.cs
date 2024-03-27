@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using MovieCategorySearch.Application.Usecase.Categories.Dto;
-using MovieCategorySearch.Application.UseCase.Categories;
 using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Controllers;
@@ -10,6 +8,9 @@ using MovieCategorySearch.ViewModels;
 
 namespace MovieCategorySeach.UnitTest.Controllers
 {
+    /// <summary>
+    /// テスト用のMovieControllerクラス
+    /// </summary>
     public class MovieControllerTest : IDisposable
     {
         private MovieController _controller;
@@ -17,6 +18,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
         private Mock<IMovieService> _movieServiceMock;
         private Mock<IMovieQueryService> _movieQueryServiceMock;
 
+        /// <summary>
+        /// MovieControllerTestクラスのコンストラクタ
+        /// </summary>
         public MovieControllerTest()
         {
             // Arrange
@@ -31,21 +35,27 @@ namespace MovieCategorySeach.UnitTest.Controllers
             );
         }
 
+        /// <summary>
+        /// リソースの解放を行うメソッド
+        /// </summary>
         public void Dispose()
         {
             // 完了後にアンマネージドリソースの処理したり
             Console.WriteLine("disposed");
         }
 
+        /// <summary>
+        /// Indexメソッドのテスト
+        /// </summary>
         [Fact]
         public async Task Index_ReturnsViewWithMovieList()
         {
             // Arrange
             var movieList = new List<MovieResult>
-                {
-                    new MovieResult { TmdbMovieId = 1, Title = "Movie 1", Overview = "Overview 1" },
-                    new MovieResult { TmdbMovieId = 2, Title = "Movie 2", Overview = "Overview 2" }
-                };
+                    {
+                        new MovieResult { TmdbMovieId = 1, Title = "Movie 1", Overview = "Overview 1" },
+                        new MovieResult { TmdbMovieId = 2, Title = "Movie 2", Overview = "Overview 2" }
+                    };
 
             _movieServiceMock.Setup(x => x.GetMovieList()).ReturnsAsync(movieList);
 
@@ -64,15 +74,18 @@ namespace MovieCategorySeach.UnitTest.Controllers
             Assert.Equal("Overview 2", model.MovieList[1].Overview);
         }
 
+        /// <summary>
+        /// Searchメソッドのテスト
+        /// </summary>
         [Fact]
         public async Task Search_ReturnsViewWithMovieList()
         {
             // Arrange
             var movieList = new List<MovieResult>
-                {
-                    new MovieResult { TmdbMovieId = 1, Title = "Movie 1", Overview = "Overview 1" },
-                    new MovieResult { TmdbMovieId = 2, Title = "Movie 2", Overview = "Overview 2" }
-                };
+                    {
+                        new MovieResult { TmdbMovieId = 1, Title = "Movie 1", Overview = "Overview 1" },
+                        new MovieResult { TmdbMovieId = 2, Title = "Movie 2", Overview = "Overview 2" }
+                    };
             string title = "Action";
 
             _movieServiceMock.Setup(x => x.Search(title)).ReturnsAsync(movieList);

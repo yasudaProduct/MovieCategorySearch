@@ -7,10 +7,16 @@ using MovieCategorySearch.Application.UseCase.Categories;
 
 namespace MovieCategorySeach.UnitTest.UseCase
 {
+    /// <summary>
+    /// カテゴリサービスのテストクラスです。
+    /// </summary>
     public class CategoryServiceTest : IDisposable
     {
         private CategoryService _service;
 
+        /// <summary>
+        /// CategoryServiceTest のコンストラクタです。
+        /// </summary>
         public CategoryServiceTest()
         {
             //Arrange
@@ -18,14 +24,14 @@ namespace MovieCategorySeach.UnitTest.UseCase
 
             Mock<ICategoryRepository> mockICategoryRepository = new Mock<ICategoryRepository>();
             mockICategoryRepository.Setup(mock => mock.Find(1))
-                .Returns(new Category(1,new CategoryName("カテゴリ名１"), 1, new Description("説明１")));
+                .Returns(new Category(1, new CategoryName("カテゴリ名１"), 1, new Description("説明１")));
 
             mockICategoryRepository.Setup(mock => mock.FindAll())
                 .Returns(new List<Category>()
                 {
-                    new Category(1,new CategoryName("テスト１"), 1, new Description("テスト２")),
-                    new Category(1,new CategoryName("テスト１"), 1, new Description("テスト２")),
-                    new Category(1,new CategoryName("テスト１"), 1, new Description("テスト２"))
+                        new Category(1,new CategoryName("テスト１"), 1, new Description("テスト２")),
+                        new Category(1,new CategoryName("テスト１"), 1, new Description("テスト２")),
+                        new Category(1,new CategoryName("テスト１"), 1, new Description("テスト２"))
                 });
 
             mockICategoryRepository.Setup(repo => repo.Save(It.IsAny<Category>())).Returns(1);
@@ -39,6 +45,9 @@ namespace MovieCategorySeach.UnitTest.UseCase
             Console.WriteLine("disposed");
         }
 
+        /// <summary>
+        /// Find メソッドがカテゴリを見つけた場合に CategoryDetailsDto を返すことをテストします。
+        /// </summary>
         [Fact]
         public async void Find_ReturnsCategoryDetailsDto_WhenCategoryFound()
         {
@@ -53,6 +62,9 @@ namespace MovieCategorySeach.UnitTest.UseCase
 
         }
 
+        /// <summary>
+        /// Find メソッドがカテゴリを見つけられなかった場合に null を返すことをテストします。
+        /// </summary>
         [Fact]
         public async void Find_ReturnsNull_WhenCategoryNotFound()
         {
@@ -63,6 +75,9 @@ namespace MovieCategorySeach.UnitTest.UseCase
             Assert.Null(result);
         }
 
+        /// <summary>
+        /// FindAll メソッドが CategoryDetailsDto のリストを返すことをテストします。
+        /// </summary>
         [Fact]
         public async void FindAll_ReturnsCategoryDetailsDtoList()
         {
@@ -74,6 +89,9 @@ namespace MovieCategorySeach.UnitTest.UseCase
             Assert.Equal(3, result.Count());
         }
 
+        /// <summary>
+        /// Create メソッドがカテゴリを作成した場合にカテゴリの ID を返すことをテストします。
+        /// </summary>
         [Fact]
         public void Create_ShouldReturnCategoryId_WhenCategoryIsCreated()
         {

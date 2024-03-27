@@ -11,10 +11,16 @@ using MovieCategorySearch.ViewModels;
 
 namespace MovieCategorySeach.UnitTest.Controllers
 {
+    /// <summary>
+    /// テスト用のカテゴリーサービスクラス
+    /// </summary>
     public class CategoryServiceTest : IDisposable
     {
         private HomeController _controller;
 
+        /// <summary>
+        /// CategoryServiceTestクラスのコンストラクタ
+        /// </summary>
         public CategoryServiceTest()
         {
             //Arrange
@@ -27,27 +33,33 @@ namespace MovieCategorySeach.UnitTest.Controllers
             mockICategoryService.Setup(mock => mock.FindAll())
                 .Returns(new List<CategoryDetailsDto>()
                 {
-                    new CategoryDetailsDto(1, "テスト1", "テスト1"),
-                    new CategoryDetailsDto(2, "テスト2", "テスト2")
+                        new CategoryDetailsDto(1, "テスト1", "テスト1"),
+                        new CategoryDetailsDto(2, "テスト2", "テスト2")
                 });
 
             Mock<IMovieService> mockIMovieService = new Mock<IMovieService>();
             mockIMovieService.Setup(mock => mock.GetMovieList())
                 .ReturnsAsync(new List<MovieResult>()
                 {
-                    new MovieResult(){ TmdbMovieId = 1,Title = "テスト1",Overview = "テスト" ,ReleaseDate = DateTime.Now},
-                    new MovieResult(){ TmdbMovieId = 2,Title = "テスト2",Overview = "テスト" ,ReleaseDate = DateTime.Now}
+                        new MovieResult(){ TmdbMovieId = 1,Title = "テスト1",Overview = "テスト" ,ReleaseDate = DateTime.Now},
+                        new MovieResult(){ TmdbMovieId = 2,Title = "テスト2",Overview = "テスト" ,ReleaseDate = DateTime.Now}
                 });
 
             _controller = new HomeController(mockILogger.Object, mockICategoryService.Object, mockIMovieService.Object);
         }
 
+        /// <summary>
+        /// リソースの解放
+        /// </summary>
         public void Dispose()
         {
             // 完了後にアンマネージドリソースの処理したり
             Console.WriteLine("disposed");
         }
 
+        /// <summary>
+        /// Indexページを開くテスト
+        /// </summary>
         [Fact]
         public async void Index_Open()
         {
@@ -59,7 +71,7 @@ namespace MovieCategorySeach.UnitTest.Controllers
             var viewResult = Assert.IsType<ViewResult>(result);
             var viewModel = Assert.IsType<HomeViewModel>(viewResult.Model);
 
-            Assert.Equal(viewModel.CategoryModelList.Count(),2);
+            Assert.Equal(viewModel.CategoryModelList.Count(), 2);
             Assert.Equal(viewModel.MovieList.Count(), 2);
 
             Assert.Equal(viewModel.CategoryModelList.ToList()[0].Id, 1);
@@ -69,6 +81,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             Assert.Equal(viewModel.MovieList.ToList()[0].Overview, "テスト");
         }
 
+        /// <summary>
+        /// Privacyページを開くテスト
+        /// </summary>
         [Fact]
         public async void Privacy_Open()
         {
@@ -79,6 +94,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             var viewResult = Assert.IsType<ViewResult>(result);
         }
 
+        /// <summary>
+        /// Errorページを開くテスト
+        /// </summary>
         [Fact]
         public async void Error_Open()
         {
@@ -90,6 +108,6 @@ namespace MovieCategorySeach.UnitTest.Controllers
             var model = Assert.IsType<ErrorViewModel>(viewResult.Model);
         }
 
-        
+
     }
 }
