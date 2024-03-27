@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
-using MovieCategorySearch.Application.Domain.Categories;
-using MovieCategorySearch.Application.Domain.Categories.ValueObject;
+using MovieCategorySearch.Domain.Categories;
+using MovieCategorySearch.Domain.Categories.ValueObject;
 
 namespace MovieCategorySearch.Application.UseCase.Categories
 {

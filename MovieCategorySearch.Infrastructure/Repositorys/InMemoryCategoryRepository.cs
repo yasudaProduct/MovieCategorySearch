@@ -1,5 +1,5 @@
-using MovieCategorySearch.Application.Domain.Categories;
-using MovieCategorySearch.Application.Domain.Categories.ValueObject;
+using MovieCategorySearch.Domain.Categories;
+using MovieCategorySearch.Domain.Categories.ValueObject;
 using MovieCategorySearch.Infrastructure.Data;
 
 namespace MovieCategorySearch.Infrastructure.Repositorys

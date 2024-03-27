@@ -1,6 +1,6 @@
 ﻿using Merino.Test;
 using Moq;
-using MovieCategorySearch.Application.Domain.User;
+using MovieCategorySearch.Domain.User;
 using MovieCategorySearch.Application.UseCase.Auth;
 using MovieCategorySearch.Application.UseCase.Auth.Dto;
 

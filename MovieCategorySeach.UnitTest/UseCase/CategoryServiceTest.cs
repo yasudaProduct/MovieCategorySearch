@@ -1,8 +1,8 @@
 ﻿using Merino.Test;
 using Microsoft.Extensions.Logging;
 using Moq;
-using MovieCategorySearch.Application.Domain.Categories;
-using MovieCategorySearch.Application.Domain.Categories.ValueObject;
+using MovieCategorySearch.Domain.Categories;
+using MovieCategorySearch.Domain.Categories.ValueObject;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
 using MovieCategorySearch.Application.UseCase.Categories;
 

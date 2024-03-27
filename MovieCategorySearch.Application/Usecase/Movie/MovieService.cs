@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Logging;
-using MovieCategorySearch.Application.Domain.Movie;
+using MovieCategorySearch.Domain.Movie;
 using MovieCategorySearch.Application.Usecase.Movie;
 using MovieCategorySearch.Application.Usecase.Movie.Dto;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;

@@ -1,4 +1,4 @@
-using MovieCategorySearch.Application.Domain.User;
+using MovieCategorySearch.Domain.User;
 using MovieCategorySearch.Application.UseCase.Auth.Dto;
 
 namespace MovieCategorySearch.Application.UseCase.Auth

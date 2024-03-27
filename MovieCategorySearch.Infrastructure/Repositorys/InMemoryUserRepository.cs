@@ -1,4 +1,4 @@
-using MovieCategorySearch.Application.Domain.User;
+using MovieCategorySearch.Domain.User;
 using MovieCategorySearch.Infrastructure.Data;
 
 namespace MovieCategorySearch.Infrastructure.Repositorys
