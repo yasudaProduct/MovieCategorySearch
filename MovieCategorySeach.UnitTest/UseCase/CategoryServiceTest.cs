@@ -28,6 +28,8 @@ namespace MovieCategorySeach.UnitTest.UseCase
                     new Category(1,new CategoryName("テスト１"), 1, new Description("テスト２"))
                 });
 
+            mockICategoryRepository.Setup(repo => repo.Save(It.IsAny<Category>())).Returns(1);
+
             _service = new CategoryService(mockILogger.Object, mockICategoryRepository.Object);
         }
 
@@ -70,6 +72,19 @@ namespace MovieCategorySeach.UnitTest.UseCase
             //Assert
             Assert.IsType<IEnumerable<CategoryDetailsDto>>(result);
             Assert.Equal(3, result.Count());
+        }
+
+        [Fact]
+        public void Create_ShouldReturnCategoryId_WhenCategoryIsCreated()
+        {
+            // Arrange
+            var command = new CreateCategoryCommand("Action", "Action movies", 1);
+
+            // Act
+            var result = _service.Create(command);
+
+            // Assert
+            Assert.Equal(1, result);
         }
     }
 }
