@@ -14,7 +14,7 @@ namespace MovieCategorySeach.UnitTest.Controllers
     /// <summary>
     /// テスト用のCategoryControllerクラスです。
     /// </summary>
-    public class CategoryControllerTest : MerinoUnitTests
+    public class CategoryControllerTest : MerinoUnitTest
     {
         private CategoryController _controller;
 
