@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Merino.Test;
+using Microsoft.Extensions.Logging;
 using Moq;
 using MovieCategorySearch.Application.Domain.Categories;
 using MovieCategorySearch.Application.Domain.Categories.ValueObject;
@@ -10,7 +11,7 @@ namespace MovieCategorySeach.UnitTest.UseCase
     /// <summary>
     /// カテゴリサービスのテストクラスです。
     /// </summary>
-    public class CategoryServiceTest : IDisposable
+    public class CategoryServiceTest : MerinoUnitTest
     {
         private CategoryService _service;
 
@@ -37,13 +38,7 @@ namespace MovieCategorySeach.UnitTest.UseCase
             mockICategoryRepository.Setup(repo => repo.Save(It.IsAny<Category>())).Returns(1);
 
             _service = new CategoryService(mockILogger.Object, mockICategoryRepository.Object);
-        }
-
-        public void Dispose()
-        {
-            // 完了後にアンマネージドリソースの処理したり
-            Console.WriteLine("disposed");
-        }
+        }      
 
         /// <summary>
         /// Find メソッドがカテゴリを見つけた場合に CategoryDetailsDto を返すことをテストします。

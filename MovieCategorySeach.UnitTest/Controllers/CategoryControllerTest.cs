@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Merino.Test;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -10,7 +11,10 @@ using System.Security.Claims;
 
 namespace MovieCategorySeach.UnitTest.Controllers
 {
-    public class CategoryControllerTest : IDisposable
+    /// <summary>
+    /// テスト用のCategoryControllerクラスです。
+    /// </summary>
+    public class CategoryControllerTest : MerinoUnitTests
     {
         private CategoryController _controller;
 
@@ -18,6 +22,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
 
         private Mock<ICategoryService> _mockICategoryService;
 
+        /// <summary>
+        /// CategoryControllerTestクラスの新しいインスタンスを初期化します。
+        /// </summary>
         public CategoryControllerTest()
         {
             //Arrange
@@ -30,8 +37,8 @@ namespace MovieCategorySeach.UnitTest.Controllers
             _mockICategoryService.Setup(mock => mock.FindAll())
                 .Returns(new List<CategoryDetailsDto>()
                 {
-                    new CategoryDetailsDto(1, "カテゴリ１", "説明１"),
-                    new CategoryDetailsDto(2, "カテゴリ２", "説明２")
+                        new CategoryDetailsDto(1, "カテゴリ１", "説明１"),
+                        new CategoryDetailsDto(2, "カテゴリ２", "説明２")
                 });
 
             _mockICategoryService.Setup(mock => mock.Create(new CreateCategoryCommand(
@@ -45,12 +52,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             _controller = new CategoryController(_mockILogger.Object, _mockICategoryService.Object);
         }
 
-        public void Dispose()
-        {
-            // 完了後にアンマネージドリソースの処理したり
-            Console.WriteLine("disposed");
-        }
-
+        /// <summary>
+        /// Indexメソッドをテストします。
+        /// </summary>
         [Fact]
         public async void Index_Open()
         {
@@ -62,6 +66,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             var viewResult = Assert.IsType<ViewResult>(result);
         }
 
+        /// <summary>
+        /// Detailsメソッドをテストします。
+        /// </summary>
         [Fact]
         public async void Details_ReturnsViewWithCategoryViewModel()
         {
@@ -77,6 +84,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             Assert.Equal("説明１", model.Description);
         }
 
+        /// <summary>
+        /// Createメソッドをテストします。
+        /// </summary>
         [Fact]
         public async void Create_Open()
         {
@@ -88,6 +98,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             var viewResult = Assert.IsType<ViewResult>(result);
         }
 
+        /// <summary>
+        /// CreateメソッドのPOSTリクエストをテストします。
+        /// </summary>
         [Fact]
         public async void CreatePost_ReturnsViewWithCategoryViewModel_WhenModelStateIsInvalid()
         {
@@ -109,6 +122,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             Assert.Equal("テスト２", model.Description);
         }
 
+        /// <summary>
+        /// CreateメソッドのPOSTリクエストをテストします。
+        /// </summary>
         [Fact]
         public async void CreatePost_ReturnsARedirect_WhenModelStateIsValid()
         {
@@ -126,7 +142,7 @@ namespace MovieCategorySeach.UnitTest.Controllers
                 new Mock<ILogger<CategoryController>>().Object,
                 mockICategoryService.Object
                 );
-            
+
             var viewModel = new CategoryViewModel
             {
                 CategoryName = "テスト１",
@@ -137,16 +153,16 @@ namespace MovieCategorySeach.UnitTest.Controllers
             controller.ControllerContext.HttpContext = new DefaultHttpContext();
             controller.ControllerContext.HttpContext.User = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
             {
-                new Claim(ClaimTypes.Name, "UnitTest@example.com"),
-                new Claim("UserId", "1"),
-                new Claim(ClaimTypes.Role, "Administrator"),
+                    new Claim(ClaimTypes.Name, "UnitTest@example.com"),
+                    new Claim("UserId", "1"),
+                    new Claim(ClaimTypes.Role, "Administrator"),
             }));
 
             //Act
             var result = controller.Create(viewModel);
 
             //Assert
-            
+
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Null(redirectToActionResult.ControllerName);
             Assert.Equal("Details", redirectToActionResult.ActionName);

@@ -9,13 +9,14 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Merino.Test;
 
 namespace MovieCategorySeach.UnitTest.Controllers
 {
     /// <summary>
     /// ユニットテスト用のAuthenticationControllerクラスです。
     /// </summary>
-    public class AuthenticationControllerTest
+    public class AuthenticationControllerTest : MerinoUnitTest
     {
         private AuthenticationController _controller;
         private Mock<ILogger<AuthenticationController>> _loggerMock;

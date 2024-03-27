@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Merino.Test;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using MovieCategorySearch.Application.UseCase.Movie;
@@ -11,7 +12,7 @@ namespace MovieCategorySeach.UnitTest.Controllers
     /// <summary>
     /// テスト用のMovieControllerクラス
     /// </summary>
-    public class MovieControllerTest : IDisposable
+    public class MovieControllerTest : MerinoUnitTest
     {
         private MovieController _controller;
         private Mock<ILogger<MovieController>> _loggerMock;
@@ -33,15 +34,6 @@ namespace MovieCategorySeach.UnitTest.Controllers
                 _movieServiceMock.Object,
                 _movieQueryServiceMock.Object
             );
-        }
-
-        /// <summary>
-        /// リソースの解放を行うメソッド
-        /// </summary>
-        public void Dispose()
-        {
-            // 完了後にアンマネージドリソースの処理したり
-            Console.WriteLine("disposed");
         }
 
         /// <summary>
