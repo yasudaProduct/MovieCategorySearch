@@ -13,5 +13,15 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
             _dbContext = dbContext;
         }
 
+        public int? GetById(int id)
+        {
+            var movie = _dbContext.Movie.Find(id);
+
+            if (movie == null) return null;
+
+            return movie.TmdbMovieId;
+
+        }
+
     }
 }

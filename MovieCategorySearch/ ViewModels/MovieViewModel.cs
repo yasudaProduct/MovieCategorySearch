@@ -14,5 +14,7 @@ namespace MovieCategorySearch.ViewModels
 
         public string PosterPath { get; set; }
 
+        public Dictionary<int, string> Category { get; set; } = new Dictionary<int, string>();
+
     }
 }

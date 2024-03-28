@@ -5,7 +5,9 @@
     {
 
         public int TmdbMovieId { get; set; }
-       
+
+        public Dictionary<int, string> CategoryList { get; set; }
+
     }
 
 }

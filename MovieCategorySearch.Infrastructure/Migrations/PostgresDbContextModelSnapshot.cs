@@ -17,7 +17,7 @@ namespace MovieCategorySearch.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.27")
+                .HasAnnotation("ProductVersion", "6.0.28")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -52,6 +52,17 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                         .HasDefaultValue("0")
                         .HasColumnName("deleted_flg");
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
+                        .HasColumnName("name");
+
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("update_date");
@@ -61,15 +72,9 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("update_pgm_id");
 
-                    b.Property<string>("UpdateUserId")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("UpdateUserId")
+                        .HasColumnType("integer")
                         .HasColumnName("update_user_id");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
@@ -100,9 +105,8 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("create_pgm_id");
 
-                    b.Property<string>("CreateUserId")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("CreateUserId")
+                        .HasColumnType("integer")
                         .HasColumnName("create_user_id");
 
                     b.Property<string>("DeletedFlg")
@@ -124,9 +128,8 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("update_pgm_id");
 
-                    b.Property<string>("UpdateUserId")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("UpdateUserId")
+                        .HasColumnType("integer")
                         .HasColumnName("update_user_id");
 
                     b.HasKey("Id");
@@ -140,12 +143,12 @@ namespace MovieCategorySearch.Infrastructure.Migrations
 
             modelBuilder.Entity("MovieCategorySearch.Infrastructure.Data.Entity.Movie", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TmdbMovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id");
+                        .HasColumnName("tmdb_movie_id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TmdbMovieId"));
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp without time zone")
@@ -156,9 +159,8 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("create_pgm_id");
 
-                    b.Property<string>("CreateUserId")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("CreateUserId")
+                        .HasColumnType("integer")
                         .HasColumnName("create_user_id");
 
                     b.Property<string>("DeletedFlg")
@@ -169,15 +171,6 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                         .HasDefaultValue("0")
                         .HasColumnName("deleted_flg");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("title");
-
-                    b.Property<int>("TmdbMovieId")
-                        .HasColumnType("integer")
-                        .HasColumnName("tmdb_movie_id");
-
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("update_date");
@@ -187,12 +180,11 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("update_pgm_id");
 
-                    b.Property<string>("UpdateUserId")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("UpdateUserId")
+                        .HasColumnType("integer")
                         .HasColumnName("update_user_id");
 
-                    b.HasKey("Id");
+                    b.HasKey("TmdbMovieId");
 
                     b.ToTable("movie");
                 });
@@ -212,9 +204,8 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("create_pgm_id");
 
-                    b.Property<string>("CreateUserId")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("CreateUserId")
+                        .HasColumnType("integer")
                         .HasColumnName("create_user_id");
 
                     b.Property<string>("DeletedFlg")
@@ -240,9 +231,8 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("update_pgm_id");
 
-                    b.Property<string>("UpdateUserId")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("UpdateUserId")
+                        .HasColumnType("integer")
                         .HasColumnName("update_user_id");
 
                     b.Property<string>("UserCls")

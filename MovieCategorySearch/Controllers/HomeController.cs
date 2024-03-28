@@ -61,7 +61,8 @@ public class HomeController : MerinoController
                 TmdbMovieId = item.TmdbMovieId,
                 Title = item.Title,
                 Overview = item.Overview,
-                PosterPath = item.PosterPath
+                PosterPath = item.PosterPath,
+                Category = item.Category,
             });
         }
 

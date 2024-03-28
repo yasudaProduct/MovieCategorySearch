@@ -12,6 +12,8 @@
 
         public string[] Genres { get; set; }
 
+        public Dictionary<int,string> Category { get; set; }
+
         public DateTime ReleaseDate { get; set; }
 
         public string PosterPath { get; set; }

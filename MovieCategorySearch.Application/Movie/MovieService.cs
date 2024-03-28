@@ -30,13 +30,22 @@ namespace MovieCategorySearch.Application.UseCase.Movie
 
         public async Task<List<MovieResult>> GetMovieList()
         {
-
-            //TmdbApiからデータを取得
-            TmdbApiResponce reqest = await _tmdbApiClient.GetPopular();
-
             List<MovieResult> movieResultList = new List<MovieResult>();
 
-            //MovieResultを作成 TODO Factoryにする？
+            // TmdbApiからデータを取得
+            TmdbApiResponce reqest = await _tmdbApiClient.GetPopular();
+
+            List<MovieQueryResult> list = new List<MovieQueryResult>();
+
+            foreach (var movie in reqest.results)
+            {
+                // MovieRositoryからデータを取得
+                var res = _movieQueryService.GetbyTmdbId(movie.id);
+                if(res != null) list.Add(res);
+            }
+                       
+
+            // MovieResultを作成 TODO Factoryにする？
             foreach(var movie in reqest.results)
             {
 
@@ -45,6 +54,7 @@ namespace MovieCategorySearch.Application.UseCase.Movie
                     TmdbMovieId = movie.id,
                     Title = movie.title,
                     Overview = movie.overview,
+                    Category = list.Where(m => m.TmdbMovieId == movie.id).Select(c => c.CategoryList).FirstOrDefault(),
                     PosterPath = movie.poster_path
                 });
 
