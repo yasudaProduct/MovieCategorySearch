@@ -228,6 +228,75 @@ public static class SeedData
         }
         #endregion
 
+        #region CategoryMap
+        if (!context.CategoryMap.Any())
+        {
+
+            context.CategoryMap.AddRange(
+                new CategoryMap { 
+                    MovieId = 1011985,
+                    CategoryId = 1,
+                    DeletedFlg = "0",
+                    CreatePgmId = "Seed",
+                    CreateUserId = 1,
+                    CreateDate = DateTime.Now,
+                    UpdatePgmId = "Seed",
+                    UpdateUserId = 1,
+                    UpdateDate = DateTime.Now,
+                },
+                new CategoryMap
+                {
+                    MovieId = 1011985,
+                    CategoryId = 2,
+                    DeletedFlg = "0",
+                    CreatePgmId = "Seed",
+                    CreateUserId = 1,
+                    CreateDate = DateTime.Now,
+                    UpdatePgmId = "Seed",
+                    UpdateUserId = 1,
+                    UpdateDate = DateTime.Now,
+                },
+                new CategoryMap
+                {
+                    MovieId = 1011985,
+                    CategoryId = 3,
+                    DeletedFlg = "0",
+                    CreatePgmId = "Seed",
+                    CreateUserId = 1,
+                    CreateDate = DateTime.Now,
+                    UpdatePgmId = "Seed",
+                    UpdateUserId = 1,
+                    UpdateDate = DateTime.Now,
+                },
+                new CategoryMap
+                {
+                    MovieId = 634492,
+                    CategoryId = 1,
+                    DeletedFlg = "0",
+                    CreatePgmId = "Seed",
+                    CreateUserId = 1,
+                    CreateDate = DateTime.Now,
+                    UpdatePgmId = "Seed",
+                    UpdateUserId = 1,
+                    UpdateDate = DateTime.Now,
+                },
+                new CategoryMap
+                {
+                    MovieId = 763215,
+                    CategoryId = 1,
+                    DeletedFlg = "0",
+                    CreatePgmId = "Seed",
+                    CreateUserId = 1,
+                    CreateDate = DateTime.Now,
+                    UpdatePgmId = "Seed",
+                    UpdateUserId = 1,
+                    UpdateDate = DateTime.Now,
+                }
+                );
+        }
+
+            #endregion
+
         context.SaveChanges();
 
     }

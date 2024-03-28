@@ -6,24 +6,64 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MovieCategorySearch.Infrastructure.Migrations
 {
-    public partial class CreateTable : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "movie",
+                columns: table => new
+                {
+                    tmdb_movie_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    deleted_flg = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: false, defaultValue: "0"),
+                    create_pgm_id = table.Column<string>(type: "text", nullable: false),
+                    create_user_id = table.Column<int>(type: "integer", nullable: false),
+                    create_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    update_pgm_id = table.Column<string>(type: "text", nullable: false),
+                    update_user_id = table.Column<int>(type: "integer", nullable: false),
+                    update_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_movie", x => x.tmdb_movie_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "user",
+                columns: table => new
+                {
+                    user_id = table.Column<int>(type: "integer", nullable: false),
+                    mail_address = table.Column<string>(type: "character varying(319)", maxLength: 319, nullable: false),
+                    user_cls = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: false),
+                    deleted_flg = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: false, defaultValue: "0"),
+                    create_pgm_id = table.Column<string>(type: "text", nullable: false),
+                    create_user_id = table.Column<int>(type: "integer", nullable: false),
+                    create_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    update_pgm_id = table.Column<string>(type: "text", nullable: false),
+                    update_user_id = table.Column<int>(type: "integer", nullable: false),
+                    update_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_user", x => x.user_id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "category",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(type: "text", nullable: false),
+                    name = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    description = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     create_user_id = table.Column<int>(type: "integer", nullable: false),
-                    deleted_flg = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: false),
+                    deleted_flg = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: false, defaultValue: "0"),
                     create_pgm_id = table.Column<string>(type: "text", nullable: false),
-                    create_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    create_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     update_pgm_id = table.Column<string>(type: "text", nullable: false),
-                    update_user_id = table.Column<string>(type: "text", nullable: false),
-                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    update_user_id = table.Column<int>(type: "integer", nullable: false),
+                    update_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,27 +77,6 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "movie",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    tmdb_movie_id = table.Column<int>(type: "integer", nullable: false),
-                    title = table.Column<string>(type: "text", nullable: false),
-                    deleted_flg = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: false),
-                    create_pgm_id = table.Column<string>(type: "text", nullable: false),
-                    create_user_id = table.Column<string>(type: "text", nullable: false),
-                    create_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    update_pgm_id = table.Column<string>(type: "text", nullable: false),
-                    update_user_id = table.Column<string>(type: "text", nullable: false),
-                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_movie", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "category_map",
                 columns: table => new
                 {
@@ -67,11 +86,11 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                     category_id = table.Column<int>(type: "integer", nullable: false),
                     deleted_flg = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: false),
                     create_pgm_id = table.Column<string>(type: "text", nullable: false),
-                    create_user_id = table.Column<string>(type: "text", nullable: false),
-                    create_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    create_user_id = table.Column<int>(type: "integer", nullable: false),
+                    create_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     update_pgm_id = table.Column<string>(type: "text", nullable: false),
-                    update_user_id = table.Column<string>(type: "text", nullable: false),
-                    update_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    update_user_id = table.Column<int>(type: "integer", nullable: false),
+                    update_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,7 +105,7 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                         name: "FK_category_map_movie_movie_id",
                         column: x => x.movie_id,
                         principalTable: "movie",
-                        principalColumn: "id",
+                        principalColumn: "tmdb_movie_id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -116,6 +135,9 @@ namespace MovieCategorySearch.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "movie");
+
+            migrationBuilder.DropTable(
+                name: "user");
         }
     }
 }
