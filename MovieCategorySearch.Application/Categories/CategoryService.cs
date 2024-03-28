@@ -65,8 +65,8 @@ namespace MovieCategorySearch.Application.UseCase.Categories
             //ƒhƒƒCƒ“ƒ‚ƒfƒ‹ì¬
             var category = new Category(
                 null,
-                new CategoryName(command.CategoryName),
                 command.CreateUserId,
+                new CategoryName(command.CategoryName),
                 command.Description != null ? new Description(command.Description) : null
                 );
 

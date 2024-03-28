@@ -1,0 +1,50 @@
+﻿@model MovieCategorySearch.ViewModels.AddCategoryViewModel
+
+@{
+    ViewData["Title"] = "カテゴリ追加";
+}
+
+<form asp-action="Create" method="post">
+    <h2>カテゴリを追加</h2>
+    <div>
+        <h4>Movie</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Movie.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Movie.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Movie.Overview)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Movie.Overview)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="CategoryName" class="control-label"></label>
+                    <input asp-for="CategoryName" class="form-control" />
+                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="@Model.Movie.TmdbMovieId" value="@Model.Movie.TmdbMovieId" />
+                    <span asp-validation-for="@Model.Movie.TmdbMovieId" class="text-danger"></span>
+                    <span asp-validation-for="@Model.Movie.Title" class="text-danger"></span>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

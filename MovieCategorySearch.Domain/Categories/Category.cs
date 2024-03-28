@@ -4,7 +4,7 @@ namespace MovieCategorySearch.Domain.Categories
 {
     public class Category //: MainteNanceValueObject
     {
-        public Category(int? id, CategoryName categoryName, int userId, Description? description = null) //: base(userId)
+        public Category(int? id, int userId, CategoryName categoryName, Description? description = null) //: base(userId)
         {
 
             if (categoryName == null) throw new ArgumentNullException(nameof(categoryName));

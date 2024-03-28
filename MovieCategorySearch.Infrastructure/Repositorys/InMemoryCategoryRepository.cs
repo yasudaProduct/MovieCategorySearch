@@ -21,8 +21,8 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
 
             return new Category(
                 entity.Id,
-                new CategoryName(entity.Name),
                 1,
+                new CategoryName(entity.Name),
                 entity.Description != null ? new Description(entity.Description): null
                 );
         }
@@ -31,8 +31,8 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
         {
             return _dbContext.Category.ToList().Select(x => new Category(
                                x.Id,
-                               new CategoryName(x.Name),
                                x.CreateUserId,
+                               new CategoryName(x.Name),
                                x.Description != null ? new Description(x.Description) : null
                                )).ToList();
         }

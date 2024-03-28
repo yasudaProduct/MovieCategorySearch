@@ -19,7 +19,7 @@ namespace MovieCategorySeach.UnitTest.Domain.Categories
             var id = 1;
             var categoryName = new CategoryName("Action");
             var userId = 100;
-            var category = new Category(id, categoryName, userId);
+            var category = new Category(id, userId, categoryName);
 
             var newName = new CategoryName("Adventure");
 
@@ -40,7 +40,7 @@ namespace MovieCategorySeach.UnitTest.Domain.Categories
             var id = 1;
             var categoryName = new CategoryName("Action");
             var userId = 100;
-            var category = new Category(id, categoryName, userId, new Description("Action movies"));
+            var category = new Category(id, userId, categoryName, new Description("Action movies"));
 
             var newName = new CategoryName("Adventure");
             var newDescription = new Description("Adventure movies");

@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Merino.Controller;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MovieCategorySearch.Application.UseCase.Auth;
+using MovieCategorySearch.Application.Movie.Dto;
 using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.ViewModels;
@@ -11,7 +12,7 @@ namespace MovieCategorySearch.Controllers
     /// 映画を管理するためのコントローラーです。
     /// </summary>
     [Authorize]
-    public class MovieController : Controller
+    public class MovieController : MerinoController
     {
         private readonly ILogger _logger;
 
@@ -110,12 +111,27 @@ namespace MovieCategorySearch.Controllers
         }
 
         /// <summary>
-        /// 映画の作成フォームを表示します。
+        /// 映画のカテゴリを追加する画面を表示します。
         /// </summary>
-        /// <returns>映画の作成フォームを含むビュー。</returns>
-        public ActionResult Create()
+        /// <param name="id">映画のID。</param>
+        /// <returns>映画の詳細を含むビュー。</returns>
+        public async Task<ActionResult> AddCategory(int id)
         {
-            return View();
+            MovieResult result = await _movieService.GetDetails(id);
+
+            MovieViewModel movie = new MovieViewModel()
+            {
+                TmdbMovieId = result.TmdbMovieId,
+                Title = result.Title,
+                Overview = result.Overview
+            };
+
+            AddCategoryViewModel model = new AddCategoryViewModel()
+            {
+                Movie = movie                
+            };
+
+            return View(model);
         }
 
         /// <summary>
@@ -125,16 +141,26 @@ namespace MovieCategorySearch.Controllers
         /// <returns>アクションの結果。</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(AddCategoryViewModel viewModel)
         {
-            try
+
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View("AddCategory",viewModel);
             }
-            catch
-            {
-                return View();
-            }
+
+            var request = new AddCategoryRequest {
+                TmdbId = viewModel.Movie.TmdbMovieId,
+                UserId = int.Parse(base.UserId),
+                CategoryName = viewModel.CategoryName,
+                Description = viewModel.Description
+            };
+
+            // MovieService
+            var result = await _movieService.AddMovieCreate(request);
+
+            return View("AddCategory", viewModel);
+
         }
 
         /// <summary>

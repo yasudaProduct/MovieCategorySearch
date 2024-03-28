@@ -3,6 +3,9 @@ using MovieCategorySearch.Domain.Movie;
 using MovieCategorySearch.Application.Usecase.Movie;
 using MovieCategorySearch.Application.Usecase.Movie.Dto;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
+using MovieCategorySearch.Application.Movie.Dto;
+using MovieCategorySearch.Domain.Categories;
+using MovieCategorySearch.Domain.Categories.ValueObject;
 
 namespace MovieCategorySearch.Application.UseCase.Movie
 {
@@ -98,6 +101,21 @@ namespace MovieCategorySearch.Application.UseCase.Movie
             };
 
             return result;
+        }
+
+        public async Task<bool> AddMovieCreate(AddCategoryRequest request)
+        {
+            // Idチェック
+
+            // Category作成
+            var category = new Category(
+                null,
+                request.UserId,
+                new CategoryName(request.CategoryName),
+                new Description(request.Description)
+                );
+
+            return _movieRpository.AddCategory(request.TmdbId, category);
         }
 
     }

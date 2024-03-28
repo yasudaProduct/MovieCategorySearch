@@ -25,14 +25,14 @@ namespace MovieCategorySeach.UnitTest.UseCase
 
             Mock<ICategoryRepository> mockICategoryRepository = new Mock<ICategoryRepository>();
             mockICategoryRepository.Setup(mock => mock.Find(1))
-                .Returns(new Category(1, new CategoryName("カテゴリ名１"), 1, new Description("説明１")));
+                .Returns(new Category(1, 1, new CategoryName("カテゴリ名１"), new Description("説明１")));
 
             mockICategoryRepository.Setup(mock => mock.FindAll())
                 .Returns(new List<Category>()
                 {
-                        new Category(1,new CategoryName("テスト１"), 1, new Description("テスト２")),
-                        new Category(1,new CategoryName("テスト１"), 1, new Description("テスト２")),
-                        new Category(1,new CategoryName("テスト１"), 1, new Description("テスト２"))
+                        new Category(1,1, new CategoryName("テスト１"), new Description("テスト２")),
+                        new Category(1,1, new CategoryName("テスト１"), new Description("テスト２")),
+                        new Category(1,1, new CategoryName("テスト１"), new Description("テスト２"))
                 });
 
             mockICategoryRepository.Setup(repo => repo.Save(It.IsAny<Category>())).Returns(1);
