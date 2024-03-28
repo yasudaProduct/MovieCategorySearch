@@ -1,8 +1,9 @@
-﻿using MovieCategorySearch.Domain.Categories.ValueObject;
+﻿using Merino.Test;
+using MovieCategorySearch.Domain.Categories.ValueObject;
 
 namespace MovieCategorySeach.UnitTest.Domain.Categories.ValueObject
 {
-    public class CategoryNameTest
+    public class CategoryNameTest : MerinoUnitTest
     {
         [Fact]
         public void CategoryName_ValidValue_CreatesInstance()
