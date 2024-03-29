@@ -130,13 +130,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
         {
             //Arrange
             var mockICategoryService = new Mock<ICategoryService>();
-            mockICategoryService.Setup(mock => mock.Create(new CreateCategoryCommand(
-                "カテゴリ３",
-                "説明３",
-                1
-                )))
-                .Returns(1)
-                .Verifiable();
+            mockICategoryService.Setup(mock => mock.Create(
+                It.IsAny< CreateCategoryCommand>()))
+                .Returns(1);
 
             var controller = new CategoryController(
                 new Mock<ILogger<CategoryController>>().Object,

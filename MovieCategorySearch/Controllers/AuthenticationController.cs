@@ -43,7 +43,8 @@ namespace MovieCategorySearch.Controllers
 
             //認証
             AuthRequest req = new AuthRequest(model.LoginId, model.Password);
-            if (!_authService.Auth(req))
+            var res = _authService.Auth(req);
+            if (!res)
             {
                 ModelState.AddModelError(string.Empty, "ログイン情報に誤りがあります。");
                 return View();

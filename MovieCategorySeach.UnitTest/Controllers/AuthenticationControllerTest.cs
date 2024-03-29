@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Merino.Test;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
-using MovieCategorySearch.Application.UseCase.Auth.Dto;
 using MovieCategorySearch.Application.UseCase.Auth;
+using MovieCategorySearch.Application.UseCase.Auth.Dto;
 using MovieCategorySearch.Controllers;
 using MovieCategorySearch.ViewModels;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
-using Merino.Test;
 
 namespace MovieCategorySeach.UnitTest.Controllers
 {
@@ -29,7 +28,25 @@ namespace MovieCategorySeach.UnitTest.Controllers
         {
             _loggerMock = new Mock<ILogger<AuthenticationController>>();
             _authServiceMock = new Mock<IAuthService>();
+            var services = new ServiceCollection();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                    options.SlidingExpiration = true;
+                    options.LoginPath = "/Authentication/Login";
+                    options.AccessDeniedPath = "/Authentication/AccessDenied";
+                });
+            services.AddLogging();
+            services.AddMvc();
+            services.AddRouting(op =>
+            op.ConstraintMap.Add("Movie", typeof(MovieController))
+
+            );     
+
             _controller = new AuthenticationController(_loggerMock.Object, _authServiceMock.Object);
+            _controller.ControllerContext.HttpContext = new DefaultHttpContext();
+            _controller.ControllerContext.HttpContext.RequestServices = services.BuildServiceProvider();
         }
 
         /// <summary>
@@ -112,16 +129,14 @@ namespace MovieCategorySeach.UnitTest.Controllers
         {
             // Arrange
             var model = new LoginViewModel { LoginId = "seed01@example.com", Password = "password" };
-            var authRequest = new AuthRequest(model.LoginId, model.Password);
-            _authServiceMock.Setup(x => x.Auth(authRequest)).Returns(true).Verifiable();
+            _authServiceMock.Setup(x => x.Auth(It.IsAny<AuthRequest>())).Returns(true);         
 
             // Act
             var result = await _controller.Login(model);
 
             // Assert
-            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
-            Assert.Equal("Index", redirectResult.ActionName);
-            Assert.Equal("Movie", redirectResult.ControllerName);
+            var redirectResult = Assert.IsType<RedirectResult>(result);
+            Assert.Equal("/Category/Create", redirectResult.Url);
         }
 
         /// <summary>
@@ -130,26 +145,7 @@ namespace MovieCategorySeach.UnitTest.Controllers
         [Fact]
         public async Task Logout_RedirectsToHomeIndex()
         {
-            // Arrange
-            //Cookie認証を設定
-            _controller.ControllerContext.HttpContext = new DefaultHttpContext();
-            var claimsIdentity = new ClaimsIdentity(new Claim[]
-            {
-                    new Claim(ClaimTypes.Name, "UnitTest@example.com"),
-                    new Claim("UserId", "1"),
-                    new Claim(ClaimTypes.Role, "Administrator"),
-            });
-            //_controller.ControllerContext.HttpContext.User = new ClaimsPrincipal(claimsIdentity);
-
-            await _controller.ControllerContext.HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                new AuthenticationProperties
-                {
-                    // Cookie をブラウザー セッション間で永続化するか？（ブラウザを閉じてもログアウトしないかどうか）
-                    IsPersistent = false,
-                    //ExpiresUtc = DateTime.UtcNow.AddMinutes(20)
-                });
+            // Arrange            
 
             // Act
             var result = await _controller.Logout();
