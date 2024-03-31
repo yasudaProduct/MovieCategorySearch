@@ -48,8 +48,24 @@ header {
         height: 100%;
     }
 
+
+.btn-main {
+    color: white;
+    border-color: #FF5470;
+    border-radius: 30px;
+    background-color: #FF5470;
+}
+
 .btn-cate {
     border-color: lightgray;
     border-radius: 30px;
     background-color: #FFF7F1;
+}
+
+.home-movie-list .card-body {
+    /*word-wrap: break-word;*/
+    min-height: 170px;
+    max-height: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
