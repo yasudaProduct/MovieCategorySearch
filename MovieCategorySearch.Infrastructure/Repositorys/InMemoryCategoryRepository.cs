@@ -1,5 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using MovieCategorySearch.Application.Usecase.Movie;
+using MovieCategorySearch.Application.Usecase.Movie.Dto;
 using MovieCategorySearch.Domain.Categories;
 using MovieCategorySearch.Domain.Categories.ValueObject;
+using MovieCategorySearch.Domain.Movie;
 using MovieCategorySearch.Infrastructure.Data;
 
 namespace MovieCategorySearch.Infrastructure.Repositorys
@@ -9,21 +13,43 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
 
         private readonly PostgresDbContext _dbContext;
 
-        public InMemoryCategoryRepository(PostgresDbContext dbContext)
+        private readonly ITmdbApiClient _tmdbApiClient;
+
+        public InMemoryCategoryRepository(PostgresDbContext dbContext, ITmdbApiClient tmdbApiClient)
         {
             _dbContext = dbContext;
+            _tmdbApiClient = tmdbApiClient;
         }
 
 
-        public Category Find(int id)
+        public async Task<Category> Find(int id)
         {
-            var entity = _dbContext.Category.Find(id);
+            // Category‚ðŽæ“¾
+            var entity = _dbContext.Category
+                .Include(x => x.CategoryMaps).ThenInclude(x => x.Movie).ToList()
+                .Find(x => x.Id == id);
+
+            // 
+            List<Movie> movies = new List<Movie>();
+            foreach (var categoryMap in entity.CategoryMaps)
+            {
+                TmdbMovieDetailsResponce responce = await _tmdbApiClient.GetDetails(categoryMap.Movie.TmdbMovieId);
+
+                movies.Add(new Movie(
+                    responce.id,
+                    responce.title,
+                    responce.overview,
+                    responce.poster_path,
+                    responce.release_date
+                        ));
+            }
 
             return new Category(
                 entity.Id,
                 1,
                 new CategoryName(entity.Name),
-                entity.Description != null ? new Description(entity.Description): null
+                entity.Description != null ? new Description(entity.Description): null,
+                movies
                 );
         }
 

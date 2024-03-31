@@ -36,8 +36,7 @@ namespace MovieCategorySeach.UnitTest.UseCase
             _movieService = new MovieService(
                 _loggerMock.Object,
                 _movieRepositoryMock.Object,
-                _movieQueryServiceMock.Object,
-                _tmdbApiClientMock.Object
+                _movieQueryServiceMock.Object
             );
         }
 

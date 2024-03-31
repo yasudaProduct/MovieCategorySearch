@@ -1,11 +1,9 @@
 using Microsoft.Extensions.Logging;
-using MovieCategorySearch.Domain.Movie;
-using MovieCategorySearch.Application.Usecase.Movie;
-using MovieCategorySearch.Application.Usecase.Movie.Dto;
-using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Application.Movie.Dto;
+using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Domain.Categories;
 using MovieCategorySearch.Domain.Categories.ValueObject;
+using MovieCategorySearch.Domain.Movie;
 
 namespace MovieCategorySearch.Application.UseCase.Movie
 {
@@ -17,48 +15,33 @@ namespace MovieCategorySearch.Application.UseCase.Movie
 
         private readonly IMovieQueryService _movieQueryService;
 
-        private readonly ITmdbApiClient _tmdbApiClient;
         public MovieService(
             ILogger<MovieService> logger,
             IMovieRepository movieRpository,
-            IMovieQueryService movieQueryService,
-            ITmdbApiClient tmdbApiClient
+            IMovieQueryService movieQueryService
         )
         {
             _logger = logger;
             _movieRpository = movieRpository;
             _movieQueryService = movieQueryService;
-            _tmdbApiClient = tmdbApiClient;
         }
 
         public async Task<List<MovieResult>> GetMovieList()
         {
             List<MovieResult> movieResultList = new List<MovieResult>();
 
-            // TmdbApiからデータを取得
-            TmdbApiResponce reqest = await _tmdbApiClient.GetPopular();
-
-            List<MovieQueryResult> list = new List<MovieQueryResult>();
-
-            foreach (var movie in reqest.results)
-            {
-                // MovieRositoryからデータを取得
-                var res = _movieQueryService.GetbyTmdbId(movie.id);
-                if(res != null) list.Add(res);
-            }
-                       
+            List<MovieQueryResult> list =  await _movieQueryService.GetPopularMovies(); 
 
             // MovieResultを作成 TODO Factoryにする？
-            foreach(var movie in reqest.results)
+            foreach(var movie in list)
             {
-
                 movieResultList.Add(new MovieResult
                 {
-                    TmdbMovieId = movie.id,
-                    Title = movie.title,
-                    Overview = movie.overview,
-                    Category = list.Where(m => m.TmdbMovieId == movie.id).Select(c => c.CategoryList).FirstOrDefault(),
-                    PosterPath = movie.poster_path
+                    TmdbMovieId = movie.TmdbMovieId,
+                    Title = movie.Title,
+                    Overview = movie.OverView,
+                    Category = list.Where(m => m.TmdbMovieId == movie.TmdbMovieId).Select(c => c.CategoryList).FirstOrDefault(),
+                    PosterPath = movie.PosterPath
                 });
 
             }
@@ -69,35 +52,30 @@ namespace MovieCategorySearch.Application.UseCase.Movie
         public async Task<List<MovieResult>> Search(string title)
         {
             //TmdbApiからデータを取得
-            TmdbApiResponce reqest = await _tmdbApiClient.SearchCollection(title);
+            MovieQueryResult result = await _movieQueryService.SearchCollection(title);
 
             List<MovieResult> movieResultList = new List<MovieResult>();
 
-            foreach (var movie in reqest.results)
-            {
-
                 movieResultList.Add(new MovieResult
                 {
-                    TmdbMovieId = movie.id,
-                    Title = movie.title,
-                    Overview = movie.overview,
+                    TmdbMovieId = result.TmdbMovieId,
+                    Title = result.Title,
+                    Overview = result.OverView,
                 });
-
-            }
 
             return movieResultList;
         }
 
         public async Task<MovieResult> GetDetails(int tmdbId)
         {
-            TmdbMovieDetailsResponce reqest = await _tmdbApiClient.GetDetails(tmdbId);
+            MovieQueryResult responce = await _movieQueryService.GetDetails(tmdbId);
 
             MovieResult result = new MovieResult()
             {
-                TmdbMovieId = reqest.id,
-                Title = reqest.title,
-                Overview = reqest.overview,
-                ReleaseDate = reqest.release_date,
+                TmdbMovieId = responce.TmdbMovieId,
+                Title = responce.Title,
+                Overview = responce.OverView,
+                //ReleaseDate = responce.release_date,
             };
 
             return result;

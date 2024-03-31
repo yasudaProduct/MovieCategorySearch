@@ -17,5 +17,7 @@ namespace MovieCategorySearch.ViewModels
         [DisplayName("説明")]
         [StringLength(100)]
         public string? Description { get; set; }
+
+        public List<MovieViewModel> MovieList { get; set; } = new List<MovieViewModel>();
     }
 }

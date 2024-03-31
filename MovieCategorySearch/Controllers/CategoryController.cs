@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
 using MovieCategorySearch.Application.UseCase.Categories;
+using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.ViewModels;
 
 namespace MovieCategorySearch.Controllers
@@ -27,17 +28,31 @@ namespace MovieCategorySearch.Controllers
             return View();
         }
 
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
             if (id == null) return RedirectToAction(nameof(HomeController.Index));
 
-            CategoryDetailsDto dto =  _categoryService.Find(id);
+            CategoryDetailsDto dto =  await _categoryService.Find(id);
+
+            List<MovieViewModel> movieList = new List<MovieViewModel>();
+            foreach (MovieResult movie in dto.Movies)
+            {
+                movieList.Add(new MovieViewModel
+                {
+                    TmdbMovieId = movie.TmdbMovieId,
+                    Title = movie.Title,
+                    Overview = movie.Overview,
+                    PosterPath = movie.PosterPath,
+                    ReleaseDate = movie.ReleaseDate
+                });
+            }
 
             CategoryViewModel viewModel = new CategoryViewModel()
             {
                 Id = dto.Id,
                 CategoryName = dto.CategoryName,
                 Description = dto.Description
+                
             };
 
             return View(viewModel);

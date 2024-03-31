@@ -1,6 +1,10 @@
 ﻿using Merino.Test;
 using Microsoft.EntityFrameworkCore;
+using Moq;
+using MovieCategorySearch.Application.Usecase.Movie;
+using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
+using MovieCategorySearch.Domain.Categories;
 using MovieCategorySearch.Infrastructure.Data;
 using MovieCategorySearch.Infrastructure.QueryServices;
 
@@ -8,6 +12,7 @@ namespace MovieCategorySeach.UnitTest.Infrastructure.QueryServices
 {
     public class MovieQueryServiceTest : MerinoUnitTest
     {
+        IMovieQueryService _queryService;
 
         PostgresDbContext _dbContext;
 
@@ -17,8 +22,12 @@ namespace MovieCategorySeach.UnitTest.Infrastructure.QueryServices
             _dbContext = new PostgresDbContext(
                 new DbContextOptionsBuilder<PostgresDbContext>().UseInMemoryDatabase("InMemory").Options
                 );
-            
             SeedData.InitTestData(_dbContext);
+
+
+            Mock<ITmdbApiClient> mockITmdbApiClient = new Mock<ITmdbApiClient>();           
+
+            _queryService = new MovieQueryService(_dbContext, mockITmdbApiClient.Object);
         }
 
 
@@ -27,10 +36,9 @@ namespace MovieCategorySeach.UnitTest.Infrastructure.QueryServices
         {
             // Arrange
             int tmdbId = 763215;
-            var movieQueryService = new MovieQueryService(_dbContext);
 
             // Act
-            var result = movieQueryService.GetbyTmdbId(tmdbId);
+            var result = _queryService.GetbyTmdbId(tmdbId);
 
             // Assert
             Assert.NotNull(result);
@@ -43,10 +51,9 @@ namespace MovieCategorySeach.UnitTest.Infrastructure.QueryServices
         {
             // Arrange
             int tmdbId = 1;
-            var movieQueryService = new MovieQueryService(_dbContext);
 
             // Act
-            var result = movieQueryService.GetbyTmdbId(tmdbId);
+            var result = _queryService.GetbyTmdbId(tmdbId);
 
             // Assert
             Assert.Null(result);

@@ -3,15 +3,29 @@
     public class Movie
     {
 
-        public Movie(int TmdbMovieId, string Title)
+        public Movie(
+            int tmdbMovieId,
+            string title,
+            string overview,
+            string posterPath,
+            DateTime releaseDate)
         {
-            this.TmdbMovieId = TmdbMovieId;
-            this.Title = Title;
+            this.TmdbMovieId = tmdbMovieId;
+            this.Title = title;
+            this.Overview = overview;
+            this.PosterPath = posterPath;
+            this.ReleaseDate = releaseDate;
         }
 
         public int TmdbMovieId { get; }
         
         public string Title { get; }
+
+        public string Overview { get; }
+
+        public string PosterPath { get; }
+
+        public DateTime ReleaseDate { get; }
 
     }
 }

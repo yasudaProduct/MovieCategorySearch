@@ -1,5 +1,7 @@
 using Microsoft.Extensions.Logging;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
+using MovieCategorySearch.Application.Usecase.Movie;
+using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Domain.Categories;
 using MovieCategorySearch.Domain.Categories.ValueObject;
 
@@ -7,7 +9,7 @@ namespace MovieCategorySearch.Application.UseCase.Categories
 {
     public interface ICategoryService
     {
-        public CategoryDetailsDto Find(int id);
+        public Task<CategoryDetailsDto> Find(int id);
 
         public IEnumerable<CategoryDetailsDto> FindAll();
 
@@ -32,17 +34,30 @@ namespace MovieCategorySearch.Application.UseCase.Categories
         #endregion
 
 
-        public CategoryDetailsDto Find(int id)
+        public async Task<CategoryDetailsDto> Find(int id)
         {
-
-            Category category = _categoryRepository.Find(id) ?? null;
+            // Category‚ðŽæ“¾
+            Category category = await _categoryRepository.Find(id) ?? null;
 
             if (category == null) return null;
+
+            var movies = new List<MovieResult>();
+            foreach(Domain.Movie.Movie movie in category.Movies)
+            {
+                movies.Add(new MovieResult {
+                    TmdbMovieId = movie.TmdbMovieId,
+                    Title = movie.Title,
+                    Overview = movie.Overview,
+                    PosterPath = movie.PosterPath,
+                    ReleaseDate = movie.ReleaseDate
+                    });
+            }
 
             return new CategoryDetailsDto(
                 category.Id.Value,
                 category.CategoryName.Value,
-                category.Description?.Value
+                category.Description?.Value,
+                movies
                 );
         }
 

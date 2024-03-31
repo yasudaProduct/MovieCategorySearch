@@ -5,6 +5,11 @@ namespace MovieCategorySearch.Application.UseCase.Movie
     public interface IMovieQueryService
     {
         public MovieQueryResult GetbyTmdbId(int tmdbId);
-        //public List<MovieQueryResult> SearchMovieList(string title);
+        
+        public Task<List<MovieQueryResult>> GetPopularMovies();
+
+        public Task<MovieQueryResult> SearchCollection(string title);
+
+        public Task<MovieQueryResult> GetDetails(int tmdbId);
     }
 }

@@ -25,7 +25,7 @@ namespace MovieCategorySeach.UnitTest.UseCase
 
             Mock<ICategoryRepository> mockICategoryRepository = new Mock<ICategoryRepository>();
             mockICategoryRepository.Setup(mock => mock.Find(1))
-                .Returns(new Category(1, 1, new CategoryName("カテゴリ名１"), new Description("説明１")));
+                .ReturnsAsync(new Category(1, 1, new CategoryName("カテゴリ名１"), new Description("説明１")));
 
             mockICategoryRepository.Setup(mock => mock.FindAll())
                 .Returns(new List<Category>()
@@ -47,7 +47,7 @@ namespace MovieCategorySeach.UnitTest.UseCase
         public async void Find_ReturnsCategoryDetailsDto_WhenCategoryFound()
         {
             //Act
-            var result = _service.Find(1);
+            var result = await _service.Find(1);
 
             //Assert
             Assert.IsType<CategoryDetailsDto>(result);

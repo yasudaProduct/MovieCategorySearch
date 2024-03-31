@@ -29,7 +29,7 @@ namespace MovieCategorySeach.UnitTest.Controllers
 
             Mock<ICategoryService> mockICategoryService = new Mock<ICategoryService>();
             mockICategoryService.Setup(mock => mock.Find(1))
-                .Returns(new CategoryDetailsDto(1, "", ""));
+                .ReturnsAsync(new CategoryDetailsDto(1, "", ""));
 
             mockICategoryService.Setup(mock => mock.FindAll())
                 .Returns(new List<CategoryDetailsDto>()

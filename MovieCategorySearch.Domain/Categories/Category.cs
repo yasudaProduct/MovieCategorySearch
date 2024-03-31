@@ -4,7 +4,12 @@ namespace MovieCategorySearch.Domain.Categories
 {
     public class Category //: MainteNanceValueObject
     {
-        public Category(int? id, int userId, CategoryName categoryName, Description? description = null) //: base(userId)
+        public Category(
+            int? id,
+            int userId,
+            CategoryName categoryName,
+            Description? description = null,
+            List<Domain.Movie.Movie> movies = null)
         {
 
             if (categoryName == null) throw new ArgumentNullException(nameof(categoryName));
@@ -14,7 +19,7 @@ namespace MovieCategorySearch.Domain.Categories
             CategoryName = categoryName;
             Description = description;
             CreateUserId = userId;
-
+            Movies = movies;
         }
 
         public int? Id { get; }
@@ -24,6 +29,8 @@ namespace MovieCategorySearch.Domain.Categories
         public Description Description { get; private set; }
 
         public int CreateUserId { get; private set; }
+
+        public List<Domain.Movie.Movie> Movies { get; private set; }
 
         internal void ChangeName(CategoryName name, Description description = null)
         {

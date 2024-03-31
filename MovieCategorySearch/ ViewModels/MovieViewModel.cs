@@ -19,7 +19,10 @@ namespace MovieCategorySearch.ViewModels
         public string PosterPath { get; set; }
 
         [ValidateNever]
-        public Dictionary<int, string> Category { get; set; } = new Dictionary<int, string>();
+        public DateTime ReleaseDate { get; set; }
+
+        [ValidateNever]
+        public Dictionary<int, string>? Category { get; set; } = new Dictionary<int, string>();
 
     }
 }
