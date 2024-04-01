@@ -29,6 +29,23 @@ namespace MovieCategorySearch.Controllers
         }
 
         [HttpGet]
+        public IActionResult SignUp()
+        {
+            return View(new SignUpViewModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SignUp(SignUpViewModel model)
+        {
+            if(!ModelState.IsValid) return View(model);
+
+            // TODO ユーザー登録Service呼び出し
+
+            return View(model);
+        }
+
+        [HttpGet]
         public IActionResult Login(string? ReturnUrl = null)
         {
             return View(new LoginViewModel { ReturnUrl = ReturnUrl});

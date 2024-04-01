@@ -20,14 +20,13 @@ namespace MovieCategorySearch.Infrastructure.Data.Entity
         [Column("mail_address")]
         [Required]
         [MaxLength(319)]
-        public string MailAdress { get; set; }
+        public string EmailAdress { get; set; }
 
-        // [Description("パスワード")]
-        // [Column("password")]
-        // [Required]
-        // [MaxLength(12)]
-        // [MinLength(4)]
-        // public string Password { get; set; }
+        [Description("ユーザー名")]
+        [Column("name")]
+        [Required]
+        [MaxLength(10)]
+        public string Name { get; set; }
 
         [Description("ユーザー区分")]
         [Column("user_cls")]

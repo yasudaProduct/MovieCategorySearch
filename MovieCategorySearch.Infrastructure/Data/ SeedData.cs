@@ -84,7 +84,8 @@ public static class SeedData
                 new User
                 {
                     UserId = 1,
-                    MailAdress = "seed01@example.com",
+                    EmailAdress = "seed01@example.com",
+                    Name = "Seed01",
                     UserCls = "1",
                     DeletedFlg = "0",
                     CreatePgmId = "Seed",
@@ -97,7 +98,8 @@ public static class SeedData
                 new User
                 {
                     UserId = 2,
-                    MailAdress = "seed02@example.com",
+                    EmailAdress = "seed02@example.com",
+                    Name = "Seed02",
                     UserCls = "1",
                     DeletedFlg = "0",
                     CreatePgmId = "Seed",

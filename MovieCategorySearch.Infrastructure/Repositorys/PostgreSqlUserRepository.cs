@@ -1,4 +1,5 @@
 using MovieCategorySearch.Domain.User;
+using MovieCategorySearch.Domain.User.ValueObject;
 using MovieCategorySearch.Infrastructure.Data;
 
 namespace MovieCategorySearch.Infrastructure.Repositorys
@@ -15,9 +16,9 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
 
         public User Find(string mailAddress)
         {
-            var user = _dbContext.User.FirstOrDefault(x => x.MailAdress == mailAddress);
+            var user = _dbContext.User.FirstOrDefault(x => x.EmailAdress == mailAddress);
 
-            return new User(user.UserId, user.MailAdress, user.UserCls);
+            return new User(user.UserId, user.Name, new EmailAddress(user.EmailAdress), (UserCls)int.Parse(user.UserCls));
         }
     }
 }
