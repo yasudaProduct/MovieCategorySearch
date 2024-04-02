@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -39,14 +41,17 @@ namespace MovieCategorySeach.UnitTest.Controllers
                 });
             services.AddLogging();
             services.AddMvc();
-            services.AddRouting(op =>
-            op.ConstraintMap.Add("Movie", typeof(MovieController))
 
-            );     
-
-            _controller = new AuthenticationController(_loggerMock.Object, _authServiceMock.Object);
-            _controller.ControllerContext.HttpContext = new DefaultHttpContext();
-            _controller.ControllerContext.HttpContext.RequestServices = services.BuildServiceProvider();
+            _controller = (AuthenticationController)ArrangeServiceAndController(
+                new AuthenticationController(_loggerMock.Object, _authServiceMock.Object)
+                );
+            //_controller.ControllerContext = new ControllerContext()
+            //{
+            //    HttpContext = new DefaultHttpContext(),
+            //    RouteData = new RouteData(),
+            //    ActionDescriptor = new ControllerActionDescriptor(),
+            //};
+            //_controller.ControllerContext.HttpContext.RequestServices = services.BuildServiceProvider();
         }
 
         /// <summary>
@@ -135,8 +140,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
             var result = await _controller.Login(model);
 
             // Assert
-            var redirectResult = Assert.IsType<RedirectResult>(result);
-            Assert.Equal("/Category/Create", redirectResult.Url);
+            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Index", redirectResult.ActionName);
+            Assert.Equal("Movie", redirectResult.ControllerName);
         }
 
         /// <summary>

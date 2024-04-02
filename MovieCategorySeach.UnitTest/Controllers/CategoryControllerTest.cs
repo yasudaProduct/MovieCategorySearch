@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
 using MovieCategorySearch.Application.UseCase.Categories;
+using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Controllers;
 using MovieCategorySearch.ViewModels;
 using System.Security.Claims;
@@ -32,13 +33,13 @@ namespace MovieCategorySeach.UnitTest.Controllers
 
             _mockICategoryService = new Mock<ICategoryService>();
             _mockICategoryService.Setup(mock => mock.Find(1))
-                .ReturnsAsync(new CategoryDetailsDto(1, "カテゴリ１", "説明１"));
+                .ReturnsAsync(new CategoryDetailsDto(1, "カテゴリ１", "説明１", new List<MovieResult>()));
 
             _mockICategoryService.Setup(mock => mock.FindAll())
                 .Returns(new List<CategoryDetailsDto>()
                 {
-                        new CategoryDetailsDto(1, "カテゴリ１", "説明１"),
-                        new CategoryDetailsDto(2, "カテゴリ２", "説明２")
+                        new CategoryDetailsDto(1, "カテゴリ１", "説明１", new List<MovieResult>()),
+                        new CategoryDetailsDto(2, "カテゴリ２", "説明２", new List<MovieResult>())
                 });
 
             _mockICategoryService.Setup(mock => mock.Create(new CreateCategoryCommand(
@@ -73,7 +74,7 @@ namespace MovieCategorySeach.UnitTest.Controllers
         public async void Details_ReturnsViewWithCategoryViewModel()
         {
             //Act
-            var result = _controller.Details(1);
+            var result = await _controller.Details(1);
 
             //Assert
             var viewResult = Assert.IsType<ViewResult>(result);

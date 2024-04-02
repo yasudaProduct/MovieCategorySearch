@@ -15,14 +15,14 @@ namespace MovieCategorySeach.UnitTest.Controllers
     /// <summary>
     /// テスト用のカテゴリーサービスクラス
     /// </summary>
-    public class CategoryServiceTest : MerinoUnitTest
+    public class HomeControllerTest : MerinoUnitTest
     {
         private HomeController _controller;
 
         /// <summary>
         /// CategoryServiceTestクラスのコンストラクタ
         /// </summary>
-        public CategoryServiceTest()
+        public HomeControllerTest()
         {
             //Arrange
             Mock<ILogger<HomeController>> mockILogger = new Mock<ILogger<HomeController>>();
@@ -46,7 +46,9 @@ namespace MovieCategorySeach.UnitTest.Controllers
                         new MovieResult(){ TmdbMovieId = 2,Title = "テスト2",Overview = "テスト" ,ReleaseDate = DateTime.Now}
                 });
 
-            _controller = new HomeController(mockILogger.Object, mockICategoryService.Object, mockIMovieService.Object);
+            _controller = (HomeController)ArrangeServiceAndController(
+                new HomeController(mockILogger.Object, mockICategoryService.Object, mockIMovieService.Object)
+                );
         }
 
         /// <summary>

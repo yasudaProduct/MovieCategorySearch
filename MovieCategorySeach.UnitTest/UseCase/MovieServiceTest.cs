@@ -6,6 +6,7 @@ using MovieCategorySearch.Application.Usecase.Movie;
 using MovieCategorySearch.Application.Usecase.Movie.Dto;
 using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
+using MovieCategorySeach.UnitTest.Domain.Categories;
 
 namespace MovieCategorySeach.UnitTest.UseCase
 {
@@ -141,15 +142,16 @@ namespace MovieCategorySeach.UnitTest.UseCase
             // Arrange
             var tmdbId = 1;
 
-            var tmdbMovieDetailsResponse = new TmdbMovieDetailsResponce
+            var movieQueryResult = new MovieQueryResult
             {
-                id = 1,
-                title = "Movie 1",
-                overview = "Overview 1",
-                release_date = DateTime.Parse("2022-01-01")
+                TmdbMovieId = 1,
+                Title = "Movie 1",
+                OverView = "Overview 1",
+                PosterPath= "poster1.jpg",
+                CategoryList = new Dictionary<int, string>()
             };
 
-            _tmdbApiClientMock.Setup(x => x.GetDetails(tmdbId)).ReturnsAsync(tmdbMovieDetailsResponse);
+            _movieQueryServiceMock.Setup(x => x.GetDetails(tmdbId)).ReturnsAsync(movieQueryResult);
 
             // Act
             var result = await _movieService.GetDetails(tmdbId);

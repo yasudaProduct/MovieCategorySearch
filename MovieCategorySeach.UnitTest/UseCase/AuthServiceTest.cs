@@ -3,6 +3,7 @@ using Moq;
 using MovieCategorySearch.Domain.User;
 using MovieCategorySearch.Application.UseCase.Auth;
 using MovieCategorySearch.Application.UseCase.Auth.Dto;
+using MovieCategorySearch.Domain.User.ValueObject;
 
 
 namespace MovieCategorySeach.UnitTest.UseCase
@@ -33,7 +34,7 @@ namespace MovieCategorySeach.UnitTest.UseCase
         {
             // Arrange
             var authRequest = new AuthRequest("unittest@example.com", "password");
-            var user = new User(1, "unittest@example.com", "1");
+            var user = new User(1, "Unit Test", new EmailAddress("unittest@example.com"), UserCls.Normal);
             _userRepositoryMock.Setup(repo => repo.Find(authRequest.LoginId)).Returns(user);
 
             // Act

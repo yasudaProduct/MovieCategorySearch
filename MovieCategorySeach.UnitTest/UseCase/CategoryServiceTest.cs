@@ -5,6 +5,7 @@ using MovieCategorySearch.Domain.Categories;
 using MovieCategorySearch.Domain.Categories.ValueObject;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
 using MovieCategorySearch.Application.UseCase.Categories;
+using MovieCategorySearch.Domain.Movie;
 
 namespace MovieCategorySeach.UnitTest.UseCase
 {
@@ -25,14 +26,14 @@ namespace MovieCategorySeach.UnitTest.UseCase
 
             Mock<ICategoryRepository> mockICategoryRepository = new Mock<ICategoryRepository>();
             mockICategoryRepository.Setup(mock => mock.Find(1))
-                .ReturnsAsync(new Category(1, 1, new CategoryName("カテゴリ名１"), new Description("説明１")));
+                .ReturnsAsync(new Category(1, 1, new CategoryName("カテゴリ名１"), new Description("説明１"), new List<Movie>()));
 
             mockICategoryRepository.Setup(mock => mock.FindAll())
                 .Returns(new List<Category>()
                 {
-                        new Category(1,1, new CategoryName("テスト１"), new Description("テスト２")),
-                        new Category(1,1, new CategoryName("テスト１"), new Description("テスト２")),
-                        new Category(1,1, new CategoryName("テスト１"), new Description("テスト２"))
+                        new Category(1,1, new CategoryName("テスト１"), new Description("テスト２"), new List<Movie>()),
+                        new Category(1,1, new CategoryName("テスト１"), new Description("テスト２"), new List<Movie>()),
+                        new Category(1,1, new CategoryName("テスト１"), new Description("テスト２"), new List<Movie>())
                 });
 
             mockICategoryRepository.Setup(repo => repo.Save(It.IsAny<Category>())).Returns(1);
