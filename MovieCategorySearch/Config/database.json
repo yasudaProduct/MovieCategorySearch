@@ -1,25 +1,25 @@
 {
   "DatabaseSetting": {
-    "DataSources": {
-      "DataSource": [
-        //{
-        //  "ConnectionString": "Host=localhost;Database=mcs-dev;Username=postgres;Password=postgres",
-        //  "EntityFramework": {
-        //    "Valid": true,
-        //    "UseDbProvider": 2,
-        //    "ContextAssemblyName": "MovieCategorySearch.Infrastructure",
-        //    "ContextClassName": "MovieCategorySearch.Infrastructure.Data.PostgresDbContext"
-        //  }
-        //}
-        {
-          "EntityFramework": {
-            "Valid": true,
-            "UseDbProvider": 3,
-            "ContextAssemblyName": "MovieCategorySearch.Infrastructure",
-            "ContextClassName": "MovieCategorySearch.Infrastructure.Data.PostgresDbContext"
-          }
+    "DataSources": [
+      //{
+      //  "Name": "postgres",
+      //  "ConnectionString": "Host=localhost;Database=mcs-dev;Username=postgres;Password=postgres",
+      //  "EntityFramework": {
+      //    "Valid": true,
+      //    "UseDbProvider": 2,
+      //    "ContextAssemblyName": "MovieCategorySearch.Infrastructure",
+      //    "ContextClassName": "MovieCategorySearch.Infrastructure.Data.PostgresDbContext"
+      //  }
+      //}
+      {
+        "Name": "InMemory",
+        "EntityFramework": {
+          "Valid": true,
+          "UseDbProvider": 3,
+          "ContextAssemblyName": "MovieCategorySearch.Infrastructure",
+          "ContextClassName": "MovieCategorySearch.Infrastructure.Data.PostgresDbContext"
         }
-      ]
-    }
+      }
+    ]
   }
 }

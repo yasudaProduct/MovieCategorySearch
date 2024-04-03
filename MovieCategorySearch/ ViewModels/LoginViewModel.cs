@@ -1,4 +1,4 @@
-﻿using Merino.Attribute;
+﻿using Merino.Attributes;
 using MovieCategorySearch.Resources;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;

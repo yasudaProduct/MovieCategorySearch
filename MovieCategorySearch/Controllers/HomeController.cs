@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Security.Claims;
 using Merino.Controller;
+using Merino.Log;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
@@ -34,11 +35,10 @@ public class HomeController : MerinoController
         _movieService = movieService;
     }
     #endregion  
-
+        
 
     public async Task<IActionResult> Index()
     {
-
         List<CategoryDetailsDto> list = _categoryService.FindAll().ToList();
 
         List<CategoryModel> categoryModelList = new List<CategoryModel>();
