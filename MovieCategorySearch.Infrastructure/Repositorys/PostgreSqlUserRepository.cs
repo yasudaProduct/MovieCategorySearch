@@ -20,5 +20,19 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
 
             return new User(user.UserId, user.Name, new EmailAddress(user.EmailAdress), (UserCls)int.Parse(user.UserCls));
         }
+
+        public void Save(User user)
+        {
+            Data.Entity.User userEntity = new Data.Entity.User
+            {
+                UserId = user.UserId,
+                Name = user.Name,
+                EmailAdress = user.EmailAddress.Value,
+                UserCls = user.UserCls.ToString()
+            };
+
+            _dbContext.User.Add(userEntity);
+            _dbContext.SaveChanges();
+        }
     }
 }

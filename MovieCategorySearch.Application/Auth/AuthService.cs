@@ -1,27 +1,32 @@
 using MovieCategorySearch.Domain.User;
 using MovieCategorySearch.Application.UseCase.Auth.Dto;
+using Merino.Log;
+using System;
+using MovieCategorySearch.Application.Auth.Dto;
+using MovieCategorySearch.Application.Auth;
 
 namespace MovieCategorySearch.Application.UseCase.Auth
 {
 
     public class AuthService : IAuthService
     {
-        //private readonly ILogger _logger;
 
         private readonly IUserRepository _userRpository;
 
+        private readonly IUserFactory _userFactory;
+
         public AuthService(
-            //ILogger<AuthService> logger
-            IUserRepository userRpository
+            IUserRepository userRpository,
+            IUserFactory userFactory
         )
         {
-            //_logger = logger;
             _userRpository = userRpository;
+            _userFactory = userFactory;
         }
 
         public bool Auth(AuthRequest req)
         {
-            //_logger.LogInformation("Auth");
+            MerinoLogger.Logger.Trace("AuthService Auth");
 
             //new EmailAddress(req.emailaddres)Å@//ValuesObjectçÏê¨
 
@@ -29,6 +34,16 @@ namespace MovieCategorySearch.Application.UseCase.Auth
             User user = _userRpository.Find(req.LoginId);
 
             if (user == null) return false;
+
+            return true;
+        }
+
+        public bool SignUp(SignUpRequest req)
+        {
+            // UserFactoryÇégÇ¡ÇƒUserÉÇÉfÉãÇçÏê¨
+            User user = _userFactory.CreateUser(req.Name, req.Password, req.Name, req.Email);
+
+            _userRpository.Save(user);
 
             return true;
         }

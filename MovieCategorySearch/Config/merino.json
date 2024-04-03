@@ -15,10 +15,12 @@
         "EndMatchNames": [
           "Repository",
           "QueryService",
-          "Client"
+          "Client",
+          "Factory"
         ],
         "ExactMatchNames": [
-          "InMemoryUserRepository"
+          "InMemoryUserRepository",
+          "InMemoryUserFactory"
         ]
       }
     ],

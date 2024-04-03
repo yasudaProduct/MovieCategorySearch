@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;
 using MovieCategorySearch.Application.UseCase.Categories;
-using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.ViewModels;
 
 namespace MovieCategorySearch.Controllers

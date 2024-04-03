@@ -8,6 +8,7 @@ using MovieCategorySearch.Application.UseCase.Auth.Dto;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using MovieCategorySearch.Application.Auth.Dto;
 
 namespace MovieCategorySearch.Controllers
 {
@@ -38,11 +39,18 @@ namespace MovieCategorySearch.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SignUp(SignUpViewModel model)
         {
-            if(!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid) return View(model);
 
-            // TODO ユーザー登録Service呼び出し
+            // ユーザー登録Service呼び出し
+            _authService.SignUp(new SignUpRequest
+            {
+                LoginId = model.LoginId,
+                Password = model.Password,
+                Name = model.Name,
+                Email = model.LoginId
+            });
 
-            return View(model);
+            return RedirectToAction(nameof(this.Login), "Authentication", new { ReturnUrl = model.ReturnUrl });
         }
 
         [HttpGet]
@@ -59,8 +67,7 @@ namespace MovieCategorySearch.Controllers
             if (!ModelState.IsValid) return View(model);
 
             //認証
-            AuthRequest req = new AuthRequest(model.LoginId, model.Password);
-            var res = _authService.Auth(req);
+            var res = _authService.Auth(new AuthRequest(model.LoginId, model.Password));
             if (!res)
             {
                 ModelState.AddModelError(string.Empty, "ログイン情報に誤りがあります。");
