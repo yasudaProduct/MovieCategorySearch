@@ -4,6 +4,7 @@ using MovieCategorySearch.Domain.User;
 using MovieCategorySearch.Application.UseCase.Auth;
 using MovieCategorySearch.Application.UseCase.Auth.Dto;
 using MovieCategorySearch.Domain.User.ValueObject;
+using MovieCategorySearch.Application.Auth;
 
 
 namespace MovieCategorySeach.UnitTest.UseCase
@@ -15,6 +16,7 @@ namespace MovieCategorySeach.UnitTest.UseCase
     public class AuthServiceTest : MerinoUnitTest
     {
         private readonly Mock<IUserRepository> _userRepositoryMock;
+        private readonly Mock<IUserFactory> _userFactory;
         private readonly AuthService _authService;
 
         /// <summary>
@@ -23,7 +25,8 @@ namespace MovieCategorySeach.UnitTest.UseCase
         public AuthServiceTest()
         {
             _userRepositoryMock = new Mock<IUserRepository>();
-            _authService = new AuthService(_userRepositoryMock.Object);
+            _userFactory = new Mock<IUserFactory>();
+            _authService = new AuthService(_userRepositoryMock.Object, _userFactory.Object);
         }
 
         /// <summary>

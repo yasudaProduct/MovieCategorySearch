@@ -6,6 +6,6 @@ namespace MovieCategorySearch.Domain.Movie
     {
         public int? GetById(int id);
 
-        public bool AddCategory(int TmdbId, Category category);
+        public int AddCategory(int TmdbId, Category category);
     }
 }

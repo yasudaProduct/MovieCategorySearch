@@ -97,7 +97,9 @@ namespace MovieCategorySearch.Controllers
             {
                 TmdbMovieId = result.TmdbMovieId,
                 Title = result.Title,
-                Overview = result.Overview
+                Overview = result.Overview,
+                PosterPath = result.PosterPath,
+                Category = result.Category
             };
 
             MovieDetailsViewModel model = new MovieDetailsViewModel()
@@ -157,9 +159,9 @@ namespace MovieCategorySearch.Controllers
             };
 
             // MovieService
-            var result = await _movieService.AddMovieCreate(request);
+            var id = await _movieService.AddMovieCreate(request);
 
-            return View("AddCategory", viewModel);
+            return RedirectToAction(nameof(MovieController.Details), "Movie",new { id = viewModel.Movie.TmdbMovieId });
 
         }
 

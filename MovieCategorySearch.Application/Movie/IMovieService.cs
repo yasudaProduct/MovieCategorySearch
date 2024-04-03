@@ -11,6 +11,6 @@ namespace MovieCategorySearch.Application.UseCase.Movie
 
         public Task<MovieResult> GetDetails(int tmdbId);
 
-        public Task<bool> AddMovieCreate(AddCategoryRequest request);
+        public Task<int> AddMovieCreate(AddCategoryRequest request);
     }
 }

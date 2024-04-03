@@ -98,12 +98,20 @@ namespace MovieCategorySearch.Infrastructure.QueryServices
         {
             var responce = await _tmdbApiClient.GetDetails(tmdbId);
 
+            var categoryList = _dbContext.CategoryMap
+                .Where(m => m.MovieId == responce.id)
+                .Select(cm => cm.Category)
+                .ToList();
+
             return new MovieQueryResult()
             {
                 TmdbMovieId = responce.id,
                 Title = responce.title,
                 OverView = responce.overview,
-                ReleaseDate = responce.release_date
+                ReleaseDate = responce.release_date,
+                PosterPath = responce.poster_path,
+                Genre = responce.genres.Select(g => g.name).ToArray(),
+                CategoryList = categoryList !=null ? categoryList.ToDictionary(c => c.Id, c => c.Name) : null
             };
         }
 

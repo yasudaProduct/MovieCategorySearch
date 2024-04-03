@@ -24,7 +24,7 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
 
         }
 
-        public bool AddCategory(int TmdbId, Category category)
+        public int AddCategory(int TmdbId, Category category)
         {
             var movie = _dbContext.Movie.Find(TmdbId);
 
@@ -59,9 +59,9 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
 
             var result = _dbContext.SaveChanges();
 
-            if(result == 0) return false;
+            if(result == 0) throw new Exception(); // TODO Ç‡Ç¡Ç∆ìKêÿÇ»ó·äOÇÇ»Ç∞ÇÈ
 
-            return true;
+            return cty.Id;
         }
 
     }

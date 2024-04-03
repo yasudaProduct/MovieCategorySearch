@@ -14,6 +14,8 @@
 
         public DateTime ReleaseDate { get; set; }
 
+        public string[] Genre { get; set; }
+
         public Dictionary<int, string> CategoryList { get; set; }
 
     }

@@ -68,24 +68,25 @@ namespace MovieCategorySearch.Application.UseCase.Movie
 
         public async Task<MovieResult> GetDetails(int tmdbId)
         {
-            MovieQueryResult responce = await _movieQueryService.GetDetails(tmdbId);
+            MovieQueryResult result = await _movieQueryService.GetDetails(tmdbId);
 
-            MovieResult result = new MovieResult()
+            return new MovieResult()
             {
-                TmdbMovieId = responce.TmdbMovieId,
-                Title = responce.Title,
-                Overview = responce.OverView,
-                ReleaseDate = responce.ReleaseDate,
+                TmdbMovieId = result.TmdbMovieId,
+                Title = result.Title,
+                Overview = result.OverView,
+                ReleaseDate = result.ReleaseDate,
+                PosterPath = result.PosterPath,
+                Category = result.CategoryList
             };
-
-            return result;
         }
 
-        public async Task<bool> AddMovieCreate(AddCategoryRequest request)
+        public async Task<int> AddMovieCreate(AddCategoryRequest request)
         {
             // Idチェック
 
             // Category作成
+            // TODO Factoryにする
             var category = new Category(
                 null,
                 request.UserId,
