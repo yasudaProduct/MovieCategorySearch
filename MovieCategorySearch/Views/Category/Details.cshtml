@@ -28,3 +28,29 @@
     @* <a asp-action="Edit" asp-route-id="@Model?.Movie.TmdbMovieId">Edit</a> |
     <a asp-action="Index">Back to List</a> *@
 </div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 home-movie-list">
+    @foreach (var movie in Model.MovieList!)
+    {
+        <div class="col" style="">
+            <div class="card">
+                <div class="card-header flex-direction:row">
+                    <img src="https://image.tmdb.org/t/p/w500/@movie.PosterPath" class="card-img-top" style="object-fit: contain; width: 300px; height: 200px;" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@movie.Title</h5>
+                    <p class="card-text">@movie.Overview</p>
+                </div>
+                <div class="card-footer">
+                    @foreach (var category in movie.Category ?? new Dictionary<int, string>())
+                    {
+                        <a class="btn btn-cate text-muted mb-2" asp-controller="Category" asp-action="Details" asp-route-id="@category.Key">@category.Value</a>
+                    }
+                    <div class="text-center">
+                        <a class="btn btn-outline-dark" asp-controller="Movie" asp-action="Details" asp-route-id="@movie.TmdbMovieId">詳細</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

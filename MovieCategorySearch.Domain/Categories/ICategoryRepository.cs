@@ -6,6 +6,8 @@
 
         public List<Category> FindAll();
 
+        public List<Category> FindByMovieId(int movieId);
+
         public int Save(Category category);
     }
 }

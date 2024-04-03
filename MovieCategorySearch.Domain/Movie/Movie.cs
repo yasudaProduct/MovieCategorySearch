@@ -1,4 +1,6 @@
-﻿namespace MovieCategorySearch.Domain.Movie
+﻿using MovieCategorySearch.Domain.Categories;
+
+namespace MovieCategorySearch.Domain.Movie
 {
     public class Movie
     {
@@ -8,13 +10,15 @@
             string title,
             string overview,
             string posterPath,
-            DateTime releaseDate)
+            DateTime releaseDate,
+            List<Category> categorys)
         {
             this.TmdbMovieId = tmdbMovieId;
             this.Title = title;
             this.Overview = overview;
             this.PosterPath = posterPath;
             this.ReleaseDate = releaseDate;
+            this.Categorys = categorys;
         }
 
         public int TmdbMovieId { get; }
@@ -26,6 +30,8 @@
         public string PosterPath { get; }
 
         public DateTime ReleaseDate { get; }
+
+        public List<Category> Categorys { get; }
 
     }
 }

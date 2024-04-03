@@ -4,6 +4,7 @@ using MovieCategorySearch.Application.Usecase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Domain.Categories;
 using MovieCategorySearch.Domain.Categories.ValueObject;
+using MovieCategorySearch.Domain.Movie;
 
 namespace MovieCategorySearch.Application.UseCase.Categories
 {
@@ -41,17 +42,15 @@ namespace MovieCategorySearch.Application.UseCase.Categories
 
             if (category == null) return null;
 
-            var movies = new List<MovieResult>();
-            foreach(Domain.Movie.Movie movie in category.Movies)
+            List<MovieResult> movies = category.Movies.Select(m =>  new MovieResult
             {
-                movies.Add(new MovieResult {
-                    TmdbMovieId = movie.TmdbMovieId,
-                    Title = movie.Title,
-                    Overview = movie.Overview,
-                    PosterPath = movie.PosterPath,
-                    ReleaseDate = movie.ReleaseDate
-                    });
-            }
+                TmdbMovieId = m.TmdbMovieId,
+                Title = m.Title,
+                Overview = m.Overview,
+                PosterPath = m.PosterPath,
+                ReleaseDate = m.ReleaseDate,
+                Category = m.Categorys != null ? m.Categorys.ToDictionary(x => (int)x.Id, x => x.CategoryName.Value) : null
+            }).ToList();
 
             return new CategoryDetailsDto(
                 category.Id.Value,

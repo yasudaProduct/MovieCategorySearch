@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\Repositorys\" />
+    <Folder Include="Infrastructure\Repositorys\新しいフォルダー\" />
   </ItemGroup>
 
 </Project>

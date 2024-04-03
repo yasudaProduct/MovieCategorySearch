@@ -32,27 +32,31 @@ namespace MovieCategorySearch.Controllers
         {
             if (id == null) return RedirectToAction(nameof(HomeController.Index));
 
+            // カテゴリを取得
             CategoryDetailsDto dto =  await _categoryService.Find(id);
 
-            List<MovieViewModel> movieList = new List<MovieViewModel>();
-            foreach (MovieResult movie in dto.Movies)
+            List<MovieViewModel> movieList = dto.Movies.Select(movie => new MovieViewModel
             {
-                movieList.Add(new MovieViewModel
-                {
-                    TmdbMovieId = movie.TmdbMovieId,
-                    Title = movie.Title,
-                    Overview = movie.Overview,
-                    PosterPath = movie.PosterPath,
-                    ReleaseDate = movie.ReleaseDate
-                });
-            }
+                TmdbMovieId = movie.TmdbMovieId,
+                Title = movie.Title,
+                Overview = movie.Overview,
+                PosterPath = movie.PosterPath,
+                ReleaseDate = movie.ReleaseDate,
+                Category = movie.Category
+            }).ToList();
+
+            // 自分カテゴリを削除
+            movieList.ForEach(movie =>
+            {
+                movie.Category.Remove(id);
+            });
 
             CategoryViewModel viewModel = new CategoryViewModel()
             {
                 Id = dto.Id,
                 CategoryName = dto.CategoryName,
-                Description = dto.Description
-                
+                Description = dto.Description,
+                MovieList = movieList
             };
 
             return View(viewModel);

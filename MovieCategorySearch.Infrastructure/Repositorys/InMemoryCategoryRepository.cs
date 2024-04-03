@@ -31,19 +31,23 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
 
             if(entity == null) return null;
 
-            // 
+            // TmdbMovie‚ðŽæ“¾
             List<Movie> movies = new List<Movie>();
             foreach (var categoryMap in entity.CategoryMaps)
             {
                 TmdbMovieDetailsResponce responce = await _tmdbApiClient.GetDetails(categoryMap.Movie.TmdbMovieId);
+
+                // Category‚ðŽæ“¾
+                
 
                 movies.Add(new Movie(
                     responce.id,
                     responce.title,
                     responce.overview,
                     responce.poster_path,
-                    responce.release_date
-                        ));
+                    responce.release_date,
+                    this.FindByMovieId(categoryMap.MovieId).ToList()
+                    ));
             }
 
             return new Category(
@@ -58,6 +62,19 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
         public List<Category> FindAll()
         {
             return _dbContext.Category.ToList().Select(x => new Category(
+                               x.Id,
+                               x.CreateUserId,
+                               new CategoryName(x.Name),
+                               x.Description != null ? new Description(x.Description) : null
+                               )).ToList();
+        }
+
+        public List<Category> FindByMovieId(int movieId)
+        {
+            return _dbContext.Category
+                .Include(x => x.CategoryMaps).ThenInclude(x => x.Movie).ToList()
+                .FindAll(c => c.CategoryMaps.Any(cm => cm.MovieId == movieId))
+                .Select(x => new Category(
                                x.Id,
                                x.CreateUserId,
                                new CategoryName(x.Name),

@@ -21,7 +21,8 @@ namespace MovieCategorySearch.Infrastructure.Factory
                     result.title,
                     result.overview,
                     result.poster_path,
-                    result.release_date
+                    result.release_date,
+                    null
                     );
         }
     }
