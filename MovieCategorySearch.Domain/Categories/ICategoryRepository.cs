@@ -2,7 +2,7 @@
 {
     public interface ICategoryRepository
     {
-        public Task<Category> Find(int id);
+        public Task<Category>? Find(int id);
 
         public List<Category> FindAll();
 

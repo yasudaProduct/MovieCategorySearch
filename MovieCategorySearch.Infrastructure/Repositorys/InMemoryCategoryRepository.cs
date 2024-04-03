@@ -22,12 +22,14 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
         }
 
 
-        public async Task<Category> Find(int id)
+        public async Task<Category>? Find(int id)
         {
             // Category‚ðŽæ“¾
             var entity = _dbContext.Category
                 .Include(x => x.CategoryMaps).ThenInclude(x => x.Movie).ToList()
                 .Find(x => x.Id == id);
+
+            if(entity == null) return null;
 
             // 
             List<Movie> movies = new List<Movie>();

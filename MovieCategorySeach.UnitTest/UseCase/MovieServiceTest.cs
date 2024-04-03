@@ -1,12 +1,12 @@
-﻿using Merino.Test;
+﻿using Humanizer;
+using Merino.Test;
 using Microsoft.Extensions.Logging;
 using Moq;
-using MovieCategorySearch.Domain.Movie;
 using MovieCategorySearch.Application.Usecase.Movie;
 using MovieCategorySearch.Application.Usecase.Movie.Dto;
 using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
-using MovieCategorySeach.UnitTest.Domain.Categories;
+using MovieCategorySearch.Domain.Movie;
 
 namespace MovieCategorySeach.UnitTest.UseCase
 {
@@ -48,27 +48,27 @@ namespace MovieCategorySeach.UnitTest.UseCase
         public async Task GetMovieList_ShouldReturnListOfMovieResults()
         {
             // Arrange
-            var tmdbApiResponse = new TmdbApiResponce
+            var movieQueryResult = new List<MovieQueryResult>
             {
-                results = new Result[] {
-                         new Result
+                         new MovieQueryResult
                          {
-                             id = 1,
-                             title = "Movie 1",
-                             overview = "Overview 1",
-                             poster_path = "poster1.jpg"
+                             TmdbMovieId = 1,
+                             Title = "Movie 1",
+                             OverView = "Overview 1",
+                             PosterPath = "poster1.jpg",
+                             CategoryList = new Dictionary<int, string>(){ { 1, "Category 1"}, { 2, "Category 2" } }
                          },
-                        new Result
+                        new MovieQueryResult
                         {
-                            id = 2,
-                            title = "Movie 2",
-                            overview = "Overview 2",
-                            poster_path = "poster2.jpg"
+                            TmdbMovieId = 2,
+                            Title = "Movie 2",
+                            OverView = "Overview 2",
+                            PosterPath = "poster2.jpg",
+                            CategoryList = new Dictionary<int, string>(){ { 1, "Category 1"}, { 2, "Category 2" } }
                         }
-                    }
             };
 
-            _tmdbApiClientMock.Setup(x => x.GetPopular()).ReturnsAsync(tmdbApiResponse);
+            _movieQueryServiceMock.Setup(x => x.GetPopularMovies()).ReturnsAsync(movieQueryResult);
 
             // Act
             var result = await _movieService.GetMovieList();
@@ -85,6 +85,8 @@ namespace MovieCategorySeach.UnitTest.UseCase
             Assert.Equal("Movie 2", result[1].Title);
             Assert.Equal("Overview 2", result[1].Overview);
             Assert.Equal("poster2.jpg", result[1].PosterPath);
+            Assert.Equal(2, result[0].Category.Count);
+            Assert.Equal("Category 1", result[0].Category[1]);
         }
 
         /// <summary>
@@ -96,27 +98,16 @@ namespace MovieCategorySeach.UnitTest.UseCase
             // Arrange
             var title = "Movie";
 
-            var tmdbApiResponse = new TmdbApiResponce
+            var movieQueryResult = new MovieQueryResult
             {
-                results = new Result[] {
-                         new Result
-                         {
-                             id = 1,
-                             title = "Movie 1",
-                             overview = "Overview 1",
-                             poster_path = "poster1.jpg"
-                         },
-                        new Result
-                        {
-                            id = 2,
-                            title = "Movie 2",
-                            overview = "Overview 2",
-                            poster_path = "poster2.jpg"
-                        }
-                    }
+                TmdbMovieId = 1,
+                Title = "Movie 1",
+                OverView = "Overview 1",
+                PosterPath = "poster1.jpg",
+                CategoryList = new Dictionary<int, string>() { { 1, "Category 1" }, { 2, "Category 2" } }
             };
 
-            _tmdbApiClientMock.Setup(x => x.SearchCollection(title)).ReturnsAsync(tmdbApiResponse);
+            _movieQueryServiceMock.Setup(x => x.SearchCollection(title)).ReturnsAsync(movieQueryResult);
 
             // Act
             var result = await _movieService.Search(title);
@@ -124,13 +115,10 @@ namespace MovieCategorySeach.UnitTest.UseCase
             // Assert
             Assert.NotNull(result);
             Assert.IsType<List<MovieResult>>(result);
-            Assert.Equal(2, result.Count);
+            Assert.Equal(1, result.Count);
             Assert.Equal(1, result[0].TmdbMovieId);
             Assert.Equal("Movie 1", result[0].Title);
             Assert.Equal("Overview 1", result[0].Overview);
-            Assert.Equal(2, result[1].TmdbMovieId);
-            Assert.Equal("Movie 2", result[1].Title);
-            Assert.Equal("Overview 2", result[1].Overview);
         }
 
         /// <summary>
@@ -148,6 +136,7 @@ namespace MovieCategorySeach.UnitTest.UseCase
                 Title = "Movie 1",
                 OverView = "Overview 1",
                 PosterPath= "poster1.jpg",
+                ReleaseDate = DateTime.Parse("2022-01-01"),
                 CategoryList = new Dictionary<int, string>()
             };
 

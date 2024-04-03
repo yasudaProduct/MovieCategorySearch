@@ -102,7 +102,8 @@ namespace MovieCategorySearch.Infrastructure.QueryServices
             {
                 TmdbMovieId = responce.id,
                 Title = responce.title,
-                OverView = responce.overview
+                OverView = responce.overview,
+                ReleaseDate = responce.release_date
             };
         }
 

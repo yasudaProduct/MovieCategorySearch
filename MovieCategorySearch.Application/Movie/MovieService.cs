@@ -75,7 +75,7 @@ namespace MovieCategorySearch.Application.UseCase.Movie
                 TmdbMovieId = responce.TmdbMovieId,
                 Title = responce.Title,
                 Overview = responce.OverView,
-                //ReleaseDate = responce.release_date,
+                ReleaseDate = responce.ReleaseDate,
             };
 
             return result;
