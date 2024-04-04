@@ -37,7 +37,7 @@ namespace MovieCategorySearch.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SignUp(SignUpViewModel model)
+        internal IActionResult SignUp(SignUpViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -61,7 +61,7 @@ namespace MovieCategorySearch.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        internal async Task<IActionResult> Login(LoginViewModel model)
         {
             //入力チェック
             if (!ModelState.IsValid) return View(model);

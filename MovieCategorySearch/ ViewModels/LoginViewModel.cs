@@ -1,11 +1,12 @@
 ﻿using Merino.Attributes;
+using MovieCategorySearch.Models;
 using MovieCategorySearch.Resources;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace MovieCategorySearch.ViewModels
 {
-    public class LoginViewModel
+    internal class LoginViewModel : BaseViewModel
     {
         [DisplayName("メールアドレス")]
         [MerinoRequired]

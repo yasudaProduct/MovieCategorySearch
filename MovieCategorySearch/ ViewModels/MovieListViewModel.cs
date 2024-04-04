@@ -1,6 +1,8 @@
-﻿namespace MovieCategorySearch.ViewModels
+﻿using MovieCategorySearch.Models;
+
+namespace MovieCategorySearch.ViewModels
 {
-    public class MovieListViewModel
+    internal class MovieListViewModel : BaseViewModel
     {
 
         public List<MovieViewModel> MovieList { get; set; } = new List<MovieViewModel>();

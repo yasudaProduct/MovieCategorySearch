@@ -2,7 +2,7 @@
 
 namespace MovieCategorySearch.ViewModels
 {
-    public class HomeViewModel
+    internal class HomeViewModel : BaseViewModel
     {
         public IEnumerable<CategoryModel>  CategoryModelList { get; set; } = new List<CategoryModel>();
 

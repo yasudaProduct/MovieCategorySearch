@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using MovieCategorySearch.Models;
 using System.ComponentModel;
 
 namespace MovieCategorySearch.ViewModels
 {
-    public class MovieViewModel
+    internal class MovieViewModel : BaseViewModel
     {
         public int TmdbMovieId { get; set; }
         

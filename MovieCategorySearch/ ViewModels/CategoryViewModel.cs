@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using MovieCategorySearch.Models;
 
 namespace MovieCategorySearch.ViewModels
 {
-    public class CategoryViewModel
+    internal class CategoryViewModel: BaseViewModel
     {
 
         [DisplayName("ID")]

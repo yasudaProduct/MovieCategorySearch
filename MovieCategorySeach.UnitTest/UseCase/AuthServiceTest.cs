@@ -6,7 +6,6 @@ using MovieCategorySearch.Application.UseCase.Auth.Dto;
 using MovieCategorySearch.Domain.User.ValueObject;
 using MovieCategorySearch.Application.Auth;
 
-
 namespace MovieCategorySeach.UnitTest.UseCase
 {
 

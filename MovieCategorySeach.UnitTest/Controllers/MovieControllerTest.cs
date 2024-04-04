@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
+using MovieCategorySearch.Application.UseCase.Categories;
 using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Controllers;
@@ -18,6 +19,7 @@ namespace MovieCategorySeach.UnitTest.Controllers
         private Mock<ILogger<MovieController>> _loggerMock;
         private Mock<IMovieService> _movieServiceMock;
         private Mock<IMovieQueryService> _movieQueryServiceMock;
+        private Mock<ICategoryService> _categoryService;
 
         /// <summary>
         /// MovieControllerTestクラスのコンストラクタ
@@ -28,11 +30,13 @@ namespace MovieCategorySeach.UnitTest.Controllers
             _loggerMock = new Mock<ILogger<MovieController>>();
             _movieServiceMock = new Mock<IMovieService>();
             _movieQueryServiceMock = new Mock<IMovieQueryService>();
+            _categoryService = new Mock<ICategoryService>();
 
             _controller = new MovieController(
                 _loggerMock.Object,
                 _movieServiceMock.Object,
                 _movieQueryServiceMock.Object
+                ,_categoryService.Object
             );
         }
 
