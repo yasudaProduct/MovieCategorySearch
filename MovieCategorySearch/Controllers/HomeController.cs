@@ -75,7 +75,7 @@ public class HomeController : MerinoController
 
     public IActionResult Privacy()
     {
-        return View();
+        return View(new BaseViewModel());
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

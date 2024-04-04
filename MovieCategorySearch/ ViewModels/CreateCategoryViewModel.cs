@@ -2,7 +2,7 @@
 
 namespace MovieCategorySearch.ViewModels
 {
-    internal class CreateCategoryViewModel: BaseViewModel
+    public class CreateCategoryViewModel: BaseViewModel
     {
 
         public MovieViewModel Movie { get; set; }

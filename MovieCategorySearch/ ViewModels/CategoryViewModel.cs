@@ -4,7 +4,7 @@ using MovieCategorySearch.Models;
 
 namespace MovieCategorySearch.ViewModels
 {
-    internal class CategoryViewModel: BaseViewModel
+    public class CategoryViewModel: BaseViewModel
     {
 
         [DisplayName("ID")]

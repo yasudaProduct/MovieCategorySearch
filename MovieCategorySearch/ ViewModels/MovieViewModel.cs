@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace MovieCategorySearch.ViewModels
 {
-    internal class MovieViewModel : BaseViewModel
+    public class MovieViewModel : BaseViewModel
     {
         public int TmdbMovieId { get; set; }
         
