@@ -2,7 +2,7 @@
 
 namespace MovieCategorySearch.Models
 {
-    public class BaseViewModel : PageModel
+    public class BaseViewModel
     {
         public string Messenge { get; set; } = "基底モデルからのメッセージです。";
 
