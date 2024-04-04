@@ -16,5 +16,7 @@ namespace MovieCategorySearch.ViewModels
         public CreateCategoryModel CreateCategoryModel { get; set; }
 
         public IEnumerable<CategoryModel> CategoryModelList { get; set; } = new List<CategoryModel>();
+
+        public int SelectedCategory { get; set; }
     }
 }

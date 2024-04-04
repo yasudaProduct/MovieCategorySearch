@@ -72,11 +72,24 @@
     <div class="category-list">
         @foreach (var item in Model.CategoryModelList!)
         {
-            <input type="button" class="btn btn-cate mb-3 ms-3" value="@item.CategoryName" />
+            <div>
+                <input type="radio" asp-for="SelectedCategory" value="@item.Id" id="@item.Id" class="btn btn-cate text-muted mb-2" />
+                <label for="@item.Id" class="btn btn-cate text-muted mb-2" >@item.CategoryName</label>
+            </div>
         }
+
     </div>
 </form>
 @* <div>
     <a asp-action="AddCategory" asp-route-id="@Model?.Movie.TmdbMovieId">カテゴリを追加する</a> |
     <a asp-action="Index">Back to List</a>
 </div> *@
+
+<script>
+    window.onload = function () {
+
+
+
+
+    }
+</script>
