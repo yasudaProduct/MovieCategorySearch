@@ -46,7 +46,37 @@
         <a class="btn btn-cate text-muted mb-2" asp-controller="Category" asp-action="Details" asp-route-id="@category.Key">@category.Value</a>
     }
 </div>
-<div>
+<form asp-action="Create" method="post">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CreateCategoryModel.CategoryName" class="control-label"></label>
+                <input asp-for="CreateCategoryModel.CategoryName" class="form-control" />
+                <span asp-validation-for="CreateCategoryModel.CategoryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCategoryModel.Description" class="control-label"></label>
+                <input asp-for="CreateCategoryModel.Description" class="form-control" />
+                <span asp-validation-for="CreateCategoryModel.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="@Model.Movie.TmdbMovieId" value="@Model.Movie.TmdbMovieId" />
+                <span asp-validation-for="@Model.Movie.TmdbMovieId" class="text-danger"></span>
+                <span asp-validation-for="@Model.Movie.Title" class="text-danger"></span>
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+    <div class="category-list">
+        @foreach (var item in Model.CategoryModelList!)
+        {
+            <input type="button" class="btn btn-cate mb-3 ms-3" value="@item.CategoryName" />
+        }
+    </div>
+</form>
+@* <div>
     <a asp-action="AddCategory" asp-route-id="@Model?.Movie.TmdbMovieId">カテゴリを追加する</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</div> *@

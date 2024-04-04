@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.Application.Movie.Dto;
+using MovieCategorySearch.Application.Usecase.Categories.Dto;
+using MovieCategorySearch.Application.UseCase.Categories;
 using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
+using MovieCategorySearch.Models;
 using MovieCategorySearch.ViewModels;
 
 namespace MovieCategorySearch.Controllers
@@ -20,6 +23,8 @@ namespace MovieCategorySearch.Controllers
 
         private readonly IMovieQueryService _movieQueryService;
 
+        private readonly ICategoryService _categoryService;
+
         /// <summary>
         /// <see cref="MovieController"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
@@ -29,12 +34,14 @@ namespace MovieCategorySearch.Controllers
         public MovieController(
             ILogger<MovieController> logger,
             IMovieService movieService,
-            IMovieQueryService movieQueryService
+            IMovieQueryService movieQueryService,
+            ICategoryService categoryService
             )
         {
             _logger = logger;
             _movieService = movieService;
             _movieQueryService = movieQueryService;
+            _categoryService = categoryService;
         }
 
         /// <summary>
@@ -91,6 +98,7 @@ namespace MovieCategorySearch.Controllers
         /// <returns>映画の詳細を含むビュー。</returns>
         public async Task<ActionResult> Details(int id)
         {
+            // 映画の詳細を取得
             MovieResult result =  await _movieService.GetDetails(id);
 
             MovieViewModel movie = new MovieViewModel()
@@ -102,11 +110,22 @@ namespace MovieCategorySearch.Controllers
                 Category = result.Category
             };
 
+            // カテゴリ一覧を取得
+            List<CategoryModel> categoryModelList =
+                _categoryService.FindAll()
+                .Select(item => new CategoryModel()
+                {
+                    Id = item.Id,
+                    CategoryName = item.CategoryName,
+                }).ToList();
+
+            // ViewModelに詰め替え
             MovieDetailsViewModel model = new MovieDetailsViewModel()
             {
                 Movie = movie,
                 Genres = result.Genres,
-                ReleaseDate = result.ReleaseDate
+                ReleaseDate = result.ReleaseDate,
+                CategoryModelList = categoryModelList
             };
 
             return View(model);
@@ -128,7 +147,7 @@ namespace MovieCategorySearch.Controllers
                 Overview = result.Overview
             };
 
-            AddCategoryViewModel model = new AddCategoryViewModel()
+            CreateCategoryViewModel model = new CreateCategoryViewModel()
             {
                 Movie = movie                
             };
@@ -143,7 +162,7 @@ namespace MovieCategorySearch.Controllers
         /// <returns>アクションの結果。</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(AddCategoryViewModel viewModel)
+        public async Task<ActionResult> Create(CreateCategoryViewModel viewModel)
         {
 
             if (!ModelState.IsValid)
@@ -154,8 +173,8 @@ namespace MovieCategorySearch.Controllers
             var request = new AddCategoryRequest {
                 TmdbId = viewModel.Movie.TmdbMovieId,
                 UserId = int.Parse(base.UserId),
-                CategoryName = viewModel.CategoryName,
-                Description = viewModel.Description
+                CategoryName = viewModel.CreateCategoryModel.CategoryName,
+                Description = viewModel.CreateCategoryModel.Description
             };
 
             // MovieService

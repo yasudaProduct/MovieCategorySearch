@@ -1,12 +1,10 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
-namespace MovieCategorySearch.ViewModels
+namespace MovieCategorySearch.Models
 {
-    public class AddCategoryViewModel
+    public class CreateCategoryModel
     {
-
-        public MovieViewModel Movie { get; set; }
 
         [DisplayName("カテゴリ名")]
         [Required]
@@ -16,6 +14,5 @@ namespace MovieCategorySearch.ViewModels
         [DisplayName("説明")]
         [StringLength(100)]
         public string? Description { get; set; }
-
     }
 }
