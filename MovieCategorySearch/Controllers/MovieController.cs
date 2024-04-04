@@ -162,7 +162,7 @@ namespace MovieCategorySearch.Controllers
         /// <returns>アクションの結果。</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        internal async Task<ActionResult> Create(CreateCategoryViewModel viewModel)
+        public async Task<ActionResult> Create(CreateCategoryViewModel viewModel)
         {
 
             if (!ModelState.IsValid)

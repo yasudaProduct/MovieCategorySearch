@@ -61,7 +61,7 @@ namespace MovieCategorySearch.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        internal async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             //入力チェック
             if (!ModelState.IsValid) return View(model);

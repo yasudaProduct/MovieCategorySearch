@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MovieCategorySearch.ViewModels
 {
-    internal class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
         [DisplayName("メールアドレス")]
         [MerinoRequired]

@@ -68,7 +68,7 @@ namespace MovieCategorySearch.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        internal ActionResult Create(CategoryViewModel viewModel)
+        public ActionResult Create(CategoryViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {

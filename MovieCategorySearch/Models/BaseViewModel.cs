@@ -2,7 +2,7 @@
 
 namespace MovieCategorySearch.Models
 {
-    internal class BaseViewModel
+    public class BaseViewModel
     {
         [ViewData]
         public string Messenge { get; set; } = "基底モデルからのメッセージです。";
