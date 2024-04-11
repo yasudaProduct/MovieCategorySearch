@@ -4,9 +4,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MovieCategorySearch.Infrastructure.Migrations
+namespace MovieCategorySearch.Infrastructure.MovieCategorySearch.Infrastructure.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class CreateTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,6 +35,7 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                 {
                     user_id = table.Column<int>(type: "integer", nullable: false),
                     mail_address = table.Column<string>(type: "character varying(319)", maxLength: 319, nullable: false),
+                    name = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     user_cls = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: false),
                     deleted_flg = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: false, defaultValue: "0"),
                     create_pgm_id = table.Column<string>(type: "text", nullable: false),

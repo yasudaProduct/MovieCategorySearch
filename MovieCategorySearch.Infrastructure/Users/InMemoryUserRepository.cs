@@ -2,7 +2,7 @@ using MovieCategorySearch.Domain.User;
 using MovieCategorySearch.Domain.User.ValueObject;
 using MovieCategorySearch.Infrastructure.Data;
 
-namespace MovieCategorySearch.Infrastructure.Repositorys
+namespace MovieCategorySearch.Infrastructure.Users
 {
     public class InMemoryUserRepository : IUserRepository
     {

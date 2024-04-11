@@ -1,6 +1,6 @@
 ﻿using MovieCategorySearch.Application.Usecase.Movie;
 
-namespace MovieCategorySearch.Infrastructure.Factory
+namespace MovieCategorySearch.Infrastructure.Movies
 {
     public class MovieFactory : IMovieFactory
     {

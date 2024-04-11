@@ -3,7 +3,7 @@ using MovieCategorySearch.Domain.User;
 using MovieCategorySearch.Domain.User.ValueObject;
 using MovieCategorySearch.Infrastructure.Data;
 
-namespace MovieCategorySearch.Infrastructure.Factory
+namespace MovieCategorySearch.Infrastructure.Users
 {
     public class InMemoryUserFactory : IUserFactory
     {

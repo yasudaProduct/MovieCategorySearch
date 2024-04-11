@@ -15,8 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCategorySearch.Applica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCategorySearch.Domain", "MovieCategorySearch.Domain\MovieCategorySearch.Domain.csproj", "{D33C51E9-B116-4DD7-9BA9-DB9A2AFDBA14}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Merino.UnitTest", "..\dotnetMVCLib\Merino.UnitTest\Merino.UnitTest\Merino.UnitTest.csproj", "{925BB0F3-BC8E-4C88-87AC-65533C79626D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

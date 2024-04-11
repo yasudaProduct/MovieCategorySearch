@@ -10,3 +10,15 @@
 
     ports:
       - 5432:5432
+
+  postgres-test:
+    image: postgres:latest
+    container_name: MCS-Postgres-Test
+
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mcs-test
+
+    ports:
+      - 5431:5432

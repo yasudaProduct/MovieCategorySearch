@@ -2,7 +2,7 @@ using MovieCategorySearch.Domain.Categories;
 using MovieCategorySearch.Domain.Movie;
 using MovieCategorySearch.Infrastructure.Data;
 
-namespace MovieCategorySearch.Infrastructure.Repositorys
+namespace MovieCategorySearch.Infrastructure.Movies
 {
     public class InMemoryMovieRepository : IMovieRepository
     {
@@ -59,7 +59,7 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
 
             var result = _dbContext.SaveChanges();
 
-            if(result == 0) throw new Exception(); // TODO ‚à‚Á‚Æ“KØ‚È—áŠO‚ğ‚È‚°‚é
+            if(result == 0) throw new Exception(); // TODO ï¿½ï¿½ï¿½ï¿½ï¿½Æ“Kï¿½Ø‚È—ï¿½Oï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½
 
             return cty.Id;
         }

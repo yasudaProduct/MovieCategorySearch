@@ -73,6 +73,7 @@ public static class SeedData
                     UpdateDate = DateTime.Now,
                 }
             );
+            context.SaveChanges();
         }
         #endregion
 
@@ -110,6 +111,7 @@ public static class SeedData
                     UpdateDate = DateTime.Now,
                 }
                 );
+            context.SaveChanges();
         }
         #endregion
 
@@ -120,7 +122,8 @@ public static class SeedData
             context.Category.AddRange(
                 new Category
                 {
-                    Name = "‹L‰¯‚ğÁ‚µ‚Ä‚İ‚½‚¢‰f‰æ",
+                    Id = 1,
+                    Name = "è¨˜æ†¶ã‚’æ¶ˆã—ã¦ã¿ãŸã„æ˜ ç”»",
                     Description = "Seed Date",
                     CreateUserId = 1,
                     DeletedFlg = "0",
@@ -132,7 +135,8 @@ public static class SeedData
                 },
                 new Category
                 {
-                    Name = "‰J‚Ì“ú‚ÉŠÏ‚½‚¢‰f‰æ",
+                    Id = 2,
+                    Name = "ã€‡ã€‡ãªæ˜ ç”»",
                     Description = "Seed Date",
                     CreateUserId = 2,
                     DeletedFlg = "0",
@@ -144,7 +148,8 @@ public static class SeedData
                 },
                 new Category
                 {
-                    Name = "—F‚¾‚¿‚ÆŠÏ‚½‚¢‰f‰æ",
+                    Id = 3,
+                    Name = "å¯ã‚Œãªã„ã¨ãã«è¦‹ãŸããªã‚‹æ˜ ç”»",
                     Description = "Seed Date",
                     CreateUserId = 1,
                     DeletedFlg = "0",
@@ -156,7 +161,8 @@ public static class SeedData
                 },
                 new Category
                 {
-                    Name = "Î‚¦‚é‰f‰æ",
+                    Id = 4,
+                    Name = "ã‚ã‚ã‚ã‚",
                     Description = "Seed Date",
                     CreateUserId = 1,
                     DeletedFlg = "0",
@@ -168,7 +174,8 @@ public static class SeedData
                 },
                 new Category
                 {
-                    Name = "[–é‚ÉŒ©‚½‚¢‰f‰æ",
+                    Id = 5,
+                    Name = "ã„ã„ã„ã„",
                     Description = "Seed Date",
                     CreateUserId = 1,
                     DeletedFlg = "0",
@@ -180,7 +187,8 @@ public static class SeedData
                 },
                 new Category
                 {
-                    Name = "[–é‚ÉŒ©‚½‚¢‰f‰æ",
+                    Id = 6,
+                    Name = "ãŠãŠãŠãŠãŠãŠãŠãŠãŠãŠãŠãŠãŠãŠãŠãŠãŠãŠ",
                     Description = "Seed Date",
                     CreateUserId = 1,
                     DeletedFlg = "0",
@@ -192,7 +200,8 @@ public static class SeedData
                 },
                 new Category
                 {
-                    Name = "˜A‹x‚¨‚·‚·‚ß",
+                    Id = 7,
+                    Name = "TEST",
                     Description = "Seed Date",
                     CreateUserId = 1,
                     DeletedFlg = "0",
@@ -204,6 +213,7 @@ public static class SeedData
                 },
                 new Category
                 {
+                    Id = 8,
                     Name = "12345",
                     Description = "Seed Date",
                     CreateUserId = 1,
@@ -216,7 +226,8 @@ public static class SeedData
                 },
                 new Category
                 {
-                    Name = "‚v‚v‚v‚v‚v‚v‚v‚v‚v‚v‚v‚v‚v‚v‚v‚v",
+                    Id = 9,
+                    Name = "TEST",
                     Description = "Seed Date",
                     CreateUserId = 1,
                     DeletedFlg = "0",
@@ -227,6 +238,8 @@ public static class SeedData
                     UpdateDate = DateTime.Now,
                 }
                 );
+
+            context.SaveChanges();
         }
         #endregion
 
@@ -235,7 +248,8 @@ public static class SeedData
         {
 
             context.CategoryMap.AddRange(
-                new CategoryMap { 
+                new CategoryMap
+                {
                     MovieId = 1011985,
                     CategoryId = 1,
                     DeletedFlg = "0",
@@ -295,11 +309,10 @@ public static class SeedData
                     UpdateDate = DateTime.Now,
                 }
                 );
+
+            context.SaveChanges();
         }
 
-            #endregion
-
-        context.SaveChanges();
-
+        #endregion
     }
 }

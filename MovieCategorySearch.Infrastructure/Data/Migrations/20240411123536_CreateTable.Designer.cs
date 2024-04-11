@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MovieCategorySearch.Infrastructure.Migrations
+namespace MovieCategorySearch.Infrastructure.MovieCategorySearch.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(PostgresDbContext))]
-    [Migration("20240328042624_Initial")]
-    partial class Initial
+    [Migration("20240411123536_CreateTable")]
+    partial class CreateTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -218,11 +218,17 @@ namespace MovieCategorySearch.Infrastructure.Migrations
                         .HasDefaultValue("0")
                         .HasColumnName("deleted_flg");
 
-                    b.Property<string>("MailAdress")
+                    b.Property<string>("EmailAdress")
                         .IsRequired()
                         .HasMaxLength(319)
                         .HasColumnType("character varying(319)")
                         .HasColumnName("mail_address");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("timestamp without time zone")

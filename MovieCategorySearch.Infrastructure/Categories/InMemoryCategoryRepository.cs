@@ -6,7 +6,7 @@ using MovieCategorySearch.Domain.Categories.ValueObject;
 using MovieCategorySearch.Domain.Movie;
 using MovieCategorySearch.Infrastructure.Data;
 
-namespace MovieCategorySearch.Infrastructure.Repositorys
+namespace MovieCategorySearch.Infrastructure.Categories
 {
     public class InMemoryCategoryRepository : ICategoryRepository
     {
@@ -24,20 +24,20 @@ namespace MovieCategorySearch.Infrastructure.Repositorys
 
         public async Task<Category>? Find(int id)
         {
-            // Category‚ðŽæ“¾
+            // Categoryï¿½ï¿½ï¿½æ“¾
             var entity = _dbContext.Category
                 .Include(x => x.CategoryMaps).ThenInclude(x => x.Movie).ToList()
                 .Find(x => x.Id == id);
 
             if(entity == null) return null;
 
-            // TmdbMovie‚ðŽæ“¾
+            // TmdbMovieï¿½ï¿½ï¿½æ“¾
             List<Movie> movies = new List<Movie>();
             foreach (var categoryMap in entity.CategoryMaps)
             {
                 TmdbMovieDetailsResponce responce = await _tmdbApiClient.GetDetails(categoryMap.Movie.TmdbMovieId);
 
-                // Category‚ðŽæ“¾
+                // Categoryï¿½ï¿½ï¿½æ“¾
                 
 
                 movies.Add(new Movie(
