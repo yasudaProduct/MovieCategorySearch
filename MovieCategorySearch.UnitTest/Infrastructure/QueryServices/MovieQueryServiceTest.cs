@@ -8,7 +8,7 @@ using MovieCategorySearch.Domain.Categories;
 using MovieCategorySearch.Infrastructure.Data;
 using MovieCategorySearch.Infrastructure.QueryServices;
 
-namespace MovieCategorySeach.UnitTest.Infrastructure.QueryServices
+namespace MovieCategorySearch.UnitTest.Infrastructure.QueryServices
 {
     public class MovieQueryServiceTest : MerinoUnitTest
     {

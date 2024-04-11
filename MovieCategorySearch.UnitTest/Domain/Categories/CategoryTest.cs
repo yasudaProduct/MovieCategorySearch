@@ -2,7 +2,7 @@
 using MovieCategorySearch.Domain.Categories;
 using MovieCategorySearch.Domain.Categories.ValueObject;
 
-namespace MovieCategorySeach.UnitTest.Domain.Categories
+namespace MovieCategorySearch.UnitTest.Domain.Categories
 {
     /// <summary>
     /// テストクラスの説明

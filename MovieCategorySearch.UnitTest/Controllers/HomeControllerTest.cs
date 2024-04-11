@@ -10,7 +10,7 @@ using MovieCategorySearch.Controllers;
 using MovieCategorySearch.Models;
 using MovieCategorySearch.ViewModels;
 
-namespace MovieCategorySeach.UnitTest.Controllers
+namespace MovieCategorySearch.UnitTest.Controllers
 {
     /// <summary>
     /// テスト用のカテゴリーサービスクラス

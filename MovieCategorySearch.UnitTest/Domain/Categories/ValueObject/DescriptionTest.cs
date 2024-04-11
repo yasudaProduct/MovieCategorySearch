@@ -1,7 +1,7 @@
 ﻿using Merino.Test;
 using MovieCategorySearch.Domain.Categories.ValueObject;
 
-namespace MovieCategorySeach.UnitTest.Domain.Categories.ValueObject
+namespace MovieCategorySearch.UnitTest.Domain.Categories.ValueObject
 {
     /// <summary>
     /// ディスクリプションのテストクラスです。

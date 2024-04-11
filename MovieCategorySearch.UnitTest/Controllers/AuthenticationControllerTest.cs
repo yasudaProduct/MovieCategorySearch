@@ -12,7 +12,7 @@ using MovieCategorySearch.Application.UseCase.Auth.Dto;
 using MovieCategorySearch.Controllers;
 using MovieCategorySearch.ViewModels;
 
-namespace MovieCategorySeach.UnitTest.Controllers
+namespace MovieCategorySearch.UnitTest.Controllers
 {
     /// <summary>
     /// ユニットテスト用のAuthenticationControllerクラスです。

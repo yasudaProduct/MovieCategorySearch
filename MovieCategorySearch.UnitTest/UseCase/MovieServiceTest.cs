@@ -8,7 +8,7 @@ using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Domain.Movie;
 
-namespace MovieCategorySeach.UnitTest.UseCase
+namespace MovieCategorySearch.UnitTest.UseCase
 {
 
     /// <summary>

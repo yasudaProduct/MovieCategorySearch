@@ -7,7 +7,7 @@ using MovieCategorySearch.Application.Usecase.Categories.Dto;
 using MovieCategorySearch.Application.UseCase.Categories;
 using MovieCategorySearch.Domain.Movie;
 
-namespace MovieCategorySeach.UnitTest.UseCase
+namespace MovieCategorySearch.UnitTest.UseCase
 {
     /// <summary>
     /// カテゴリサービスのテストクラスです。

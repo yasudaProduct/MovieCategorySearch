@@ -4,7 +4,7 @@ using MovieCategorySearch.Application.UseCase.Movie;
 using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Infrastructure.Data;
 
-namespace MovieCategorySearch.Infrastructure.QueryServices
+namespace MovieCategorySearch.Infrastructure.Movies
 {
 
     /// <summary>

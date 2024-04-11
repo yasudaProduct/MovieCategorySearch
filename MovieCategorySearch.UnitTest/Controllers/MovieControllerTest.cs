@@ -8,7 +8,7 @@ using MovieCategorySearch.Application.UseCase.Movie.Dto;
 using MovieCategorySearch.Controllers;
 using MovieCategorySearch.ViewModels;
 
-namespace MovieCategorySeach.UnitTest.Controllers
+namespace MovieCategorySearch.UnitTest.Controllers
 {
     /// <summary>
     /// テスト用のMovieControllerクラス

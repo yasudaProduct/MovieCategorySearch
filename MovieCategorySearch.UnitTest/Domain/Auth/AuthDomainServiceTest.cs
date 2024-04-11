@@ -2,7 +2,7 @@
 using Moq;
 using MovieCategorySearch.Domain.Auth;
 
-namespace MovieCategorySeach.UnitTest.Domain.Auth
+namespace MovieCategorySearch.UnitTest.Domain.Auth
 {
 
     public class AuthDomainServiceTest : MerinoUnitTest

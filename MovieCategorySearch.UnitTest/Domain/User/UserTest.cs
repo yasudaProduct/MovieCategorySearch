@@ -1,6 +1,6 @@
 ﻿using Merino.Test;
 
-namespace MovieCategorySeach.UnitTest.Domain.User
+namespace MovieCategorySearch.UnitTest.Domain.User
 {
     public class UserTest : MerinoUnitTest
     {

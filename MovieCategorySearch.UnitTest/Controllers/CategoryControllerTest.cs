@@ -10,7 +10,7 @@ using MovieCategorySearch.Controllers;
 using MovieCategorySearch.ViewModels;
 using System.Security.Claims;
 
-namespace MovieCategorySeach.UnitTest.Controllers
+namespace MovieCategorySearch.UnitTest.Controllers
 {
     /// <summary>
     /// テスト用のCategoryControllerクラスです。
