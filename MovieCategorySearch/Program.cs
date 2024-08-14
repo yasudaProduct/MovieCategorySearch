@@ -1,4 +1,4 @@
-using Merino;
+using Merino.Web;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MovieCategorySearch.Infrastructure.Data;
 

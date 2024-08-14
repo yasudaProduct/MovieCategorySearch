@@ -1,5 +1,4 @@
 
-using Merino.Controller;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.ViewModels;
@@ -9,6 +8,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using MovieCategorySearch.Application.Auth.Dto;
+using Merino.Web.Controller;
 
 namespace MovieCategorySearch.Controllers
 {

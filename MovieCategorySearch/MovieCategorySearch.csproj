@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\dotnetMVCLib\Merino\Merino.csproj" />
+    <ProjectReference Include="..\..\..\..\workspace\★framework\dnet_library\Merino.Web\Merino.Web.csproj" />
     <ProjectReference Include="..\MovieCategorySearch.Application\MovieCategorySearch.Application.csproj" />
     <ProjectReference Include="..\MovieCategorySearch.Infrastructure\MovieCategorySearch.Infrastructure.csproj" />
   </ItemGroup>
@@ -44,7 +44,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>23dd705a-b160-4bc1-9a66-f3ce42f41d5a</UserSecretsId>

@@ -7,13 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCategorySearch", "Movi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCategorySearch.Infrastructure", "MovieCategorySearch.Infrastructure\MovieCategorySearch.Infrastructure.csproj", "{6087A2F6-3D62-4870-AD49-404FF20BAB64}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Merino", "..\dotnetMVCLib\Merino\Merino.csproj", "{20FD5BB5-4EEC-4DEB-9FA9-CB321FBE120E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCategorySeach.UnitTest", "MovieCategorySeach.UnitTest\MovieCategorySeach.UnitTest.csproj", "{9E31D5A3-E957-48CA-889D-627823579183}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCategorySearch.Application", "MovieCategorySearch.Application\MovieCategorySearch.Application.csproj", "{160F46BB-1C56-4D2E-938E-6E0670143CC3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieCategorySearch.Domain", "MovieCategorySearch.Domain\MovieCategorySearch.Domain.csproj", "{D33C51E9-B116-4DD7-9BA9-DB9A2AFDBA14}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Merino.Web", "..\..\..\workspace\★framework\dnet_library\Merino.Web\Merino.Web.csproj", "{E20E054C-A057-4B66-94DA-994C971DE1D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Merino", "..\..\..\workspace\★framework\dnet_library\Merino\Merino.csproj", "{76172C3A-B617-4076-ADB3-38A06F96C5C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +31,6 @@ Global
 		{6087A2F6-3D62-4870-AD49-404FF20BAB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6087A2F6-3D62-4870-AD49-404FF20BAB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6087A2F6-3D62-4870-AD49-404FF20BAB64}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20FD5BB5-4EEC-4DEB-9FA9-CB321FBE120E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20FD5BB5-4EEC-4DEB-9FA9-CB321FBE120E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20FD5BB5-4EEC-4DEB-9FA9-CB321FBE120E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20FD5BB5-4EEC-4DEB-9FA9-CB321FBE120E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E31D5A3-E957-48CA-889D-627823579183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E31D5A3-E957-48CA-889D-627823579183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E31D5A3-E957-48CA-889D-627823579183}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,10 +43,14 @@ Global
 		{D33C51E9-B116-4DD7-9BA9-DB9A2AFDBA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D33C51E9-B116-4DD7-9BA9-DB9A2AFDBA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D33C51E9-B116-4DD7-9BA9-DB9A2AFDBA14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{925BB0F3-BC8E-4C88-87AC-65533C79626D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{925BB0F3-BC8E-4C88-87AC-65533C79626D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{925BB0F3-BC8E-4C88-87AC-65533C79626D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{925BB0F3-BC8E-4C88-87AC-65533C79626D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E20E054C-A057-4B66-94DA-994C971DE1D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E20E054C-A057-4B66-94DA-994C971DE1D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E20E054C-A057-4B66-94DA-994C971DE1D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E20E054C-A057-4B66-94DA-994C971DE1D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76172C3A-B617-4076-ADB3-38A06F96C5C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76172C3A-B617-4076-ADB3-38A06F96C5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76172C3A-B617-4076-ADB3-38A06F96C5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76172C3A-B617-4076-ADB3-38A06F96C5C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

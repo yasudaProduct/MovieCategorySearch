@@ -1,0 +1,6 @@
+{
+  "WebSettings": {
+    "CustomErrorPage": "/Home/Error",
+    "RootUrlPattern": "{controller=Home}/{action=Index}/{id?}"
+  }
+}

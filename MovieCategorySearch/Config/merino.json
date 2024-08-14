@@ -1,16 +1,19 @@
 {
   "MerinoSettings": {
     "SettingFile": {
-      "Database": "database.json"
+      "Database": "database.json",
+      "Web": "web.json"
     },
     "InjectionAssembly": [
       {
+        "IsInterface": true,
         "AssemblyName": "MovieCategorySearch.Application",
         "EndMatchNames": [
           "Service"
         ]
       },
       {
+        "IsInterface": true,
         "AssemblyName": "MovieCategorySearch.Infrastructure",
         "EndMatchNames": [
           "Repository",

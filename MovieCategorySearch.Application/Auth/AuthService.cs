@@ -1,9 +1,8 @@
-using MovieCategorySearch.Domain.User;
 using MovieCategorySearch.Application.UseCase.Auth.Dto;
-using Merino.Log;
-using System;
 using MovieCategorySearch.Application.Auth.Dto;
 using MovieCategorySearch.Application.Auth;
+using Merino.Logging;
+using MovieCategorySearch.Domain.User;
 
 namespace MovieCategorySearch.Application.UseCase.Auth
 {
@@ -26,7 +25,7 @@ namespace MovieCategorySearch.Application.UseCase.Auth
 
         public bool Auth(AuthRequest req)
         {
-            MerinoLogger.Logger.Trace("AuthService Auth");
+            MerinoLogger.Trace("AuthService Auth");
 
             //new EmailAddress(req.emailaddres)Å@//ValuesObjectçÏê¨
 

@@ -6,12 +6,12 @@
        "ConnectionString": "Host=localhost;Database=mcs-dev;Username=postgres;Password=postgres",
        "AssemblyName": "NpgSql",
        "ConnectionClassName": "Npgsql.NpgsqlConnection",
-       "EntityFramework": {
-         "Valid": true,
-         "UseDbProvider": 2,
-         "ContextAssemblyName": "MovieCategorySearch.Infrastructure",
-         "ContextClassName": "MovieCategorySearch.Infrastructure.Data.PostgresDbContext"
-       }
+        "EntityFramework": {
+          "UseDbProvider": 2,
+          "ContextAssemblyName": "MovieCategorySearch.Infrastructure",
+          "ContextClassName": "MovieCategorySearch.Infrastructure.Data.PostgresDbContext",
+          "RepositoresAssemblyName": "MovieCategorySearch.Domain"
+        }
       }
       // {
       //   "Name": "InMemory",

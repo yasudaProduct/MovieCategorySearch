@@ -1,4 +1,4 @@
-﻿using Merino.Controller;
+﻿using Merino.Web.Controller;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.Application.Movie.Dto;

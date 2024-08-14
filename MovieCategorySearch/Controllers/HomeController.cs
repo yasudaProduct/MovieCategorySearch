@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.Security.Claims;
-using Merino.Controller;
-using Merino.Log;
+using Merino.Web.Controller;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieCategorySearch.Application.Usecase.Categories.Dto;

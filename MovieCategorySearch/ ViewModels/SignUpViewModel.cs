@@ -1,4 +1,4 @@
-﻿using Merino.Attributes;
+﻿using Merino.Web.Attributes;
 using MovieCategorySearch.Models;
 using MovieCategorySearch.Resources;
 using System.ComponentModel;
